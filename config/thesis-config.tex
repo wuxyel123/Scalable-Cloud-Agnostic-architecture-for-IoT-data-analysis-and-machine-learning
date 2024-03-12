@@ -34,7 +34,7 @@
 % Images path, not using \graphicspath because it doesn't properly work with
 % latexmk custom dependencies
 \NewCommandCopy{\latexincludegraphics}{\includegraphics}
-\renewcommand{\includegraphics}[2][]{\latexincludegraphics[#1]{../images/#2}}
+\renewcommand{\includegraphics}[2][]{\latexincludegraphics[#1]{images/#2}}
 
 % Page format settings
 % see: http://wwwcdf.pd.infn.it/AppuntiLinux/a2547.htm
@@ -60,14 +60,14 @@
 % Spacing between entries
 \setlength\bibitemsep{1.5\itemsep}
 
-\DeclareBibliographyCategory{opere}
+\DeclareBibliographyCategory{books}
 \DeclareBibliographyCategory{web}
 
-\addtocategory{opere}{womak:lean-thinking}
+\addtocategory{books}{womak:lean-thinking}
 \addtocategory{web}{site:agile-manifesto}
 
-\defbibheading{opere}{\section*{Riferimenti bibliografici}}
-\defbibheading{web}{\section*{Siti Web consultati}}
+\defbibheading{books}{\section*{Bibliographic references}}
+\defbibheading{web}{\section*{Website references}}
 
 
 \captionsetup{
@@ -129,7 +129,7 @@
 \definecolor{webgreen}{rgb}{0,.5,0}
 \definecolor{webbrown}{rgb}{.6,0,0}
 
-\newcommand{\sectionname}{sezione}
+\newcommand{\sectionname}{section}
 \addto\captionsitalian{\renewcommand{\figurename}{Figura}
                        \renewcommand{\tablename}{Tabella}}
 
@@ -151,11 +151,11 @@
     \par\medskip
 }
 
-\newcommand{\riskname}{Rischio}
+\newcommand{\riskname}{Risk}
 
-\newcommand{\riskdescription}[1]{\textbf{\\Descrizione:} #1.}
+\newcommand{\riskdescription}[1]{\textbf{\\Description:} #1.}
 
-\newcommand{\risksolution}[1]{\textbf{\\Soluzione:} #1.}
+\newcommand{\risksolution}[1]{\textbf{\\Solution:} #1.}
 
 % Use case environment
 \newcounter{usecasecounter}             % define a counter

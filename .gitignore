@@ -301,4 +301,8 @@ TSWLatexianTemp*
 #*Notes.bib
 
 .DS_Store
-
+compile.sh
+.vscode/
+chapters/backup/
+thesis.xmpdata
+thesis.ist
