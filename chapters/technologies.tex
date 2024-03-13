@@ -1,0 +1,329 @@
+\chapter{Technologies}
+\label{cap:technologies}
+
+\intro{In this chapter it's reported the study made on the various technologies taken into account to develop the project.}\\
+%citazione\footcite{womak:lean-thinking} \\
+
+\section{Cloud}
+This section describes the services offered by \href{https://aws.amazon.com/it/}{Amazon Web Services} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}, exploring their features, pros and cons. 
+These services are the most used cloud services in the world and they offer a wide range of services that can be used to develop the project.
+It's also important to mention that these two providers were chosen right away because of the already developed experience with them, both in the company and in the author of this thesis.
+    \subsection{Amazon Web Services}
+
+        \subsubsection{Batch}
+        \label{aws:batch}
+        AWS Batch is a fully managed service that enables developers to easily and efficiently run thousands of batch and machine learning computing jobs on AWS.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Cost effective
+            \item Supports different batch processing scenarios
+            \item Supports machine learning
+            \item Easy to use
+            \item Versatile
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not well documented
+        \end{itemize}
+
+        \subsubsection{DynamoDB}
+        \label{aws:dynamodb}
+        AWS DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+        Tables can store and retrieve virtually any amount of data, serving any level of request traffic.
+        It automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining consistent and fast performance.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Fast and predictable performance
+            \item Scalable
+            \item Highly available
+            \item NoSQL
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Hard to make changes against bulks of records
+            \item Need to know at prior which queries will be made
+        \end{itemize}
+
+        \subsubsection{Elastic map reduce (EMR)}
+        \label{aws:emr}
+        AWS EMR is a big data platform that simplifies the deployment and management of big data frameworks, like Apache Hadoop and Apache Spark, on AWS.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Petabyte scale data processing
+            \item Easy resources provisioning
+            \item Reconfigurable
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Complexity
+            \item Costly
+        \end{itemize}
+
+        \subsubsection{Glue}
+        \label{aws:glue}
+        AWS Glue is a fully managed ETL service that enables efficient data integration on a large scale.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Pay per use
+            \item Scalable
+            \item Provides a centralize metadata repository
+            \item Supports different data sources and formats
+            \item Can automatically discover and catalog data from various sources
+            \item Allow for job scheduling
+            \item Data encryption
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Costly for high workloads
+            \item Performance issues with large datasets
+            \item Complexity
+        \end{itemize}
+
+        \subsubsection{Greengrass}
+        \label{aws:greengrass}
+        AWS Greengrass is an open source edge runtime and cloud service used to build, deploy, and manage device software. 
+        It enables the devices to process the data locally, while still using the cloud for management, analytics, and durable storage.\\
+        It also enables encryption at rest and in transit and it can also extend device functionality with AWS Lambda functions.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Edge computing
+            \item Encryption at rest and in transit
+            \item Extend device functionality with AWS Lambda functions
+            \item ML models deployment
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Restrained to AWS services
+            \item Not platform agnostic
+            \item Resource intensive for small devices
+            \item Need a connection for the initial setup
+        \end{itemize}
+        
+        \subsubsection{IoT Core}
+        \label{aws:iot-core}
+        AWS IoT Core is a fully managed cloud service that lets connected devices easily and securely interact with cloud applications and other devices.
+        It is composed of multiple services like Device Management, Device Defender, Device Advisor, and IoT Analytics and only some of them can be used during the development.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Composed of multiple services so only the necessary ones can be used
+            \item Encription at rest and in transit
+            \item Supports MQTT, HTTP, and WebSockets
+            \item Allows for device management
+            \item Allows for machine learning at edge
+            \item Can trigger events thanks to custom rules
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not platform agnostic if installed on devices
+            \item Lacks of integration for some devices
+        \end{itemize}       
+
+        \subsubsection{Kendra}
+        \label{aws:kendra}
+        AWS Kendra is a fully managed enterprise search service that allows developers to add search capabilities across various content repositories leveraging on built in connectors.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports multiple data sources
+            \item Easy to use and set up
+            \item Accurate search results
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Costly
+        \end{itemize}
+
+        \subsubsection{Kinesis Data Firehose}
+        \label{aws:kinesis-data-firehose}
+        AWS Kinesis Data Firehose is a fully managed service that simplifies the process of capturing, transforming and loading streaming data.
+        It acts as an ETL service that can capture, transform, and load streaming data into a variety of AWS services.
+        Additionaly it can transform raw data in column oriented data formats like \href{https://parquet.apache.org/}{Apache Parquet}\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Can read data from IoT core and Kinesis Data Streams
+            \item Scalable
+            \item Can transform data
+            \item Can load data into different AWS services
+            \item Supports batching based on time or size
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not always cost effective
+            \item Limited transformation capabilities
+            \item Does not support batching based on more complex rules
+        \end{itemize}
+        
+        \subsubsection{Kinesis Data Streams} 
+        \label{aws:kinesis-data-streams}
+        AWS Kinesis Data Stream is a fully managed service that simplify the capture,
+         processing and loading of streaming data in real time at any scale thus enabling real-time data analytics with ease.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Real-time and fast data processing
+            \item Keeps data for 24 hours by default
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not always cost effective
+            \item Limited data retention
+            \item Limited data transformation
+            \item Not useful for certain batch processing scenarios
+        \end{itemize}
+
+        \subsubsection{Lake Formation}
+        \label{aws:lake-formation}
+        AWS Lake Formation is a fully managed service that simplifies the creation, security and management of data lakes.
+        It allows for cleaning and transforming the data using machine learning.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Secure
+            \item Simplifies lake creation 
+            \item Simplifies ingestion management    
+            \item Simplifies permission management      
+            \item Provides data auditing 
+            \item Supports machine learning
+            \item Supports data cataloging
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Complexity
+            \item Costly
+            \item Not native support for all data sources
+        \end{itemize}
+
+        \subsubsection{Lambda}
+        \label{aws:lambda}
+        AWS Lambda is an event driven serverless compute service that automatically manages the underlying compute resources.
+        AWS Lambda can be used to extend other AWS services with custom logic, and to create new back-end services that can
+        operate at AWS scale, performance, and security.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Serverless
+            \item Pay per use
+            \item Scalable
+            \item Easy to integrate with other AWS services
+            \item Supports multiple programming languages
+            \item Easy to deploy and maintain
+            \item Can run parallel executions
+            \item Low time to market
+            \item Supports custom libraries
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Limited execution time (15 mins)
+            \item Limited memory
+            \item Limited environment variables
+            \item Maximum 1000 concurrent executions
+            \item Cold start
+            \item Not cost effective for high workloads
+        \end{itemize}
+
+        \subsubsection{Managed Service for Apache Flink (MSF)}
+        \label{aws:msf}
+        AWS MSF is a fully managed service that simplifies the creation and the execution of real time application using \href{https://flink.apache.org/}{Apache Flink} .\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports batch and stream processing
+            \item Real-time processing
+            \item Large-scale data processing
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Complexity
+        \end{itemize}
+
+        \subsubsection{Managed Streaming for Kafka (MSK)}
+        \label{aws:msk}
+        AWS MSK is a fully managed service that simplifies the setup, the scaling and the management of \href{https://kafka.apache.org/}{Apache Kafka} clusters.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Cost effective
+            \item Secure
+            \item High availability
+            \item Easy to integrate with other AWS services
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Local testing challenges: hard to replicate the same environment in production and locally
+            \item Not suitable for high traffic scenarios
+            \item Complexity
+        \end{itemize}
+
+        \subsubsection{Sage Maker}
+        \label{aws:sage-maker}
+        AWS Sage maker is a cloud-based machine learning platform that allows developer to build, train and deploy machine learning models.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports multiple machine learning frameworks
+            \item Supports multiple programming languages
+            \item Allow for easy model deployment
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Cannot schedule training jobs
+            \item Costly for high workloads
+        \end{itemize}
+
+        \subsubsection{Simple Storage Service (S3)} 
+        \label{aws:s3}
+        AWS S3 is an object storage service offering scalability, data availability, security, and performance.
+        With S3, any amount of data can be stored and retrieved from anywhere on the web. 
+        Data is stored as objects in buckets, with each object representing a file and its metadata.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Scalable
+            \item Highly available
+            \item Secure
+            \item Durable
+            \item Cost effective
+            \item No bucket size limit
+            \item No limit to the number of objects that can be stored in a bucket
+            \item Has different storage classes to fit frequent access, infrequent access, and long-term storage
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not suitable for small files
+            \item Object size limit (5TB)
+            \item Maximum 100 buckets per account
+            \item Max 5GB per file upload via PUT operation
+        \end{itemize}
+
+
+    \subsection{Microsoft Azure}
+    
+
+
+
+\section{Present Solutions}
+
+\subsection{Eclipse Kura}
+
+\subsection{Eurotech Everyware Cloud}
+
+\subsection{STMicrelectronics}
+
+\section{Machine Learning at the Edge and Federated Learning} 
+
+\subsection{Tensorflow Lite}
+
+\subsection{Tiny Engine}
+
