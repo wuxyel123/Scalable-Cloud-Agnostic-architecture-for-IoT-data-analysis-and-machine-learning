@@ -6,6 +6,9 @@
 
 \section{Cloud}
 This section describes the services offered by \href{https://aws.amazon.com/it/}{Amazon Web Services} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}, exploring their features, pros and cons. 
+Services features are better in the respective offical AWS\footcite{site:aws-docs} and Azure\footcite{site:azure-docs} documentation, 
+while pros and cons are based on the author's and the company experience as well as other users reviews that can be found in 
+\href{https://www.trustradius.com/}{TrustRadius}\footcite{site:trust-radius} website.\\
 These services are the most used cloud services in the world and they offer a wide range of services that can be used to develop the project.
 It's also important to mention that these two providers were chosen right away because of the already developed experience with them, both in the company and in the author of this thesis.
     \subsection{Amazon Web Services}
@@ -309,10 +312,33 @@ It's also important to mention that these two providers were chosen right away b
 
 
     \subsection{Microsoft Azure}
+    
+        \subsubsection{Blob Storage}
+        \label{azure:blob-storage}
+        Azure Blob Storage is a fully managed object storage service that is highly scalable and available. 
+        It can store large amounts of unstructured data, making it suitable for a wide range of workloads. 
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Highly available
+            \item Secure
+            \item Cost effective
+            \item No limit to the number of objects that can be stored in a container
+            \item Has different storage tiers to fit frequent access, infrequent access, and long-term storage
+            \item Different storage options (Blob, archive, queue, file and disk) 
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not suitable for small files
+            \item Object size limit (4TB)
+            \item Maximum 2PB per account in US and Europe
+            \item Maximum 500TB per account in other regions
+        \end{itemize}
 
         \subsubsection{Cosmos DB}
         \label{azure:cosmos-db}
-        Azure Cosmos DB is a fully managed NO-SQL database service supporting multiple data models.\\
+        Azure Cosmos DB is a fully managed NO-SQL database service supporting multiple data models. It supports multiple NoSQL databases like PostgreSQL, MongoDB, and Cassandra.\\
         \textbf{Pros}
         \begin{itemize}
             \item Fully managed
@@ -328,6 +354,164 @@ It's also important to mention that these two providers were chosen right away b
             \item Slow for complex queries
         \end{itemize}
 
+        \subsubsection{DataBricks}
+        \label{azure:databricks}
+        Azure Databricks is a fully managed Apache Spark-based analytics platform supporting a variety of libraries and languages.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports multiple programming languages (Python, R, Scala, SQL, Java)
+            \item Supports multiple libraries (Tensorflow, PyTorch, Scikit-learn, etc.)
+            \item Open data lakehouse
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Costly
+            \item Complexity
+            \item Hard to configure
+        \end{itemize}
+
+        \subsubsection{Data Explorer}
+        \label{azure:data-explorer}
+        Azure data explorer is a fully managed, real-time and high volume data analytics service. 
+        It offers speed and low latency, being able to get quick insights from raw data.
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Real-time data processing
+            \item Low latency
+            \item Supports multiple data sources
+            \item Supports structured, semi-structured and unstructured data
+            \item Fast data ingestion
+            \item Can use batch processing
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Complexity
+            \item Costly
+            \item Limited capabilities for data transformation
+            \item Hard configuration
+        \end{itemize}
+
+        \subsubsection{Data Factory}
+        \label{azure:data-factory}
+        Azure data factory is a fully managed cloud-based data integration service.
+        It provides tools to orchestrate data workflows while monitoring executions.
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Can perfom data Analytics using Synapse
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Complexity
+            \item Limited transformation capabilities
+        \end{itemize}
+
+        \subsubsection{Data Lake Storage}
+        \label{azure:data-lake-storage}
+        Azure Data Lake Storage is a secure and scalable data lake platform. It provides a single place to store structured and unstructured data, making it easy to perform big data analytics.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Secure
+            \item Cost effective
+            \item Compatible with Hadoop
+            \item Supports Python for data analytics
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Data governance challenges
+        \end{itemize}
+
+        \subsubsection{Event Hubs}
+        \label{azure:event-hubs}
+        Azure Event Hubs is a fully managed, real-time data ingestion service that is simple, secure, and scalable. It can be used to stream millions of events per second with low latency, from any source to any destination.
+         It offers also native support for Apache Kafka, allowing user to run existing Kafka applications.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Secure
+            \item Low latency
+            \item Supports Apache Kafka
+            \item Schema registry: centralize repository for schema management
+            \item Real time data processing
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Costly
+            \item Complexity
+            \item Limitation in event storage
+            \item Consumers need to manage their state of processing
+        \end{itemize}
+
+        \subsubsection{Functions}
+        \label{azure:functions}
+        Azure functions is a serverless compute service that enables developers tu run code in response to 
+        events without the need to manage the infrastructure.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Pay per use
+            \item Scalable
+            \item Supports multiple programming languages
+            \item Easy to deploy and maintain
+            \item Can run parallel executions
+            \item Low time to market
+            \item Supports custom libraries
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Limited execution time (10 mins)
+            \item Cold start
+            \item Not cost effective for high workloads
+        \end{itemize}
+
+        \subsubsection{IoT Hub}
+        \label{azure:iot-hub}
+        Azure IoT Hub is a cloud service that serves as the bridge between IoT devices and solutions in the cloud, facilitating reliable and secure communication.
+        It can handle and manage a large number of devices making it suitable both for small-scale and enterprise-level solutions.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Secure
+            \item Supports MQTT, AMQP, and HTTP
+            \item Allows for device management
+            \item Allows for machine learning at edge
+            \item Can trigger events thanks to custom rules
+            \item Can extend device functionality with Azure Functions
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Not platform agnostic if installed on devices
+            \item Lacks of integration for some devices
+            \item Not well documented
+            \item Costly
+        \end{itemize}
+
+        \subsubsection{Machine Learning}
+        \label{azure:machine-learning}
+        Azure Machine Learning is a fully managed service that allows developers to build, train, and deploy machine learning models.\\
+        \textbf{Pros}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports multiple machine learning frameworks
+            \item Supports multiple programming languages
+            \item Allow for easy model deployment
+            \item Cost effective
+            \item Has MLOps capabilities
+            \item Pay as you go
+        \end{itemize}
+        \textbf{Cons}
+        \begin{itemize}
+            \item Cost raises when training big models
+            \item Hard to optimize 
+        \end{itemize}
 
 \section{Present Solutions}
 
