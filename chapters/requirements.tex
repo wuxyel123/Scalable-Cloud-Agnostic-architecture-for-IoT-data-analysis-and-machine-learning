@@ -12,7 +12,9 @@ The system must be able to ingest data from online devices and on-premise data s
 Online devices are devices that are connected to the internet and can send data to the cloud via MQTT protocol.
 On-premise data source are offline files that are stored on a local machine and must be uploaded to the cloud. The system must provide a way to upload these files to the cloud.
 \section{Data processing}
+The system must be able to preprocess the data before storage. The preprocessing of the data includes data validation, data cleaning and data transformation, this can be done in cloud or on-premise. The system must be also able to process data after storage. The processing of the data includes data analysis and machine learning operations. 
 
+\newpage
 \section{Security}
 Security is a major concern for the system. In certain scenarios, the data collected could be sensitive and thus must be protected both in transit and at rest.
     \subsection{Security in transit}
@@ -22,6 +24,7 @@ Security is a major concern for the system. In certain scenarios, the data colle
     Data at rest is stored in cloud storage. The cloud storage must provide a way to encrypt the data at rest. The system must also provide a way to manage the encryption keys. Both \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure} provide a way to encrypt data at rest and manage the encryption keys.\\ 
     Furthermore, both cloud providers uses a shared responsibility model for security.
     
+    \newpage
     \subsubsection{AWS Shared Responsibility Model}
     \href{https://aws.amazon.com/it/compliance/shared-responsibility-model/}{AWS Shared Responsibility Model}\footcite{site:aws-shared-responsibility-model} is a model that defines the responsibilities of AWS and the customer for security. AWS is responsible for the security of the cloud, while the customer is responsible for security in the cloud.\\
     It's important to keep in mind that services in services catalogued as \textit{Infrastructure as a Service} (IaaS) the customer is responsible for the security of the operating system and the applications, while in fully managed services the customer is responsible only for the security of the data.\\
@@ -31,6 +34,7 @@ Security is a major concern for the system. In certain scenarios, the data colle
         \caption{AWS Shared Responsibility Model}
     \end{figure}
 
+    \newpage
     \subsubsection{Azure Shared Responsibility Model}
     \href{https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility}{Azure Shared Responsibility Model}\footcite{site:azure-shared-responsibility-model} is a model that defines the responsibilities of Microsoft and the customer for security. The responsibility varies depending on wheter the service is \textit{Software as a Service} (SaaS), \textit{Platform as a Service} (PaaS), \textit{Infrastructure as a Service} (IaaS) or on premise. Regardless of the deployment type, the customer always detain data, endpoints account and access management responsibilities.\\
     
