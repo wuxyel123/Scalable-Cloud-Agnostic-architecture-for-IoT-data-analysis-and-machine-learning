@@ -4,7 +4,7 @@
 
 \section{Cloud Infrastructure}
 The system must be able to ingest, store and process large amount of IoT data leveraging the power of at least two cloud providers. Furthermore, the final product must be architectured to be cloud agnostic, meaning that it must be able to run on any cloud provider. This is important because the system must be able to run on different cloud providers to avoid vendor lock-in and to enable the customer to choose the best cloud provider for their needs.\\
-For the initial development, the system will be developed using \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure} mainly because of the already developed
+The system will be developed using two of the following providers: \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud}, \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure} mainly because of the already developed
 experience with them, both by the company and by the author of this thesis.
 
 \section{Data collection}
@@ -21,9 +21,18 @@ Security is a major concern for the system. In certain scenarios, the data colle
     Data in transit are transfered using MQTT protocol which is not encrypted by default. The system must provide a way to encrypt and secure the data in transit. MQTT brokers however supports authentication and authorization through certificates as well as TLS/SSL encryption. Using a broker that supports these features is a must.
     
     \subsection{Security at rest}
-    Data at rest is stored in cloud storage. The cloud storage must provide a way to encrypt the data at rest. The system must also provide a way to manage the encryption keys. Both \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure} provide a way to encrypt data at rest and manage the encryption keys.\\ 
-    Furthermore, both cloud providers uses a shared responsibility model for security.
+    Data at rest is stored in cloud storage. The cloud storage must provide a way to encrypt the data at rest. The system must also provide a way to manage the encryption keys. Each cloud service provider taken into account provide a way to encrypt data at rest and manage the encryption keys.\\ 
+    Furthermore, each cloud provider uses a shared responsibility model for security.
     
+    \newpage
+    \subsubsection{Aruba Shared Responsibility Model}
+    \href{https://kb.arubacloud.com/en/computing/use-and-technology/shared-responsibility-model.aspx}{Aruba Shared Responsibility Model}\footcite{site:aruba-shared-responsibility-model} is a model that defines the responsibilities of Aruba and the customer for security. Aruba is responsible for the security of the cloud, while the customer is responsible for security in the cloud.\\ The responsibilities of the customer and Aruba varies depending on the service, as shown in the following table.\\ 
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=1\textwidth]{aruba-shared-responsibility-model.png}
+        \caption{Aruba Shared Responsibility Model}
+    \end{figure}
+
     \newpage
     \subsubsection{AWS Shared Responsibility Model}
     \href{https://aws.amazon.com/it/compliance/shared-responsibility-model/}{AWS Shared Responsibility Model}\footcite{site:aws-shared-responsibility-model} is a model that defines the responsibilities of AWS and the customer for security. AWS is responsible for the security of the cloud, while the customer is responsible for security in the cloud.\\

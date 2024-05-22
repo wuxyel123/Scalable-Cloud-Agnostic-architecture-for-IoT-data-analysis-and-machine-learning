@@ -4,12 +4,104 @@
 \intro{In this chapter it's reported the study made on the various technologies taken into account to develop the project.}\\
 
 \section{Cloud}
-This section describes the services offered by \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure}, exploring their features, Pros: and Cons:. 
-Services features are better described in the respective offical AWS\footcite{site:aws-docs} and Azure\footcite{site:azure-docs} documentation, 
+This section describes the services offered by \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud}, \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure}, exploring their features, Pros: and Cons:. 
+Services features are better described in the respective offical Aruba Cloud\footcite{site:aruba-docs}, AWS\footcite{site:aws-docs} and Azure\footcite{site:azure-docs} documentation, 
 while Pros: and Cons: are based on the author's and the company experience as well as other users reviews that can be found in 
 \href{https://www.trustradius.com/}{TrustRadius}\footcite{site:trust-radius} website.\\
-These services are the most used cloud services in the world and they offer a wide range of services that can be used to develop the project.
-It's also important to mention that these two providers were chosen right away because of the already developed experience with them, both in the company and in the author of this thesis.
+These services are among the most used cloud services in the world, offering a wide range of services that can be used to develop the project.
+It's also important to mention that these providers were chosen right away because of the already developed experience with them, both in the company and in the author of this thesis.
+
+    \subsection{Aruba Cloud}
+    \label{aruba-cloud}
+    Aruba Cloud is a cloud service provider that offers a wide range of services like virtual machines, object storage, databases, and managed Kubernetes.\\
+
+    \subsubsection{Bare Metal}
+    \label{aruba-cloud:bare-metal}
+    Aruba Cloud Bare Metal is a service that provides dedicated servers with high performance and reliability.\\
+    \textbf{Pros:}
+    \begin{itemize}
+        \item High performance
+        \item Reliable
+        \item Cost effective
+        \item Supports multiple operating systems
+    \end{itemize}
+    \textbf{Cons:}
+    \begin{itemize}
+        \item  Need to manage the whole infrastructure
+        \item Not scalable
+        \item Not upgradable
+    \end{itemize}
+
+    \subsubsection{Virtual Private server (VPS)}
+    \label{aruba-cloud:vps}
+    Aruba Cloud VPS is a service that provides virtual servers with high performance and reliability. It uses virtualizers such as OpenStacks, VMware and Hyper-V.\\
+    \textbf{Pros:}
+    \begin{itemize}
+        \item High performance
+        \item Reliable
+        \item Cost effective
+        \item Supports multiple operating systems
+        \item Scalable
+        \item SLA up to 99.95\%
+    \end{itemize}
+    \textbf{Cons:}
+    \begin{itemize}
+        \item Guaranteed resources only in the PRO plans
+    \end{itemize}
+
+    \subsubsection{Virtual Private cloud (VPC)}
+    \label{aruba-cloud:vpc}
+    Aruba Cloud VPC is a service that provides a virtual network isolated from the public network. It allows for the creation of multiple subnets and the configuration of security groups. It can be used to create a whole private cloud infrastructure.\\
+    \textbf{Pros:}
+    \begin{itemize}
+        \item Isolated network
+        \item Multiple subnets
+        \item Security groups
+        \item Scalable
+        \item SLA up to 99.98\%
+    \end{itemize}
+    \textbf{Cons:}
+    \begin{itemize}
+        \item Complexity
+        \item Costly
+    \end{itemize}
+
+    \subsubsection{Object Storage}
+    \label{aruba-cloud:object-storage}
+    Aruba Cloud Object Storage is a service that provides scalable and secure object storage. It can be used to store and retrieve large amounts of unstructured data.\\
+    \textbf{Pros:}
+    \begin{itemize}
+        \item Scalable
+        \item Secure
+        \item Cost effective
+        \item Highly available
+        \item Reservable plans or pay per use
+    \end{itemize}
+    \textbf{Cons:}
+    \begin{itemize}
+        \item Limit for traffic to the public network
+    \end{itemize}
+
+    \subsubsection{Managed Kubernetes}
+    \label{aruba-cloud:kubernetes}
+    Aruba Cloud Managed Kubernetes is a service that provides a fully managed Kubernetes cluster. It can be used to deploy, scale, and manage containerized applications.\\
+    \textbf{Pros:}
+    \begin{itemize}
+        \item Fully managed
+        \item Scalable
+        \item Secure
+        \item Cost effective
+        \item Maximum redundancy
+        \item Minimum latency
+        \item Rapid deployment
+        \item Kubernetes native API
+    \end{itemize}
+    \textbf{Cons:}
+    \begin{itemize}
+        \item Complexity
+    \end{itemize}
+
+
     \subsection{Amazon Web Services}
 
         \subsubsection{Batch}
@@ -444,6 +536,27 @@ It's also important to mention that these two providers were chosen right away b
             \item Data governance challenges
         \end{itemize}
 
+        \subsubsection{Event Grid}
+        \label{azure:event-grid}
+        Azure Event Grid is a fully managed event routing service that simplifies the development of event-driven applications.\\
+        \textbf{Pros:}
+        \begin{itemize}
+            \item Fully managed
+            \item Scalable
+            \item Supports MQTT5
+            \item Supports multiple event sources
+            \item Supports multiple event handlers
+            \item Supports multiple event types
+            \item Supports multiple programming languages
+            \item Supports multiple event patterns
+        \end{itemize}
+        \textbf{Cons:}
+        \begin{itemize}
+            \item Complexity
+            \item Limitations in event storage and retention
+            \item Costly
+        \end{itemize}
+
         \subsubsection{Event Hubs}
         \label{azure:event-hubs}
         Azure Event Hubs is a fully managed, real-time data ingestion service that is simple, secure, and scalable. It can be used to stream millions of events per second with low latency, from any source to any destination. It offers also native support for Apache Kafka, allowing user to run existing Kafka applications.\\
@@ -506,6 +619,7 @@ It's also important to mention that these two providers were chosen right away b
             \item Lacks of integration for some devices
             \item Not well documented
             \item Costly
+            \item Does not fully support MQTT5
         \end{itemize}
 
         \subsubsection{Machine Learning}
@@ -586,7 +700,6 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
     \item Last update in 2019
 \end{itemize}
 
-
 \subsection{STMicrelectronics X-Cube Cloud}
 \label{stm}
 \href{https://www.st.com/}{STMicrelectronics}\footcite{site:st-micro} X-Cube Cloud is a software package that enables the connection of STM32 microcontrollers to the cloud.\\
@@ -601,6 +714,22 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
     \item Specific for STM32 microcontrollers
     \item Specific packages for each cloud service if you want to use the full potential
     \item The generic solution only runs on a subset of STM32 microcontrollers
+\end{itemize}
+
+\subsection{MQTTX}
+\label{mqttx}
+\href{https://mqttx.app/}{MQTTX}\footcite{site:mqttx} is a cross-platform MQTT 5.0 client tool that can be used to publish and subscribe to MQTT messages.\\
+\textbf{Pros:}
+\begin{itemize}
+    \item Cross-platform
+    \item Supports MQTT 5.0
+    \item Connection management
+    \item Log capabilities
+    \item Data pipelines
+\end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item MQTT client only
 \end{itemize}
 
 
