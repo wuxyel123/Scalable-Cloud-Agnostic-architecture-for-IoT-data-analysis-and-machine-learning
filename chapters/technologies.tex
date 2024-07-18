@@ -317,9 +317,7 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Lambda}
         \label{aws:lambda}
-        AWS Lambda is an event driven serverless compute service that automatically manages the underlying compute resources.
-        AWS Lambda can be used to extend other AWS services with custom logic, and to create new back-end services that can
-        operate at AWS scale, performance, and security.\\
+        AWS Lambda is a serverless compute service that automatically manages the compute fleet, scaling precisely with the size of the workload. The key advantage of AWS Lambda is that it allows developers to run code without provisioning or managing servers, creating a highly scalable, flexible, and cost-effective environment for executing code. AWS Lambda supports a variety of programming languages and integrates seamlessly with other AWS services, making it a versatile tool for deploying microservices, building data processing workflows, and developing real-time applications. The service is designed to handle various use cases, from running simple, single-function applications to complex, multi-step workflows.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -345,7 +343,8 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Managed Service for Apache Flink (MSF)}
         \label{aws:msf}
-        AWS MSF is a fully managed service that simplifies the creation and the execution of real time application using \href{https://flink.apache.org/}{Apache Flink}\footcite{site:apache-flink} .\\
+        AWS Managed Service for Apache Flink (MSF) is a fully managed service that simplifies the creation and execution of real-time applications using \href{https://flink.apache.org/}{Apache Flink}\footcite{site:apache-flink}, an open-source stream processing framework. This service provides developers with the tools to build sophisticated, high-throughput, low-latency data processing applications. MSF automates the underlying infrastructure management, enabling teams to focus on application logic rather than operational concerns. With built-in scalability, the service can handle varying workloads efficiently, making it suitable for both batch and stream processing. MSF also offers tight integration with other AWS services, providing a cohesive ecosystem for end-to-end data processing workflows.\\
+
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -361,7 +360,7 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Managed Streaming for Kafka (MSK)}
         \label{aws:msk}
-        AWS MSK is a fully managed service that simplifies the setup, the scaling and the management of \href{https://kafka.apache.org/}{Apache Kafka}\footcite{site:apache-kafka} clusters.\\
+        AWS Managed Streaming for Apache Kafka (MSK) is a fully managed service that simplifies the setup, scaling, and management of \href{https://kafka.apache.org/}{Apache Kafka}\footcite{site:apache-kafka} clusters. Apache Kafka is a distributed streaming platform widely used for building real-time data pipelines and streaming applications. MSK allows developers to leverage Kafka's powerful capabilities without the operational burden of managing Kafka infrastructure. The service ensures high availability, durability, and security, integrating seamlessly with other AWS services. This enables users to build robust, scalable streaming solutions while focusing on application development rather than infrastructure management.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -380,7 +379,7 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Sage Maker}
         \label{aws:sage-maker}
-        AWS Sage maker is a cloud-based machine learning platform that allows developer to build, train and deploy machine learning models.\\
+        AAWS SageMaker is a comprehensive cloud-based machine learning platform that enables developers and data scientists to build, train, and deploy machine learning models at scale. SageMaker provides a suite of tools that simplify each step of the machine learning workflow, from data labeling and preparation to model tuning and deployment. The platform supports a variety of machine learning frameworks and integrates with other AWS services, offering flexibility and interoperability. SageMaker's built-in algorithms and managed infrastructure allow users to focus on developing innovative models without worrying about the complexities of underlying hardware and software management.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -727,6 +726,7 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
     \item Connection management
     \item Log capabilities
     \item Data pipelines
+    \item Device simulation
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
@@ -770,7 +770,8 @@ This section describes the technologies that can be used to build and deploy mac
 
 \subsection{Tiny Engine}
 \label{tiny-engine}
-\href{https://github.com/mit-han-lab/tinyengine}{Tiny Engine}\footcite{site:tinyengine}\footcite{lin2022ondevice} is a machine learning framework that allows to build, train and deploy machine learning models on edge devices.\\
+\href{https://github.com/mit-han-lab/tinyengine}{Tiny Engine}\footcite{site:tinyengine}\footcite{lin2022ondevice} is a specialized machine learning framework designed to build, train, and deploy models on edge devices. It enables developers to convert TensorFlow Lite models into C++ code, facilitating efficient deployment on resource-constrained devices. Tiny Engine supports multiple platforms and utilizes pre-trained models, making it a versatile tool for various edge computing applications. The framework is lightweight, ensuring minimal resource consumption and fast inference times, which are critical for real-time, on-device machine learning tasks. Tiny Engine is particularly suited for applications in areas such as IoT, where low power consumption and quick response times are essential.
+
 \textbf{Pros:}
 \begin{itemize}
     \item Lightweight
@@ -788,9 +789,10 @@ This section describes the technologies that can be used to build and deploy mac
 
 
 \subsection{Federated Learning and Transfer Learning}
-Federated Learning is a machine learning approach that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach allows for privacy preservation and data security, as well as for the possibility to train models on devices with low computational power as described in \enquote{EdgeFed: Optimized Federated Learning
-Based on Edge Computing}\footcite{9260194}.
-Another important approach that has been taken into account is Transfer Learning, a technique that transfer the knowledge of a model trained on a specific task to a new task, improving the performance of the model and reducing the time and resources needed to train it, as described in \enquote{Federated learning for IoT devices: Enhancing TinyML with on-board training}\footcite{FICCO2024102189}.\\
+Federated Learning is a machine learning approach that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach is advantageous because it allows for privacy preservation and data security, minimizing the risk of sensitive information being exposed. Federated Learning also makes it feasible to train models on devices with low computational power, which is particularly useful in edge computing environments where computational resources are limited. As described in \enquote{EdgeFed: Optimized Federated Learning Based on Edge Computing}\footcite{9260194}, this method enables the development of sophisticated machine learning models by utilizing the collective power of multiple devices, enhancing both the efficiency and effectiveness of the training process.
+\\
+Another important approach is Transfer Learning, a technique that transfers the knowledge from a model trained on a specific task to a new, related task. This approach significantly improves the performance of the model on the new task and reduces the time and resources needed for training. Transfer Learning is especially valuable when there is limited data available for the new task, as it leverages the pre-existing knowledge embedded in the model. As detailed in \enquote{Federated learning for IoT devices: Enhancing TinyML with on-board training}\footcite{FICCO2024102189}, this method can enhance the capabilities of IoT devices by enabling them to perform complex tasks with improved accuracy and efficiency, without the need for extensive retraining.
+
 \textbf{Pros:}
 \begin{itemize}
     \item Privacy preservation

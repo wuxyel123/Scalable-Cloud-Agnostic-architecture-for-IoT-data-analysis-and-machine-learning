@@ -1,11 +1,12 @@
 \chapter{Objectives and requirements}
 \label{cap:requirements}
-\intro{In this chapter are discussed the main objectives and requirements.}\\
+\intro{In this chapter are discussed the main objectives and requirements of the architecture to be developed.}\\
 
 \section{Cloud Infrastructure}
-The system must be able to ingest, store and process large amount of IoT data leveraging the power of at least two cloud providers. Furthermore, the final product must be architectured to be cloud agnostic, meaning that it must be able to run on any cloud provider. This is important because the system must be able to run on different cloud providers to avoid vendor lock-in and to enable the customer to choose the best cloud provider for their needs.\\
-The system will be developed using two of the following providers: \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud}, \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure} mainly because of the already developed
-experience with them, both by the company and by the author of this thesis.
+The system must be able to ingest, store and process large amount of IoT data leveraging the power of any cloud provider present in the market. The final product to be developed is a cloud agnostic architecture that can be deployed on any cloud provider. The main advantage of a cloud agnostic architecture is that it can be deployed on any cloud provider, virtually without any modification. This allows customers to choose the cloud provider that best fits his needs.
+The providers taken into account to develop the architecture during this project are the following: \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud}, \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure}. 
+While AWS and Azure were chosen because the already developed experience by the company and me, Aruba Cloud was chosen because of a partnership between the company and the cloud provider that started during the development of the project.\\
+
 
 \section{Data collection}
 The system must be able to ingest data from online devices and on-premise data sources. 
