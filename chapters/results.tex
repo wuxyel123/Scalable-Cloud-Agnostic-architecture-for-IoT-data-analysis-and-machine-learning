@@ -347,11 +347,11 @@ The API Gateway provide a set of different APIs:
 \end{itemize}
 
 The API Gateway was first implemented using Python and FAST API, because of the simplicity and the speed of development.
-Since performance issues were pretty evident even with a small number of concurrent users, the API Gateway was then reimplemented using Java and Spring Boot and deployed on Wildfly (Executed as a Linux service), which provided better performance and scalability. A detailed comparison between Java and Python for API development can be found in Appendix A\ref{sec:java-vs-python}, while a description on how to start an application as a Linux service can be found in Appendix B\ref{sec:cron-jobs}.
+Since performance issues were pretty evident even with a small number of concurrent users, the API Gateway was then reimplemented using Java and Spring Boot and deployed on Wildfly (Executed as a Linux service), which provided better performance and scalability. A detailed comparison between Java and Python for API development can be found in \ref{sec:java-vs-python}, while a description on how to start an application as a Linux service can be found in \ref{sec:cron-jobs}.
 The implemented API Gateway already support TLS/SSL encryption and a basic authentication system, but it will be further improved in the next phase to support more advanced security features.
 
 \subsubsection{Batch Processing}
-Batch processing was maily used to clean the raw data and manage storage capacity efficiently. The batch process runs periodically to clean up old raw data and ensure that storage space is optimized. Batch processing was implemented using Python scripts and scheduled to run at specific intervals, leveraging Linux cron jobs for automation. A more detailed description about cron jobs can be found in Appendix B\ref{sec:cron-jobs}.
+Batch processing was maily used to clean the raw data and manage storage capacity efficiently. The batch process runs periodically to clean up old raw data and ensure that storage space is optimized. Batch processing was implemented using Python scripts and scheduled to run at specific intervals, leveraging Linux cron jobs for automation. A more detailed description about cron jobs can be found in \ref{sec:cron-jobs}.
 
 \section{Testing}
 \label{sec:testing}
