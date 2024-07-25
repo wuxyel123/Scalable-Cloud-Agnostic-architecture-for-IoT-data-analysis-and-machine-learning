@@ -387,8 +387,8 @@ The results of the stress tests performed on the Python implementation of the AP
 
 \subsubsection{Analysis of Results}
 The performance metrics indicate how the system handles different numbers of concurrent users for three operations: Calculate Analytics, Retrieve Analytics, and List Data. Below is an analysis of the results:
-
-\begin{itemize}
+{
+\beginitemize}
 \item \textbf{Calculate Analytics}:
     \begin{itemize}
     \item With 1 user, the operation takes 30 seconds.
@@ -401,8 +401,7 @@ The performance metrics indicate how the system handles different numbers of con
 
 \item \textbf{Retrieve Analytics}:
     \begin{itemize}
-        \item The response time for retrieving analytics is relatively stable, ranging from 221 ms to 327 ms as the number of users increases from 1 to 50.
-        \item With 250 users, the response time slightly increases to 268 ms.
+        \item The response time for retrieving analytics is relatively stable, ranging from 221 ms to 327 ms as the number of users increases from 1 to 250.
         \item The relatively minor variations in response time indicate that the system handles retrieving analytics efficiently, even under higher loads.
     \end{itemize}
 
