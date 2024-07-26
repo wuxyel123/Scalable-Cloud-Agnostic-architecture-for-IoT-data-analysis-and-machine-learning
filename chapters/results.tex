@@ -1,7 +1,7 @@
 \chapter{Real world implementation}
 \label{cap:real_implementation}
 
-\intro{In this chapter, we will discuss the implementation of the proposed solution based on a real-world scenario presented to the company by a client during the internship period. The client is a company that specializes in high-performance protective gear and technical apparel for motorsports and action sports enthusiasts. The goal of the project was to develop a system that could analyze IMUs data from a rider's suit and provide feedback on the rider's performance. The client wanted to use this system to improve the rider's performance both for road users and motorsport pilots.}\\
+\intro{In this chapter, we will discuss the implementation of the proposed solution based on a real-world scenario presented to the company by a client during the internship period. The client is a company that specializes in high-performance protective gear and technical apparel for motorsports and action sports enthusiasts. The goal of the project was to develop a system that could analyze IMU data from a rider's suit and provide feedback on the rider's performance. The client wanted to use this system to improve the rider's performance both for road users and motorsport pilots.}\\
 
 \section{Client's requirements}
 \label{sec:client_requirements}
@@ -85,7 +85,7 @@ The problem involves managing and processing data collected from various Motorcy
 
 \section{System Architecture}
 \label{sec:system_architecture}
-Considering the requirements and usage patterns, the system architecture must be designed to handle the sporadic and intensive data uploads from different types of users. The architecture must be scalable, fault-tolerant, and platform-agnostic to support future growth and changes in the system. Two different architectures were proposed to meet the client's requirements: an on-demand analysis architecture and a preemptive analysis architecture. Both architecture are based on the same core components described in \ref{sec:architecture}, but they differ in the way data is processed and analyzed.
+Considering the requirements and usage patterns, the system architecture must be designed to handle the sporadic and intensive data uploads from different types of users. The architecture must be scalable, fault-tolerant, and platform-agnostic to support future growth and changes in the system. Two different architectures were proposed to meet the client's requirements: an on-demand analysis architecture and a preemptive analysis architecture. Both architectures are based on the same core components described in \ref{sec:architecture}, but they differ in the way data is processed and analyzed.
 It's also worth mentioning that even if only \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud} was considered for this project, the system is designed to be platform-agnostic and can be deployed on any cloud provider.
 
 \subsection{Architecture 1: Preemptive Analytics Processing}
@@ -228,13 +228,13 @@ In the final stage, the processed data is made available to the user. Users are 
 \caption{Architecture Comparison}
 \label{table:architecture_comparison}
 \end{longtable}
-Both Architecture 1 (Preemptive Analytics Processing) and Architecture 2 (On-Demand Analytics Processing) have distinct advantages and considerations. Architecture 1 was chosen primarily for its emphasis on real-time data processing and immediate availability of analytics insights. This architecture ensures that sensor data from biker suits is processed as soon as it is received, enabling timely crash detection and data storage. The continuous processing nature of Architecture 1 supports applications requiring real-time monitoring, despite potential challenges in resource usage and scalability. Another important factor in selecting Architecture 1 is the client's focus on user experience and the need for immediate insights to enhance rider safety and performance.
+Both Architecture 1 (Preemptive Analytics Processing) and Architecture 2 (On-Demand Analytics Processing) have distinct advantages and considerations. Architecture 1 was chosen primarily for its emphasis on real-time data processing and the immediate availability of analytics insights. This architecture ensures that sensor data from biker suits is processed as soon as it is received, enabling timely crash detection and data storage. The continuous processing nature of Architecture 1 supports applications requiring real-time monitoring, despite potential challenges in resource usage and scalability. Another important factor in selecting Architecture 1 is the client's focus on user experience and the need for immediate insights to enhance rider safety and performance.
 
 
 \section{Implementation}
 \label{sec:implementation}
 
-In this section, we delve into the implementation of the chosen system architecture, detailing the various steps undertaken to bring the proposed solution to life. Architecture 1, the Preemptive Analytics Processing architecture, was selected due to its emphasis on real-time data processing and immediate availability of analytics insights, aligning well with the client's focus on enhancing rider safety and performance. This section will outline the rationale behind choosing Architecture 1 and then walk through the implementation steps, ensuring each aspect of the system is comprehensively addressed.
+In this section, we delve into the implementation of the chosen system architecture, detailing the various steps undertaken to bring the proposed solution to life. Architecture 1, the Preemptive Analytics Processing architecture, was selected due to its emphasis on real-time data processing and the immediate availability of analytics insights, aligning well with the client's focus on enhancing rider safety and performance. This section will outline the rationale behind choosing Architecture 1 and then walk through the implementation steps, ensuring each aspect of the system is comprehensively addressed.
 
 \subsection{Rationale for Choosing Architecture 1}
 Architecture 1 was chosen over Architecture 2 due to several key factors:
@@ -248,7 +248,7 @@ Architecture 1 was chosen over Architecture 2 due to several key factors:
 Given these considerations, Architecture 1 was the optimal choice for the client's needs, providing the necessary real-time capabilities and user experience enhancements.
 
 \subsection{Implementation Steps}
-The implementation of Architecture 1 involved several crucial steps, each designed to ensure the system met the client's requirements for data handling, processing, and user interaction. It's worth mentioning that the first implementation has been treated as a PoC (Proof of Concept), in the following steps description will be mentioned which steps have been implemented in the PoC and which ones are yet to be developed.
+The implementation of Architecture 1 involved several crucial steps, each designed to ensure the system met the client's requirements for data handling, processing, and user interaction. It's worth mentioning that the first implementation has been treated as a PoC (Proof of Concept), in the description of the following steps will be mentioned which steps have been implemented in the PoC and which ones are yet to be developed.
 
 \subsubsection{Data Ingestion}
 The initial step in the implementation process was to establish a robust data ingestion mechanism. Sensor data collected by the biker suits needed to be securely uploaded to raw data object storage.
@@ -274,7 +274,7 @@ Upon successful data upload, an event or API call triggers the analytics process
     \item \textbf{API Integration}: Develop APIs to allow manual or automated triggering of the analytics pipeline via HTTP or WebSocket calls.
 \end{enumerate}
 
-For the PoC, the trigger mechanism was simulated using an API call at the end of the data upload script. Wheter to keep this approach or to implement an event-driven service will be decided based on the system's performance and client feedback as well as the cloud provider's capabilities.
+For the PoC, the trigger mechanism was simulated using an API call at the end of the data upload script. Whether to keep this approach or to implement an event-driven service will be decided based on the system's performance and client feedback as well as the cloud provider's capabilities.
 \subsubsection{Data Processing}
 The core of the implementation involves processing the uploaded sensor data through various stages, including preprocessing, analytics, and crash detection.
 
@@ -285,7 +285,7 @@ The core of the implementation involves processing the uploaded sensor data thro
     \item \textbf{Crash Detection Algorithms}: Develop specialized algorithms to detect crash events within the data, ensuring timely identification and response.
 \end{enumerate}
 
-The PoC implementation of the analytics pipeline was developed as a background subroutine triggered by the API call at the end of the data upload script. In this phase a simple set of metrics was calculated, e.g. Average speed, maximum accelleration, number of left and right turn, maximum deceleration, etc. The next steps will involve refining the preprocessing, analytics, and crash detection algorithms to provide more detailed and actionable insights.
+The PoC implementation of the analytics pipeline was developed as a background subroutine triggered by the API call at the end of the data upload script. In this phase a simple set of metrics was calculated, e.g. Average speed, maximum acceleration, number of left and right turns, maximum deceleration, etc. The next steps will involve refining the preprocessing, analytics, and crash detection algorithms to provide more detailed and actionable insights.
 
 \subsubsection{Storage of Processed Data}
 Processed analytics data needs to be stored in a dedicated storage bucket, with special handling for crash data.
@@ -297,7 +297,7 @@ Processed analytics data needs to be stored in a dedicated storage bucket, with 
 \end{enumerate}
 
 For the PoC implementation, a separate storage bucket was set up to store the processed analytics data. The crash data handling mechanism will be developed in the next phase to ensure that crash events are detected and stored appropriately.
-In both cases the analytics and crash data are directly uploaded by the analytics pipeline described in the previous step.
+In both cases, the analytics and crash data are directly uploaded by the analytics pipeline described in the previous step.
 
 \subsubsection{User Access and Notification}
 Users must be notified when analytics are available and should have seamless access to retrieve their data.
@@ -347,18 +347,18 @@ The API Gateway provide a set of different APIs:
 \end{itemize}
 
 The API Gateway was first implemented using Python and FAST API, because of the simplicity and the speed of development.
-Since performance issues were pretty evident even with a small number of concurrent users, the API Gateway was then reimplemented using Java and Spring Boot and deployed on Wildfly (Executed as a Linux service), which provided better performance and scalability. A detailed comparison between Java and Python for API development can be found in \ref{sec:java-vs-python}, while a description on how to start an application as a Linux service can be found in \ref{sec:cron-jobs}.
+Since performance issues were pretty evident even with a small number of concurrent users, the API Gateway was then reimplemented using Java and Spring Boot and deployed on Wildfly (Executed as a Linux service), which provided better performance and scalability. A detailed comparison between Java and Python for API development can be found in \ref{sec:java-vs-python}, while a description of how to start an application as a Linux service can be found in \ref{sec:cron-jobs}.
 The implemented API Gateway already support TLS/SSL encryption and a basic authentication system, but it will be further improved in the next phase to support more advanced security features.
 
 \subsubsection{Batch Processing}
-Batch processing was maily used to clean the raw data and manage storage capacity efficiently. The batch process runs periodically to clean up old raw data and ensure that storage space is optimized. Batch processing was implemented using Python scripts and scheduled to run at specific intervals, leveraging Linux cron jobs for automation. A more detailed description about cron jobs can be found in \ref{sec:cron-jobs}.
+Batch processing was mainly used to clean the raw data and manage storage capacity efficiently. The batch process runs periodically to clean up old raw data and ensure that storage space is optimized. Batch processing was implemented using Python scripts and scheduled to run at specific intervals, leveraging Linux cron jobs for automation. A more detailed description of cron jobs can be found in \ref{sec:cron-jobs}.
 
 \section{Testing}
 \label{sec:testing}
 After the implementation of the system, a series of tests were conducted to ensure that the system met the client's requirements and performed as expected. The testing phase involved various types of tests, including unit tests, integration tests, and performance tests, to validate the system's functionality, reliability, and scalability.
 
 \subsection{Unit Testing}
-Unit tests were conducted to verify the functionality of individual components of the system, such as upload scripts, API endpoints and data cleaning processes. Even if this is not a best-practice, unit tests were performed manually to ensure that each component worked as intended and produced the expected output. The unit tests were conducted in a controlled environment to isolate each component and identify any potential issues or bugs. In a future phase, a more comprehensive unit testing framework will be implemented to automate the testing process and ensure that all components are thoroughly tested.
+Unit tests were conducted to verify the functionality of individual components of the system, such as upload scripts, API endpoints and data cleaning processes. Even if this is not a best practice, unit tests were performed manually to ensure that each component worked as intended and produced the expected output. The unit tests were conducted in a controlled environment to isolate each component and identify any potential issues or bugs. In a future phase, a more comprehensive unit testing framework will be implemented to automate the testing process and ensure that all components are thoroughly tested.
 
 \subsection{Integration Testing}
 Integration tests were performed to validate the interactions between different components of the system, such as the API Gateway, analytics pipeline, and object storage. The integration tests focused on verifying that the components worked together seamlessly and communicated effectively to process and store data accurately. The integration tests were conducted in a test environment that replicated the production setup to ensure that the system would perform as expected in a real-world scenario.
@@ -395,7 +395,7 @@ The performance metrics indicate how the system handles different numbers of con
     \item As the number of users increases to 10, the time rises significantly to 85 seconds.
     \item For 50 users, the time increases drastically to 467 seconds.
     \item With 250 users, the operation takes 2284 seconds.
-    \item The significant increase in time with more users suggests that the system experiences a performance bottleneck when calculating analytics under high load, the performance bottleneck is mainy due to the high number of data being transferred from the object storage to the analytics pipeline in the server.
+    \item The significant increase in time with more users suggests that the system experiences a performance bottleneck when calculating analytics under high load, the performance bottleneck is mainly due to the high number of data being transferred from the object storage to the analytics pipeline in the server.
     \item Even if the performance is not optimal, the 40 minutes required to calculate the analytics for 250 users is still acceptable for the client's requirements as the operation is not time-sensitive and would be performed while the users are charging their devices.
     \end{itemize}
 
@@ -413,4 +413,4 @@ The performance metrics indicate how the system handles different numbers of con
 \end{itemize}
 
 \subsubsection{Conclusion}
-The performance tests highlight that while the system handles retrieving and listing data efficiently under increasing loads, calculating analytics exhibits significant performance degradation as the number of users increases. Since the bottleneck is mainly due to the high number of data being transferred from the object storage to the analytics pipeline in the server, the next phase will focus on optimizing the data transfer process to improve the system's performance. The quickest solution would be to use more, less powerful servers to distribute the load. The system could also be optimized by saving raw data directly in the server, but this would require a significant amount of storage space and would not be scalable in the long run as well as the highere cost of the storage. The best solution would be to deploy the application in a containerized environment, using Kubernetes to manage the containers and distribute the load among different servers. This would allow the system to scale horizontally, adding more servers as needed, and would also provide a more efficient way to manage the data transfer process.
+The performance tests highlight that while the system handles retrieving and listing data efficiently under increasing loads, calculating analytics exhibits significant performance degradation as the number of users increases. Since the bottleneck is mainly due to the high number of data being transferred from the object storage to the analytics pipeline in the server, the next phase will focus on optimizing the data transfer process to improve the system's performance. The quickest solution would be to use more, less powerful servers to distribute the load. The system could also be optimized by saving raw data directly in the server, but this would require a significant amount of storage space and would not be scalable in the long run as well as the higher cost of the storage. The best solution would be to deploy the application in a containerized environment, using Kubernetes to manage the containers and distribute the load among different servers. This would allow the system to scale horizontally, adding more servers as needed, and would also provide a more efficient way to manage the data transfer process.
