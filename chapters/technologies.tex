@@ -7,14 +7,14 @@
 \label{cloud}
 This section describes the services offered by \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud}, \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws} and \href{https://azure.microsoft.com/it-it/}{Microsoft Azure}\footcite{site:azure}, exploring their features, pros and cons. 
 Services features are better described in the respective official Aruba Cloud\footcite{site:aruba-docs}, AWS\footcite{site:aws-docs} and Azure\footcite{site:azure-docs} documentation, 
-while pros and cons are based on the company experience, users reviews that can be found in 
+while pros and cons are based on users reviews that can be found in 
 \href{https://www.trustradius.com/}{TrustRadius}\footcite{site:trust-radius} website and my experience as well.\\
-These services are among the most used cloud services in the world, offering a wide range of services that can be used to develop the project.
-It's also important to mention that these providers were chosen right away because of the already developed experience with them, both in the company and by me.
+These are among the most used cloud services in the world, offering a wide range of features that can be used to develop the project. It's important to mention that when talking about cloud, the term \textit{Service} can span from IaaS (Infrastructure as a Service) to SaaS (Software as a Service) and PaaS (Platform as a Service). More in general this term refers to something the user can access over the internet and that is hosted on the cloud provider's servers with a paid subscription. Another important concept to mantion is that when referring to a \textit{Fully Managed} service, it means that the cloud provider takes care of the infrastructure, the maintenance, the updates, and the security of the service. This allows the user to focus on the development of the application without worrying about the underlying infrastructure.\\
+
 
     \subsection{Aruba Cloud}
     \label{aruba-cloud}
- Aruba Cloud is a cloud service provider that offers a wide range of services like virtual machines, object storage, databases, and managed Kubernetes.\\
+ Aruba Cloud is a cloud provider that offers a wide range of services like virtual machines, object storage, databases, and managed \href{https://kubernetes.io/}{Kubernetes}\footcite{site:kubernetes}(an open-source platform for automating the deployment, scaling, and management of containerized applications across a cluster of machines).\\
 
     \subsubsection{Bare Metal}
     \label{aruba-cloud:bare-metal}
@@ -35,7 +35,7 @@ It's also important to mention that these providers were chosen right away becau
 
     \subsubsection{Virtual Private Server (VPS)}
     \label{aruba-cloud:vps}
- Aruba Cloud VPS is a service that provides virtual servers with high performance and reliability. It uses virtualizers such as OpenStack, VMware and Hyper-V.\\
+ Aruba Cloud VPS is a service that provides virtual servers with high performance and reliability. It uses virtualizers\footnote{A virtualizer, or hypervisor, is software that allows multiple virtual machines (VMs) to run on a single physical machine} such as OpenStack, VMware and Hyper-V.\\
     \textbf{Pros:}
     \begin{itemize}
         \item High performance
@@ -43,11 +43,11 @@ It's also important to mention that these providers were chosen right away becau
         \item Cost-effective
         \item Supports multiple operating systems
         \item Scalable
-        \item SLA up to 99.95\%
+        \item SLA\footnote{SLA (Service Level Agreement): defines the level of service expected from the provider. It outlines specific metrics such as uptime, response times, and support availability, along with the responsibilities, performance standards, and consequences if the agreed-upon service levels are not met.} up to 99.95\%
     \end{itemize}
     \textbf{Cons:}
     \begin{itemize}
-        \item Guaranteed resources only in the PRO plans
+        \item Resources are guaranteed only in the professional plans, in the other plans resources are shared
     \end{itemize}
 
     \subsubsection{Virtual Private Cloud (VPC)}
@@ -69,7 +69,7 @@ It's also important to mention that these providers were chosen right away becau
 
     \subsubsection{Object Storage}
     \label{aruba-cloud:object-storage}
- Aruba Cloud Object Storage is a service that provides scalable and secure object storage. It can be used to store and retrieve large amounts of unstructured data.\\
+ Aruba Cloud Object Storage\footnote{Object storage: A data storage architecture that manages and stores data as discrete units called "objects." Each object contains the data itself, metadata, and a unique identifier.} is a service that provides scalable and secure object storage. It can be used to store and retrieve large amounts of unstructured data.\\
     \textbf{Pros:}
     \begin{itemize}
         \item Scalable
@@ -80,7 +80,7 @@ It's also important to mention that these providers were chosen right away becau
     \end{itemize}
     \textbf{Cons:}
     \begin{itemize}
-        \item Limit for traffic to the public network
+        \item Limit for traffic to the public network defied as TB/month, this can be a problem for high traffic scenarios
     \end{itemize}
 
     \subsubsection{Managed Kubernetes}
@@ -89,17 +89,17 @@ It's also important to mention that these providers were chosen right away becau
     \textbf{Pros:}
     \begin{itemize}
         \item Fully managed
-        \item Scalable
+        \item Autoscaling enabled
         \item Secure
-        \item Cost-effective
-        \item Maximum redundancy
-        \item Minimum latency
-        \item Rapid deployment
-        \item Kubernetes native API
+        \item Cost-effective with respect to virtual machines
+        \item Highly redundant
+        \item Low latency 
+        \item Rapid deploymentwith respect to virtual machines
+        \item Kubernetes native API (A set of API that lets you query and manipulate the state of Kubernetes objects)
     \end{itemize}
     \textbf{Cons:}
     \begin{itemize}
-        \item Complexity
+        \item Complex to use in case the user is not familiar with Kubernetes
     \end{itemize}
 
 
@@ -111,12 +111,9 @@ It's also important to mention that these providers were chosen right away becau
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
-            \item Scalable
-            \item Cost-effective
-            \item Supports different batch processing scenarios
-            \item Supports machine learning
-            \item Easy to use
-            \item Versatile
+            \item Scalable with respect to on-premises solutions
+            \item Cost-effective with respect to on-premises solutions
+            \item Versatile: can run batch jobs (Jobs that perform analytics on the data) and more complex machine learning jobs (Jobs that train machine learning models)
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
@@ -126,31 +123,31 @@ It's also important to mention that these providers were chosen right away becau
         \subsubsection{Bedrock}
         \label{aws:bedrock}
  AWS Bedrock is a fully managed service that simplifies the deployment and management of machine learning models.\\
- Using AWS Bedrock users can choose from a variety of pre-trained models and deploy them on the edge.\\
+ Using AWS Bedrock users can choose from a variety of pre-trained models and deploy them on the edge\footnote{In this context edge devices are proper IoT devices connected to the internet}.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Flexible
-            \item Native support for Retrieval Augmented Generation (RAG) models
+            \item Native support for Retrieval Augmented Generation (RAG) models\footcite{site:rag}
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Costly
-            \item New dependencies may introduce problems
-            \item The chosen model may not be future-proof
+            \item Hard to future proof
         \end{itemize}
 
         \subsubsection{DynamoDB}
         \label{aws:dynamodb}
  AWS DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
  Tables can store and retrieve virtually any amount of data, serving any level of request traffic.
- It automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while maintaining Cons:istent and fast performance.\\
+ It automatically spreads the data and traffic for the table over a sufficient number of servers to handle the request capacity specified by the customer and the amount of data stored, while being consistent and performant.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
-            \item Fast and predictable performance
+            \item Fast p
+            \item Predictable performance
             \item Scalable
-            \item Highly available
+            \item Highly available\footnote{The availability of a service is how much time it is operational and accessible.}
             \item NoSQL
         \end{itemize}
         \textbf{Cons:}
@@ -159,9 +156,9 @@ It's also important to mention that these providers were chosen right away becau
             \item Need to know at prior which queries will be made
         \end{itemize}
 
-        \subsubsection{Elastic map reduce (EMR)}
+        \subsubsection{Elastic MapReduce (EMR)}
         \label{aws:emr}
- AWS EMR is a big data platform that simplifies the deployment and management of big data frameworks, like Apache Hadoop and Apache Spark, on AWS.\\
+ AWS EMR is a big data platform that simplifies the deployment and management of big data frameworks, like \href{https://hadoop.apache.org/}{Apache Hadoop}\footcite[a library for distributed data processing]{site:hadoop} and \href{https://spark.apache.org/}{Apache Spark}\footcite[an engine for distributed data processing]{site:spark} on AWS.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -172,47 +169,44 @@ It's also important to mention that these providers were chosen right away becau
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Complexity
+            \item Complex to use in case user is not familiar with big data frameworks
             \item Costly
         \end{itemize}
 
         \subsubsection{Glue}
         \label{aws:glue}
- AWS Glue is a fully managed ETL service that enables efficient data integration on a large scale.\\
+ AWS Glue is a fully managed ETL\footnote{ETL (Extracting, Transforming, and Loading): Is a job that extract data from a datasource, preprocess the data and loads it into another system} service that enables efficient data integration on a large scale.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Pay per use
             \item Scalable
-            \item Provides a centralised metadata repository
+            \item Provides a centralised metadata repository\footcite{site:aws-glue-catalog} which allows for automated data discovery and cataloguing across different data sources
             \item Supports different data sources and formats
-            \item Can automatically discover and catalogue data from various sources
-            \item Allow for job scheduling
+            \item Allow for ETL job scheduling
             \item Data encryption
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Costly for high workloads
             \item Performance issues with large datasets
-            \item Complexity
+            \item Complex to use in case the user is not familiar with ETL
         \end{itemize}
 
         \subsubsection{Greengrass}
         \label{aws:greengrass}
- AWS Greengrass is an open-source edge runtime and cloud service used to build, deploy, and manage device software. 
- It enables the devices to process the data locally, while still using the cloud for management, analytics, and durable storage.\\
- It also enables encryption at rest and in transit and it can also extend device functionality with AWS Lambda functions.\\
+ AWS Greengrass is both a client software and a cloud service. The client software is a runtime deployable on edge devices while the cloud service allows for device management and runtime deployment.
+ It also enables for data encryption both at rest and in transit and it can also extend device functionality with AWS Lambda functions, a more exhaustive description about AWS Lambda can be found in \ref{aws:lambda}.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Edge computing
             \item Encryption at rest and in transit
             \item Extend device functionality with AWS Lambda functions
-            \item ML models deployment
+            \item Allows for machine learning at the edge
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Restrained to AWS services
-            \item Not platform agnostic
+            \item Restrained to AWS services, an architecture based on Greengrass is not platform agnostic by construction
             \item Resource intensive for small devices
             \item Need a connection for the initial setup
         \end{itemize}
@@ -220,25 +214,25 @@ It's also important to mention that these providers were chosen right away becau
         \subsubsection{IoT Core}
         \label{aws:iot-core}
  AWS IoT Core is a fully managed cloud service that lets connected devices easily and securely interact with cloud applications and other devices.
- It is composed of multiple services like Device Management, Device Defender, Device Advisor, and IoT Analytics and only some of them can be used during the development.\\
+ It is composed of multiple services like Device Management, Device Defender, Device Advisor, and IoT Analytics and only some of them can be used during the development. The main difference with Greengrass is that IoT Core does not require a client runtime to be installed on the edge device.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Composed of multiple services so only the necessary ones can be used
             \item Encryption at rest and in transit
-            \item Supports MQTT, HTTP, and WebSockets
+            \item Supports MQTT, HTTP, and WebSockets for commu
             \item Allows for device management
             \item Allows for machine learning at the edge
-            \item Can trigger events thanks to custom rules
+            \item It can be installed on devices
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Not platform agnostic if installed on devices
-            \item Lacks of integration for some devices
+            \item If installed on devices the architecture is not platform agnostic
+            \item Can't be installed on all devices
         \end{itemize}       
 
         \subsubsection{Kendra}
         \label{aws:kendra}
- AWS Kendra is a fully managed enterprise search service that allows developers to add search capabilities across various content repositories leveraging built-in connectors.\\
+ AWS Kendra is an enterprise search service that allows developers to add search capabilities across various content repositories leveraging built-in connectors\footnote{A connector in this scenario is an API like service that allows AWS kendra to ingest data from a variety of data sources. A database of prebuilt connectors is offered by AWS}.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -254,7 +248,7 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Kinesis Data Firehose}
         \label{aws:kinesis-data-firehose}
- AWS Kinesis Data Firehose is a fully managed service that simplifies the process of capturing, transforming and loading streaming data.
+ AWS Kinesis Data Firehose is a service that simplifies the process of capturing, transforming and loading streaming data.
  It acts as an ETL service that can capture, transform, and load streaming data into a variety of AWS services.
  Additionally, it can transform raw data in column-oriented data formats like \href{https://parquet.apache.org/}{Apache Parquet}\footcite{site:apache-parquet}\\
         \textbf{Pros:}
@@ -262,88 +256,78 @@ It's also important to mention that these providers were chosen right away becau
             \item Fully managed
             \item Can read data from IoT core and Kinesis Data Streams
             \item Scalable
-            \item Can transform data
             \item Can load data into different AWS services
-            \item Supports batching based on time or size
+            \item Supports batching based on time, where the batch job is started every given amout of time
+            \item Supports batching based on size, where the batch job is started when the size of the data reaches a certain threshold
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Not always cost-effective
             \item Limited transformation capabilities
-            \item Does not support batching based on more complex rules
+            \item Does not support batching based on other rules than time and size
         \end{itemize}
         
         \subsubsection{Kinesis Data Streams} 
         \label{aws:kinesis-data-streams}
- AWS Kinesis Data Stream is a fully managed service that simplifies the capture,
+ AWS Kinesis Data Stream is a service that simplifies the capture,
  processing and loading of streaming data in real time at any scale thus enabling real-time data analytics with ease.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
             \item Real-time and fast data processing
-            \item Keeps data for 24 hours by default
+            \item Data are kept available for 24 hours by default
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Not always cost-effective
-            \item Limited data retention
-            \item Limited data transformation
-            \item Not useful for certain batch processing scenarios
+            \item Limits on the data retention period
         \end{itemize}
 
         \subsubsection{Lake Formation}
         \label{aws:lake-formation}
- AWS Lake Formation is a fully managed service that simplifies the creation, security and management of data lakes.
- It allows for cleaning and transforming the data using machine learning.\\
+ AWS Lake Formation is a service that simplifies the creation, security and management of data lakes\footnote{A data lake is a repository which allows to store both structured and unstructured data in a centralized way}.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
-            \item Secure
-            \item Simplifies lake creation 
-            \item Simplifies ingestion management    
-            \item Simplifies permission management      
+            \item Simplifies lake creation process when compared to manual creation
+            \item Simplifies data ingestion process when compared to manual ingestion
+            \item Simplifies permission management when compared to a data lake implemented manually      
             \item Provides data auditing 
             \item Supports machine learning
             \item Supports data cataloguing
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Complexity
-            \item Costly
-            \item Not native support for all data sources
+            \item Costly with respect to manual implementation
         \end{itemize}
 
         \subsubsection{Lambda}
         \label{aws:lambda}
- AWS Lambda is a serverless compute service that automatically manages the compute fleet, scaling precisely with the size of the workload. The key advantage of AWS Lambda is that it allows developers to run code without provisioning or managing servers, creating a highly scalable, flexible, and cost-effective environment for executing code. AWS Lambda supports a variety of programming languages and integrates seamlessly with other AWS services, making it a versatile tool for deploying microservices, building data processing workflows, and developing real-time applications. The service is designed to handle various use cases, from running simple, single-function applications to complex, multi-step workflows.\\
+ AWS Lambda is a serverless\footnote{Serverless: a service that is offered without the provisioning of a server} compute service that automatically manages the compute resources, scaling based on the workload. AWS Lambda supports a variety of programming languages and integrates seamlessly with other AWS services, making it a versatile tool for deploying microservices, building data processing workflows, and developing real-time applications. The service is designed to handle various use cases, from running simple single-function applications to complex multi-step workflows.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Serverless
             \item Pay per use
             \item Scalable
-            \item Easy to integrate with other AWS services
             \item Supports multiple programming languages
             \item Easy to deploy and maintain
-            \item Can run parallel executions
             \item Low time to market
-            \item Supports custom libraries
+            \item Supports custom made libraries as well as AWS libraries
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Limited execution time (15 mins)
-            \item Limited memory
-            \item Limited environment variables
+            \item Limited memory (10GB)
+            \item Limited environment variables (4KB)
             \item Maximum 1000 concurrent executions
             \item Cold start
-            \item Not cost-effective for high workloads
+            \item Not cost-effective for high workloads, there is an exponential increase in cost when more RAM or CPU is needed
         \end{itemize}
 
         \subsubsection{Managed Service for Apache Flink (MSF)}
         \label{aws:msf}
- AWS Managed Service for Apache Flink (MSF) is a fully managed service that simplifies the creation and execution of real-time applications using \href{https://flink.apache.org/}{Apache Flink}\footcite{site:apache-flink}, an open-source stream processing framework. This service provides developers with the tools to build sophisticated, high-throughput, low-latency data processing applications. MSF automates the underlying infrastructure management, enabling teams to focus on application logic rather than operational concerns. With built-in scalability, the service can handle varying workloads efficiently, making it suitable for both batch and stream processing. MSF also offers tight integration with other AWS services, providing a cohesive ecosystem for end-to-end data processing workflows.\\
+ AWS Managed Service for Apache Flink (MSF) is a fully managed service that simplifies the creation and execution of real-time applications using \href{https://flink.apache.org/}{Apache Flink}\footcite{site:apache-flink}, an open-source framework that process streaming data. This service provides developers with the tools to build sophisticated, high-throughput, low-latency data processing applications. MSF automates infrastructure management, enabling teams to focus on application logic rather than operational problems.Its built-in scalability allows the service to handle varying workloads efficiently, making it suitable both for batch and stream processing.\\
 
         \textbf{Pros:}
         \begin{itemize}
@@ -355,12 +339,12 @@ It's also important to mention that these providers were chosen right away becau
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Complexity
+            \item Complex to use in case the user is not familiar with Apache Flink
         \end{itemize}
 
         \subsubsection{Managed Streaming for Kafka (MSK)}
         \label{aws:msk}
- AWS Managed Streaming for Apache Kafka (MSK) is a fully managed service that simplifies the setup, scaling, and management of \href{https://kafka.apache.org/}{Apache Kafka}\footcite{site:apache-kafka} clusters. Apache Kafka is a distributed streaming platform widely used for building real-time data pipelines and streaming applications. MSK allows developers to leverage Kafka's powerful capabilities without the operational burden of managing Kafka infrastructure. The service ensures high availability, durability, and security, integrating seamlessly with other AWS services. This enables users to build robust, scalable streaming solutions while focusing on application development rather than infrastructure management.\\
+ AWS Managed Streaming for Apache Kafka (MSK) is a fully managed service that simplifies the setup, scaling, and management of \href{https://kafka.apache.org/}{Apache Kafka}\footcite{site:apache-kafka} clusters. Apache Kafka is a distributed streaming platform widely used for building real-time data pipelines and streaming applications. MSK allows developers to leverage Kafka's capabilities without the burden of managing Kafka infrastructure.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -368,18 +352,19 @@ It's also important to mention that these providers were chosen right away becau
             \item Cost-effective
             \item Secure
             \item High availability
-            \item Easy to integrate with other AWS services
+            \item Easy to integrate with other AWS services with respect to non-managed Kafka   
+            \item 
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Local testing challenges: hard to replicate the same environment in production and locally
             \item Not suitable for high-traffic scenarios
-            \item Complexity
+            \item Complex to use in case the user is not familiar with Apache Kafka
         \end{itemize}
 
         \subsubsection{Sage Maker}
         \label{aws:sage-maker}
- AWS SageMaker is a comprehensive cloud-based machine learning platform that enables developers and data scientists to build, train, and deploy machine learning models at scale. SageMaker provides a suite of tools that simplify each step of the machine learning workflow, from data labelling and preparation to model tuning and deployment. The platform supports a variety of machine learning frameworks and integrates with other AWS services, offering flexibility and interoperability. SageMaker's built-in algorithms and managed infrastructure allow users to focus on developing innovative models without worrying about the complexities of underlying hardware and software management.\\
+ AWS SageMaker is a cloud-based machine learning platform that enables developers to build, train, and deploy machine learning models at any scale. SageMaker provides a suite of tools that simplify each step of the machine learning workflow, from data labelling and preparation to model tuning and deployment. The platform supports various machine learning frameworks and has a set of built-in algorithms that can leverage its managed infrastructure to allow users to focus on developing innovative models without worrying about the complexities of underlying hardware and software management.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -398,14 +383,14 @@ It's also important to mention that these providers were chosen right away becau
         \label{aws:s3}
  AWS S3 is an object storage service offering scalability, data availability, security, and performance.
  With S3, any amount of data can be stored and retrieved from anywhere on the web. 
- Data is stored as objects in buckets, with each object representing a file and its metadata.\\
+
         \textbf{Pros:}
         \begin{itemize}
             \item Scalable
             \item Highly available
             \item Secure
-            \item Durable
-            \item Cost-effective
+            \item Durable: redundace is built in
+            \item Cost-effective with respect to on-premises solutions or file system storage
             \item No bucket size limit
             \item No limit to the number of objects that can be stored in a bucket
             \item Has different storage classes to fit frequent access, infrequent access, and long-term storage
@@ -423,8 +408,7 @@ It's also important to mention that these providers were chosen right away becau
     
         \subsubsection{Blob Storage}
         \label{azure:blob-storage}
- Azure Blob Storage is a fully managed object storage service that is highly scalable and available. 
- It can store large amounts of unstructured data, making it suitable for a wide range of workloads.\\
+ Azure Blob Storage is an object storage service. It can store large amounts of unstructured data, making it suitable for a wide range of workloads.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -434,55 +418,54 @@ It's also important to mention that these providers were chosen right away becau
             \item Cost-effective
             \item No limit to the number of objects that can be stored in a container
             \item Has different storage tiers to fit frequent access, infrequent access, and long-term storage
-            \item Different storage options (Blob, archive, queue, file and disk) 
+            \item Different storage options that could be suitable for different workloads
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Not suitable for small files
             \item Object size limit (4TB)
-            \item Maximum 2PB per account in the US and Europe
+            \item Maximum 2PB per account in the US and Europe regions
             \item Maximum 500TB per account in other regions
         \end{itemize}
 
         \subsubsection{Cosmos DB}
         \label{azure:cosmos-db}
- Azure Cosmos DB is a fully managed NO-SQL database service supporting multiple data models. It supports multiple NoSQL databases like PostgreSQL, MongoDB, and Cassandra.\\
+ Azure Cosmos DB is a NO-SQL database service supporting multiple data models. It supports multiple NoSQL databases like PostgreSQL, MongoDB, and Cassandra.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
-            \item Multi-model
-            \item Global distribution
-            \item Consistency levels based on the application needs
-            \item Easy to use
+            \item Support multiple models of data (key-value, document, column-family, graph)
+            \item Data are available globally
+            \item Offers multiple consistency levels: Levels of consistency define how up-to-date and synchronized data is across a distributed system at the cost of performance
+            \item Easy to set up
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Expensive
-            \item Slow for complex queries
+            \item Queries can be slow if not run on the indexes
         \end{itemize}
 
         \subsubsection{DataBricks}
         \label{azure:databricks}
- Azure Databricks is a fully managed Apache Spark-based analytics platform supporting a variety of libraries and languages.\\
+ Azure Databricks is an Apache Spark-based analytics platform supporting a variety of libraries and languages.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
             \item Supports multiple programming languages (Python, R, Scala, SQL, Java)
-            \item Supports multiple libraries (Tensorflow, PyTorch, Scikit-learn, etc.)
-            \item Open data lakehouse
+            \item Supports multiple libraries for machine learning and data processing (TensorFlow\footcite{site:tensorflow}, PyTorch\footcite{site:pytorch}, Scikit-learn\footcite{site:sk-learn}, etc.)
+            \item Open data lakehouse\footnote{An open data lakehouse is a platform or architecture that conjugates the pros of a data lake and a data warehouse} platform
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Costly
-            \item Complexity
-            \item Hard to configure
+            \item Cost can rise exponentially with big-data processing
+            \item Complex to set up and use in case the user is not familiar with Apache Spark
         \end{itemize}
 
         \subsubsection{Data Explorer}
         \label{azure:data-explorer}
- Azure Data Explorer is a fully managed, real-time and high-volume data analytics service. 
+ Azure Data Explorer is a service providing real-time and high-volume data analytics. 
  It offers speed and low latency, being able to get quick insights from raw data.
         \textbf{Pros:}
         \begin{itemize}
@@ -500,23 +483,22 @@ It's also important to mention that these providers were chosen right away becau
             \item Complexity
             \item Costly
             \item Limited capabilities for data transformation
-            \item Hard configuration
+            \item Hard configuration, the user needs to know the data structure at prior to ingest data 
         \end{itemize}
 
         \subsubsection{Data Factory}
         \label{azure:data-factory}
- Azure Data Factory is a fully managed cloud-based data integration service.
+ Azure Data Factory is data integration service.
  It provides tools to orchestrate data workflows while monitoring executions.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
-            \item Can perform data Analytics using Synapse
+            \item Can perform data Analytics using Synapse, an Azure service that allows for data warehousing and big data processing
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Complexity
-            \item Limited transformation capabilities
+            \item Complex configuration
         \end{itemize}
 
         \subsubsection{Data Lake Storage}
@@ -528,24 +510,23 @@ It's also important to mention that these providers were chosen right away becau
             \item Scalable
             \item Secure
             \item Cost-effective
-            \item Compatible with Hadoop
+            \item Compatible with Apache Hadoop\footcite{site:hadoop}
             \item Supports Python for data analytics
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Data governance challenges
+            \item Data governance challenges, setting up the right user permissions can be challenging
         \end{itemize}
 
         \subsubsection{Event Grid}
         \label{azure:event-grid}
- Azure Event Grid is a fully managed event routing service that simplifies the development of event-driven applications.\\
+ Azure Event Grid is an event routing\footnote{A service that manages pub-sub messages consumption} service that simplifies the development of event-driven applications.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
             \item Scalable
             \item Supports MQTT5
-            \item Supports multiple event sources
-            \item Supports multiple event handlers
+            \item Supports event sources from other Azure services as well as custom sources
             \item Supports multiple event types
             \item Supports multiple programming languages
             \item Supports multiple event patterns
@@ -553,13 +534,13 @@ It's also important to mention that these providers were chosen right away becau
         \textbf{Cons:}
         \begin{itemize}
             \item Complexity
-            \item Limitations in event storage and retention
-            \item Costly
+            \item Limitations in event storage and retention (7 days)
+            \item Considering the cost it's not convenient for an architecture needing basic event routing
         \end{itemize}
 
         \subsubsection{Event Hubs}
         \label{azure:event-hubs}
- Azure Event Hubs is a fully managed, real-time data ingestion service that is simple, secure, and scalable. It can be used to stream millions of events per second with low latency, from any source to any destination. It offers also native support for Apache Kafka, allowing the user to run existing Kafka applications.\\
+ Azure Event Hubs is a ingestion service. It can be used to stream millions of events per second with low latency, from multiple sources and to any destination.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -567,7 +548,7 @@ It's also important to mention that these providers were chosen right away becau
             \item Secure
             \item Low latency
             \item Supports Apache Kafka
-            \item Schema registry: centralize repository for schema management
+            \item Schema registry: centralize repository for schema management\footnote{An event broker usually ingest event data from different sources. For each source a schema is needed to deserialize the data.}
             \item Real-time data processing
         \end{itemize}
         \textbf{Cons:}
@@ -580,8 +561,7 @@ It's also important to mention that these providers were chosen right away becau
 
         \subsubsection{Functions}
         \label{azure:functions}
- Azure Functions is a serverless computing service that enables developers to run code in response to 
- events without the need to manage the infrastructure.\\
+ Azure Functions is a serverless computing service enable code to be runned in response to events without the need to provision or manage the infrastructure.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -589,21 +569,21 @@ It's also important to mention that these providers were chosen right away becau
             \item Scalable
             \item Supports multiple programming languages
             \item Easy to deploy and maintain
-            \item Can run parallel executions
-            \item Low time to market
-            \item Supports custom libraries
+            \item Low time to market: the user can focus on the code and not on the infrastructure
+            \item Supports custom libraries: the user can upload custom libraries to be used in the function
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Limited execution time (10 mins)
-            \item Cold start
-            \item Not cost-effective for high workloads
+            \item Limited execution time (10 minutes)
+            \item Cold start problem: the first time a function is called it takes longer to start up
+            \item Not cost-effective for high workloads: there is an exponential increase in cost when more RAM or CPU is needed
         \end{itemize}
 
         \subsubsection{IoT Hub}
         \label{azure:iot-hub}
- Azure IoT Hub is a cloud service that serves as the bridge between IoT devices and solutions in the cloud, facilitating reliable and secure communication.
- It can handle and manage a large number of devices making it suitable both for small-scale and enterprise-level solutions.\\
+ Azure IoT Hub is a cloud service that serves as the bridge between IoT devices and the cloud, facilitating reliable and secure communication.
+ It can handle and manage a large number of devices making it suitable both for small-scale and enterprise-level solutions.
+ It also offers a client runtime that can be installed on edge devices.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Secure
@@ -615,16 +595,15 @@ It's also important to mention that these providers were chosen right away becau
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
-            \item Not platform agnostic if installed on devices
-            \item Lacks of integration for some devices
+            \item The client runtime is not platform agnostic: once it's installed only Azure services can be used
             \item Not well documented
             \item Costly
-            \item Does not fully support MQTT5
+            \item Does not fully support MQTT5: only a subset of the protocol's features is supported
         \end{itemize}
 
         \subsubsection{Machine Learning}
         \label{azure:machine-learning}
- Azure Machine Learning is a fully managed service that allows developers to build, train, and deploy machine learning models.\\
+ Azure Machine Learning is a service that allows developers to build, train, and deploy machine learning models.\\
         \textbf{Pros:}
         \begin{itemize}
             \item Fully managed
@@ -633,27 +612,24 @@ It's also important to mention that these providers were chosen right away becau
             \item Supports multiple programming languages
             \item Allow for easy model deployment
             \item Cost-effective
-            \item Has MLOps capabilities
+            \item Has MLOps capabilities\footnote{MLOps is a practice that introduce DevOps techniques in the machine learning development workflow}
             \item Pay as you go
         \end{itemize}
         \textbf{Cons:}
         \begin{itemize}
             \item Cost rises when training big models
-            \item Hard to optimize 
         \end{itemize}
 
 \section{Present Solutions}
-In this section are presented the solutions that are currently available on the market.
+In this section are presented the solutions that are currently available on the market and that could be integrated into the architecture engineering process.
 
 \subsection{Alleantia IoT Edge Hub}
 \label{alleantia}
-IoT Edge Hub is \href{www.alleantia.com}{Alleantia}\footcite{site:alleantia}'s plug-and-play solution for the industrial IoT.
-It offers a wide range of features like device management, alarms and events, log management and report generation.
-It also supports the integration with \href{https://www.microsoft.com/it-it/azure}{Microsoft Azure}\footcite{site:azure}.\\
+IoT Edge Hub is \href{www.alleantia.com}{Alleantia}\footcite{site:alleantia}'s plug-and-play solution for the industrial IoT.\\
 \textbf{Pros:}
 \begin{itemize}
     \item Plug and play
-    \item Device management
+    \item Device management: allows to manage and update devices remotely
     \item Alarms and events
     \item Log management
     \item Report generation
@@ -661,59 +637,57 @@ It also supports the integration with \href{https://www.microsoft.com/it-it/azur
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item Not platform agnostic
-    \item Does not support \href{https://aws.amazon.com/it/}{Amazon Web Services}\footcite{site:aws}
+    \item Platform dependent
+    \item Does not support Amazon Web Services
 \end{itemize}
 
 \subsection{Eclipse Kura}
 \label{kura}
 \href{https://eclipse.dev/kura/}{Eclipse Kura}\footcite{site:kura} is an open-source IoT Edge Framework that serves as a platform for building IoT gateways.
-It's based on Java/OSGi and it provides API access to the hardware interfaces of IoT Gateways.\\
+It's based on Java/OSGi\footnote{A framework that enhances Java's modular programming capabilities} and it provides API access to the hardware interfaces of IoT Gateways\footnote{An IoT gateway is a phisical device that enable sensors communication torwards the internet}.\\
 \textbf{Pros:}
 \begin{itemize}
-    \item Open source
+    \item Open source: allows for customization
     \item Platform agnostic
     \item Allows for flexible and modular development
-    \item API access to hardware interfaces
+    \item Provides access to hardware interfaces via APIs
     \item Introduces AI capabilities at the edge
 \end{itemize}
 \textbf{Cons:}  
 \begin{itemize}
-    \item Computational complexity for small devices
+    \item Computational complexity is high for less powerful devices
     \item Not well documented
-    \item No native support for cloud services
 \end{itemize}
 
 \subsection{Eurotech Everyware Cloud}
 \label{everyware-cloud}
-\href{https://www.eurotech.com/}{Eurotech}\footcite{site:eurotech} Everyware Cloud is a cloud-based IoT Integration Platform with a microservices architecture that allows to connect, configure and manage IoT gateways and devices.\\
+\href{https://www.eurotech.com/}{Eurotech}\footcite{site:eurotech} Everyware Cloud is a IoT Integration Platform with a microservices architecture that allows to connect, configure and manage IoT gateways and devices.\\
 \textbf{Pros:}
 \begin{itemize}
     \item Cloud-based
-    \item Microservices architecture
     \item Allows to connect, configure and manage IoT gateways and devices
     \item Supports multiple protocols
-    \item Supports multiple cloud services
+    \item Supports multiple cloud providers (AWS and Azure)
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item Last update in 2019
+    \item Last update in 2019: the platform could be outdated considering the pace of Cloud services development
 \end{itemize}
 
 \subsection{STMicrelectronics X-Cube Cloud}
 \label{stm}
-\href{https://www.st.com/}{STMicrelectronics}\footcite{site:st-micro} X-Cube Cloud is a software package that enables the connection of STM32 microcontrollers to the cloud.\\
+\href{https://www.st.com/}{STMicrelectronics}\footcite{site:st-micro} X-Cube Cloud is a software package that enables the connection of STM32 microcontrollers to the cloud. STM32 are a family of 32-bit microcontrollers developed by STMicroelectronics and are among the most used microcontrollers in the IoT field.\\
 \textbf{Pros:}
 \begin{itemize}
-    \item Supports multiple cloud services
-    \item Offers a generic and secure connection to the cloud
+    \item Supports multiple cloud providers
+    \item Offers a secure connection to the cloud
     \item Supports multiple protocols
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
     \item Specific for STM32 microcontrollers
-    \item Specific packages for each cloud service if you want to use the full potential
-    \item The generic solution only runs on a subset of STM32 microcontrollers
+    \item A specific version of the software is needed for each provider if the user want to use all the features 
+    \item A generic version of the software is available but it has limited features and works only with a subset of microcontrollers
 \end{itemize}
 
 \subsection{MQTTX}
@@ -721,8 +695,6 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
 \href{https://mqttx.app/}{MQTTX}\footcite{site:mqttx} is a cross-platform MQTT 5.0 client tool that can be used to publish and subscribe to MQTT messages.\\
 \textbf{Pros:}
 \begin{itemize}
-    \item Cross-platform
-    \item Supports MQTT 5.0
     \item Connection management
     \item Log capabilities
     \item Data pipelines
@@ -730,7 +702,7 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item MQTT client only
+    \item Data pipelines feature is not well documented, the pipeline creation process is not clear and there are low debug capabilities
 \end{itemize}
 
 \subsection{EMQX}
@@ -738,15 +710,13 @@ It's based on Java/OSGi and it provides API access to the hardware interfaces of
 \href{https://www.emqx.io/}{EMQX}\footcite{site:emqx} is an open-source MQTT broker designed to be highly scalable.\\
 \textbf{Pros:}
 \begin{itemize}
-    \item Open source
-    \item Scalable
     \item Supports MQTT 5.0
     \item Supports web sockets
     \item Supports multiple cloud services
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item The free version has limitations
+    \item Even though it's open-source it's not free software, the user needs to pay for the enterprise version to access all the features
 \end{itemize}
 
 \section{Machine Learning at edge} 
@@ -758,32 +728,30 @@ This section describes the technologies that can be used to build and deploy mac
 \textbf{Pros:}
 \begin{itemize}
     \item Lightweight
-    \item Supports multiple platforms
+    \item Supports multiple operating systems both mobile and edge
     \item Easy to use
     \item Well documented
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item Need to pre-train the model before deploying it
-    \item On-device training is limited to Unix-based systems
+    \item On-device training is limited to Unix-based systems, only inference is supported on edge devices
 \end{itemize}
 
 \subsection{Tiny Engine}
 \label{tiny-engine}
-\href{https://github.com/mit-han-lab/tinyengine}{Tiny Engine}\footcite{site:tinyengine}\footcite{lin2022ondevice} is a specialized machine learning framework designed to build, train, and deploy models on edge devices. It enables developers to convert TensorFlow Lite models into C++ code, facilitating efficient deployment on resource-constrained devices. Tiny Engine supports multiple platforms and utilizes pre-trained models, making it a versatile tool for various edge computing applications. The framework is lightweight, ensuring minimal resource consumption and fast inference times, which are critical for real-time, on-device machine learning tasks. Tiny Engine is particularly suited for applications in areas such as IoT, where low power consumption and quick response times are essential.
+\href{https://github.com/mit-han-lab/tinyengine}{Tiny Engine}\footcite{site:tinyengine}\footcite{lin2022ondevice} is a specialized machine learning framework designed to build, train, and deploy models on edge devices. Tiny Engine can utilize pre-trained models, making it a versatile tool for various edge computing applications. The framework is lightweight, ensuring minimal resource consumption and fast inference times, which are critical for real-time, on-device machine learning tasks. Tiny Engine is particularly suited for applications in areas such as IoT, where low power consumption and quick response times are essential.
 
 \textbf{Pros:}
 \begin{itemize}
-    \item Lightweight
     \item Supports multiple platforms
-    \item Converts Tensorflow Lite models to C++
-    \item Uses pre-trained models
+    \item Allows to convert Tensorflow Lite models to C++
+    \item Easy deployment of pre-trained models
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
     \item Need to pre-train the model before deploying it
-    \item Better support for MCUnet\footcite{lin2020mcunet}
-    \item Not well documented for deployment of custom models
+    \item MCUnet\footcite[An algorithm for deep learning on microcontrollers]{lin2020mcunet} is the only well documented model
+    \item Custom models are hard to deploy and there is a lack of documentation
 \end{itemize}
 
 
@@ -799,10 +767,10 @@ Another important approach is Transfer Learning, a technique that transfers the 
     \item Data security
     \item No need for data centralization
     \item Low computational power needed
-    \item Low latency
+    \item Predictions made on the edge reduce latency
 \end{itemize}
 \textbf{Cons:}
 \begin{itemize}
-    \item Complex to implement
-    \item Limited capabilities
+    \item Complicated to implement
+    \item Limited capabilities compared to centralized training
 \end{itemize}
