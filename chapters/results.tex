@@ -1,13 +1,14 @@
-\chapter{Real world implementation}
+\chapter{PoC implementation for a real-world scenario}
 \label{cap:real_implementation}
 
-\intro{In this chapter, we will discuss the implementation of the proposed solution based on a real-world scenario presented to the company by a client during the internship period. The client is a company that specializes in high-performance protective gear and technical apparel for motorsports and action sports enthusiasts. The goal of the project was to develop a system that could analyze IMU data from a rider's suit and provide feedback on the rider's performance. The client wanted to use this system to improve the rider's performance both for road users and motorsport pilots.}\\
+\intro{In this chapter, we will discuss the implementation of the proposed solution based on a real-world . The client is a company that specializes in high-performance protective gear and technical apparel for motorsports and action sports enthusiasts. The goal of the project was to develop a system that could analyze IMU data from a rider's suit. An Inertial Measurement Unit (IMU) is a set of sensor able to measure inertial data. Usually an IMU consists of a 3-axis acellerometer, gyroscope and magnetometer. The goal is to provide feedback on the rider's performance based on analysis performed on the IMUs data. The client wanted to use this system to improve the rider's performance both for road users and motorsport pilots.}\\
 
 \section{Client's requirements}
 \label{sec:client_requirements}
-The problem involves managing and processing data collected from various Motorcycle suits used by private and professional users. These products, used in different scenarios, generate data that needs to be efficiently collected, processed, stored, and analyzed to provide insights and ensure user safety and satisfaction. The solution must handle sporadic and intensive data uploads, support multiple types of users and devices, and ensure data integrity and accessibility.
+The problem involves managing and processing data collected from various motorcycle suits used by private and professional users. These products, used in different scenarios, generate data that needs to be efficiently collected, processed, stored, and analyzed to provide insights and ensure user safety and satisfaction. The solution must handle sporadic and intensive data uploads, support multiple types of users and devices, and ensure data integrity and accessibility.
 
-\subsection*{User Types and Usage Patterns}
+\subsection{User Types and Usage Patterns}
+In this section the different types of users and their usage patterns are described. The users are divided into four categories: Private Users with Sporadic Use, Private Users with Intensive Use, Private Users with Multiple Products, and Professional Users. Each category has specific usage patterns and data upload requirements. The estimated number of users and data volume per year are also provided in table \ref{table:data_volume}. The implementation of the system will be based on these usage patterns to ensure that the system can handle the expected data volume and user interactions.
 \begin{itemize}
     \item \textbf{Private Users with Sporadic Use}: Upload data approximately once a week.
     \item \textbf{Private Users with Intensive Use}: Upload data approximately three times a week.
@@ -85,8 +86,8 @@ The problem involves managing and processing data collected from various Motorcy
 
 \section{System Architecture}
 \label{sec:system_architecture}
-Considering the requirements and usage patterns, the system architecture must be designed to handle the sporadic and intensive data uploads from different types of users. The architecture must be scalable, fault-tolerant, and platform-agnostic to support future growth and changes in the system. Two different architectures were proposed to meet the client's requirements: an on-demand analysis architecture and a preemptive analysis architecture. Both architectures are based on the same core components described in \ref{sec:architecture}, but they differ in the way data is processed and analyzed.
-It's also worth mentioning that even if only \href{https://www.arubacloud.com/}{Aruba Cloud}\footcite{site:aruba-cloud} was considered for this project, the system is designed to be platform-agnostic and can be deployed on any cloud provider.
+Considering the requirements and usage patterns, the system architecture must be designed to handle the sporadic and intensive data uploads from different types of users. The architecture must be scalable, fault-tolerant, and platform-agnostic to support future growth and changes in the system. Two different architectures were proposed to meet the client's requirements: an on-demand analysis architecture and a preemptive analysis architecture. Both architectures are based on the same core components described in \ref{sec:architecture} maintaining the same core components thus ensuring that the system is scalable, fault-tolerant, and platform-agnostic. The choice between the two architectures will be based on the client's specific needs and priorities. Both options propose the usage of a set of APIs to facilitate the interaction between the various components.
+
 
 \subsection{Architecture 1: Preemptive Analytics Processing}
 
@@ -94,21 +95,22 @@ It's also worth mentioning that even if only \href{https://www.arubacloud.com/}{
     \centering
     \includegraphics[width=1\textwidth]{preemptive_architecture.png}
     \caption{Architecture 1: Preemptive Analytics Processing}
+    \label{fig:preemptive_architecture}
 \end{figure}
 
 \subsubsection{Overview}
-This architecture processes sensor data from biker suits as soon as it is received. The processed analytics are stored and readily available for users. This approach emphasizes real-time data processing to provide immediate insights and archive crash detection using Aruba's cloud services.
+The architecture shown in figure \ref{fig:preemptive_architecture} is engineered to processes sensor data from biker suits as soon as it is received. The processed analytics are stored and readily available for users. This approach emphasizes real-time data processing to provide immediate insights and archive crash detection using cloud services. 
 
 \subsubsection{Detailed Workflow}
 
 \textbf{Data Ingestion}:  
-Sensor data collected by the biker suit is uploaded to raw data object storage via app or dedicated hardware, ensuring a secure transfer and storage of data for subsequent processing.
+Sensor data collected by the biker suit is uploaded to raw data object storage via a mobile application or via a custom firmware installed on the suit's charging station, ensuring a secure transfer and storage of data for subsequent processing.
 
 \textbf{Trigger Analytics Pipeline}:  
-A push event triggers a function or script on the Aruba Cloud Server to initiate the analytics pipeline. Alternatively, the pipeline can be triggered by an API (HTTP or WebSocket) call upon data upload.
+An upload event triggers a function or script on the Cloud Server to initiate the analytics pipeline. Alternatively, the pipeline can be triggered by an API call upon data upload.
 
 \textbf{Data Processing}:  
-The Aruba Cloud Server runs the data analytics pipeline, which involves several key stages:
+The Cloud Server runs the data analytics pipeline, which involves several key stages:
 \begin{itemize}
     \item \textbf{Data Preprocessing}: Cleaning and transforming raw data.
     \item \textbf{Analytics}: Applying algorithms to analyze the data.
@@ -116,19 +118,19 @@ The Aruba Cloud Server runs the data analytics pipeline, which involves several 
 \end{itemize}
 
 \textbf{Storage}:  
-Processed analytics data is stored in a separate storage bucket within Aruba object storage. If a crash is detected, the raw data is duplicated in a crash-specific bucket. The original raw data is programmatically deleted to manage storage capacity efficiently.
+Processed analytics data is stored in a separate storage bucket within the object storage. If a crash is detected, the raw data is duplicated in a crash-specific bucket. The original raw data is programmatically deleted to manage storage capacity efficiently.
 
 \textbf{User Access}:  
-Users are notified when analytics are available. The API Gateway provides an endpoint for users to request analytics data. The API retrieves the requested analytics data from the analytics bucket.
+Users must be able to acess analytics data upon request. This is done by providing an API endpoint capable of retrieving the requested data analytics data from the analytics bucket. 
 
 \textbf{Data Listing}:  
 An API endpoint lists available analytics data based on metadata, facilitating easier management and retrieval for users.
 
 \subsubsection{Components}
 \begin{itemize}
-    \item \textbf{Aruba Object Storage}: For raw, analytics, and crash data storage.
-    \item \textbf{API or Event-Driven Services on Aruba Cloud Server}: To trigger the analytics pipeline.
-    \item \textbf{Aruba Cloud Server Instances}: For running the analytics pipeline.
+    \item \textbf{Object Storage}: For raw, analytics, and crash data storage.
+    \item \textbf{API or Event-Driven Services on Cloud Server}: To trigger the analytics pipeline.
+    \item \textbf{Cloud Server Instances}: For running the analytics pipeline.
     \item \textbf{APIs}: For data retrieval and listing.
 \end{itemize}
 
@@ -154,10 +156,11 @@ An API endpoint lists available analytics data based on metadata, facilitating e
     \centering
     \includegraphics[width=1\textwidth]{on-demand_architecture.png}
     \caption{Architecture 2: On-Demand Analytics Processing}
+    \label{fig:on-demand_architecture}
 \end{figure}
 
 \subsubsection{Overview}
-This architecture processes sensor data on demand. Users request analytics for specific dates, triggering the processing pipeline. This approach is resource-efficient, processing data only when necessary using Aruba's cloud services.
+The architecture schematized in figure \ref{fig:on-demand_architecture} process sensor data on demand. Users can request ride analytics processing for a specific period of time, triggering the processing pipeline. This approach is resource-efficient, processing data only upon user request.
 
 \subsubsection{Detailed Workflow}
 
@@ -168,10 +171,10 @@ The initial stage involves collecting sensor data from the biker suit. This data
 After ingestion, the Listing API is utilized. This API endpoint lists all available raw data based on its metadata, facilitating easier management and retrieval for subsequent processing steps.
 
 \textbf{Analytics Request}:  
-The user requests data analytics through an API endpoint or a WebSocket at this stage. Upon receiving the request, a background job is triggered on the Aruba Cloud Server, initiating the analytics pipeline for processing the requested data.
+The user requests data analytics through an API endpoint or a WebSocket at this stage. Upon receiving the request, a background job is triggered on the Cloud Server, initiating the analytics pipeline for processing the requested data.
 
 \textbf{Data Processing}:  
-Data processing involves several sub-stages on the Aruba Cloud Server:
+Data processing involves several sub-stages on the Cloud Server:
 \begin{itemize}
     \item \textbf{Data Preprocessing}: Raw data is cleaned and transformed to prepare it for analysis.
     \item \textbf{Analytics}: Algorithms are applied to analyze the data and extract meaningful insights.
@@ -179,16 +182,16 @@ Data processing involves several sub-stages on the Aruba Cloud Server:
 \end{itemize}
 
 \textbf{Storage}:  
-After processing, the resulting analytics data is stored in a designated analytics bucket within the Aruba object storage. If a crash is detected, the raw data is duplicated in a crash-specific bucket. To efficiently manage storage capacity, the original raw data is programmatically deleted after processing.
+After processing, the resulting analytics data is stored in a designated analytics bucket within the object storage. If a crash is detected, the raw data is duplicated in a crash-specific bucket. To efficiently manage storage capacity, the original raw data is programmatically deleted after processing.
 
 \textbf{User Access}:  
 In the final stage, the processed data is made available to the user. Users are notified via WebSocket if they made the analytics request through this method. The API Gateway provides an endpoint for users to request the analytics data, which is retrieved from the analytics bucket and delivered to the user.
 
 \subsubsection{Components}
 \begin{itemize}
-    \item \textbf{Aruba Object Storage}: For raw, analytics, and crash data storage.
+    \item \textbf{ Object Storage}: For raw, analytics, and crash data storage.
     \item \textbf{Job triggering API}: To handle on-demand processing.
-    \item \textbf{Aruba Cloud Server Instances}: For running the analytics jobs.
+    \item \textbf{Cloud Server Instances}: For running the analytics jobs.
     \item \textbf{APIs}: For data retrieval and listing.
 \end{itemize}
 
@@ -221,7 +224,7 @@ In the final stage, the processed data is made available to the user. Users are 
 \hline
 \textbf{Scalability} & Challenging & Easier \\
 \hline
-\textbf{Cost Efficiency} & Potentially costly & More cost-effective \\
+\textbf{Cost Efficiency} & Potentially expensive & More cost-effective \\
 \hline
 \textbf{Crash Detection} & Immediate & On-demand \\
 \hline
@@ -234,7 +237,7 @@ Both Architecture 1 (Preemptive Analytics Processing) and Architecture 2 (On-Dem
 \section{Implementation}
 \label{sec:implementation}
 
-In this section, we delve into the implementation of the chosen system architecture, detailing the various steps undertaken to bring the proposed solution to life. Architecture 1, the Preemptive Analytics Processing architecture, was selected due to its emphasis on real-time data processing and the immediate availability of analytics insights, aligning well with the client's focus on enhancing rider safety and performance. This section will outline the rationale behind choosing Architecture 1 and then walk through the implementation steps, ensuring each aspect of the system is comprehensively addressed.
+In this section, we delve into the implementation of the chosen system architecture, detailing the various steps undertaken to bring the proposed solution to life. Architecture 1, the Preemptive Analytics Processing architecture, was selected due to its emphasis on real-time data processing and the immediate availability of analytics insights, aligning well with the client's focus on enhancing rider safety and performance. This section outlines the rationale behind choosing Architecture 1 and then gives a walk through the various implementation steps, ensuring each aspect of the system is comprehensively addressed.
 
 \subsection{Rationale for Choosing Architecture 1}
 Architecture 1 was chosen over Architecture 2 due to several key factors:
@@ -258,7 +261,7 @@ The initial step in the implementation process was to establish a robust data in
     \item \textbf{Mobile Application Integration}: Develop or integrate a mobile application to facilitate data upload from the biker suit to the cloud. Ensure the app supports secure data transfer protocols.
     \item \textbf{Dedicated Hardware}: If applicable, implement dedicated hardware to manage data upload directly from the suit to the cloud, bypassing the need for a mobile app.
     \item \textbf{Secure Transfer}: Utilize secure transfer methods (e.g., HTTPS, SSL/TLS) to ensure data integrity and confidentiality during upload.
-    \item \textbf{Object Storage Setup}: Configure Aruba Object Storage to receive and store raw sensor data securely.
+    \item \textbf{Object Storage Setup}: Configure the Object Storage to receive and store raw sensor data securely.
 \end{enumerate}
 
 For the PoC, the Secure Transfer and Object Storage Setup steps have been implemented. To manage the file upload from the biker suit, a simple script was developed to simulate the data transfer process. The mobile application integration and dedicated hardware components will be considered in the next phase of development.
@@ -266,7 +269,7 @@ For the PoC, the Secure Transfer and Object Storage Setup steps have been implem
 
 
 \subsubsection{Trigger Analytics Pipeline}
-Upon successful data upload, an event or API call triggers the analytics processing pipeline on the Aruba Cloud Server.
+Upon successful data upload, an event or API call triggers the analytics processing pipeline on the Cloud Server.
 
 \textbf{Steps:}
 \begin{enumerate}
@@ -292,7 +295,7 @@ Processed analytics data needs to be stored in a dedicated storage bucket, with 
 
 \textbf{Steps:}
 \begin{enumerate}
-    \item \textbf{Analytics Data Storage}: Configure a separate storage bucket within Aruba Object Storage for processed analytics data.
+    \item \textbf{Analytics Data Storage}: Configure a separate storage bucket within the Object Storage for processed analytics data.
     \item \textbf{Crash Data Handling}: Implement mechanisms to duplicate raw data in a crash-specific bucket if a crash is detected. Ensure original raw data is programmatically deleted post-processing to manage storage capacity efficiently.
 \end{enumerate}
 
@@ -326,10 +329,10 @@ For the PoC, the permanent metrics storage has been implemented, ensuring that k
 \subsection{Technical Detail and Tools}
 The implementation of the proposed solution involved the use of various tools and technologies to ensure the system's robustness, scalability, and efficiency. The following technical details provide an overview of the tools used in the implementation process:
 \subsubsection{Cloud server}
-Aruba cloud server instances were used to host the API Gateway, analytics pipeline, and other backend services. The cloud server provided a scalable and reliable environment for running the analytics pipeline and managing user requests.
+Aloud server instance were used to host the API Gateway, analytics pipeline, and other backend services. The cloud server provided a scalable and reliable environment for running the analytics pipeline and managing user requests.
 
-\subsubsection{Aruba Object Storage}
-Aruba Object Storage was used to store raw sensor data, processed analytics data, and crash data. It provides a secure and scalable storage solution for managing large volumes of data efficiently.
+\subsubsection{Object Storage}
+Object Storage was used to store raw sensor data, processed analytics data, and crash data. It provides a secure and scalable storage solution for managing large volumes of data efficiently.
 The storage is divided into three main buckets:
 \begin{itemize}
     \item \textbf{Raw Data}: For storing the raw sensor data uploaded from the biker suits.
