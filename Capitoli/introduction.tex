@@ -1,0 +1,158 @@
+\chapter{Introduction}
+\label{cap:introduction}
+
+\section{The problem}
+\label{sec:the-problem}
+The proliferation of the Internet of Things (IoT) has revolutionized how we interact with technology, creating a network of interconnected devices that generate and exchange vast amounts of data. However, this advancement also brings significant challenges, particularly in managing, storing, and analyzing the enormous volumes of data produced by these devices. The problem, solved in collaboration with 221e is developing a scalable, cloud-agnostic architecture that can efficiently handle IoT data for analysis and machine learning applications.
+
+\section{Background}
+\label{sec:background}
+To understand the problem better, it is essential to define some key concepts and technologies that are relevant to the development of the proposed architecture. A brief overview of these concepts is provided below.
+
+\subsection*{Internet of Things}
+\label{sec:internet-of-things}
+The Internet of Things (IoT) refers to a network of devices embedded with sensors, software, and other technologies that enable them to connect and exchange data over the internet. These devices range from everyday household items to sophisticated industrial tools, all of which collect valuable data that can be analyzed to generate insights, optimize operations, and drive innovation across various sectors, including healthcare, manufacturing, and smart cities.  In this thesis, when referring to IoT devices, we specifically mean the MuSe multi-sensor device developed by 221e\cite{site:221e}.
+
+The MuSe device is a miniaturized multi-sensor Inertial Measurement Unit (IMU) designed to provide comprehensive data on various physical parameters. This includes measurements such as acceleration, angular velocity, and magnetic field strength. The MuSe device exemplifies a typical IoT device by being equipped with multiple sensors that continuously collect data, which can then be transmitted and analyzed for various applications.
+
+\subsection*{Scalability}
+\label{sec:scalability}
+Scalability refers to a system's ability to handle an increasing workload by adding resources, either through vertical scaling (enhancing the capacity of existing machines) or horizontal scaling (adding more machines to the network). In IoT contexts, scalability is essential, as the number of connected devices and the volume of data they generate can grow exponentially. A scalable architecture ensures that the system remains efficient, responsive, and capable of handling growing demands.
+
+\subsection*{Cloud-Agnostic}
+\label{sec:cloud-agnostic}
+A cloud-agnostic architecture is designed to operate seamlessly across multiple cloud service providers without requiring significant modifications. This flexibility is crucial in avoiding vendor lock-in, where a business becomes overly dependent on a single cloud provider. By enabling deployment across different platforms, a cloud-agnostic approach enhances resilience, cost optimization, and the ability to leverage the specific strengths of each cloud provider.
+
+\subsection*{MQTT Protocol}
+\label{sec:mqtt-protocol}
+MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed for devices with limited bandwidth and high latency, making it ideal for IoT applications. MQTT operates on a publish-subscribe model, where devices (publishers) send messages to an MQTT broker, which then forwards these messages to subscribers. This protocol is popular in IoT because it is simple, reliable, and supports various Quality of Service (QoS) levels to ensure message delivery.
+
+\subsection*{TLS/SSL Encryption}
+\label{sec:tls-ssl-encryption}
+Transport Layer Security (TLS) and its predecessor, Secure Sockets Layer (SSL), are cryptographic protocols that provide secure communication over a computer network. TLS/SSL encryption ensures that data transmitted between devices is protected from eavesdropping and tampering. In the context of IoT, securing data in transit is essential to protect sensitive information from unauthorized access.
+
+\subsection*{HTTP (Hypertext Transfer Protocol)}
+\label{sec:http}
+HTTP is an application-layer protocol used for transmitting data over the web. It is the foundation of data communication on the internet, commonly used for exchanging hypertext documents between clients (such as browsers) and servers. HTTP operates in a request-response model, where the client sends a request, and the server returns a response. While HTTP is well-suited for many web-based services, its stateless nature, where each request is treated independently, makes it less ideal for real-time data transmission in IoT applications. Despite this, HTTP is widely used for transferring IoT data due to its simplicity and compatibility with RESTful APIs.
+
+\subsection*{WebSocket}
+\label{sec:websocket}
+WebSocket is a communication protocol that provides full-duplex communication channels over a single, persistent connection between a client and a server. Unlike HTTP, which follows a request-response model, WebSocket allows continuous, bidirectional communication. This makes WebSocket particularly useful for applications that require real-time data exchange, such as live monitoring or control of IoT devices. Once the connection is established, the server and client can exchange data freely without the need to re-establish the connection for each transmission, making it efficient for continuous data streams.
+
+\subsection*{Object Storage}
+\label{sec:object-storage}
+Object storage services provide a scalable solution for storing and managing vast amounts of unstructured data, such as files, images, and videos, which are commonly generated by IoT devices. In this model, data is stored as objects within "buckets," which are containers that hold the data and associated metadata. Object storage is highly durable, easy to scale, and accessible from anywhere, making it a crucial component of cloud-based IoT architectures.
+
+\subsection*{Infrastructure as a Service (IaaS)}
+\label{sec:iaas}
+Infrastructure as a Service (IaaS) refers to cloud services that provide virtualized computing resources over the internet. IaaS enables businesses to rent infrastructure—such as virtual machines, storage, and networking—on a pay-as-you-go basis, allowing them to scale resources according to their needs without investing in physical hardware. In the context of IoT, IaaS services provide the necessary computational power and storage to manage and process large volumes of data generated by IoT devices.
+
+\subsection*{Platform as a Service (PaaS)}
+\label{sec:paas}
+Platform as a Service (PaaS) is a cloud computing model that provides a platform for developing, running, and managing applications without the complexity of building and maintaining the underlying infrastructure. PaaS services offer a complete environment for application development, including tools, libraries, and frameworks, allowing developers to focus on creating software rather than managing hardware. PaaS is well-suited for IoT applications, as it streamlines the development process and enables rapid deployment of IoT solutions.
+
+\subsection*{Shared responsibility model}
+\label{sec:shared-responsibility-model}
+The shared responsibility model is a security framework that defines the responsibilities of cloud service providers and their customers in securing cloud-based applications and data. In this model, the cloud provider is responsible for securing the underlying infrastructure, such as the physical servers and network, while the customer is responsible for securing their applications, data, and access controls. By clarifying these responsibilities, the shared responsibility model helps ensure that cloud environments are adequately protected from security threats.
+Each cloud provider has its own shared responsibility model, which outlines the specific security responsibilities of the provider and the customer. Understanding these models is essential for designing secure and compliant cloud architectures.
+
+\subsection*{Apache Spark}
+\label{sec:apache-spark}
+Apache Spark\cite{site:spark} is an open-source, distributed computing system that provides an optimized framework for large-scale data processing. It is designed to perform tasks such as batch processing, real-time data streaming, machine learning, and graph processing efficiently across clusters of computers. Spark's in-memory computing capabilities significantly enhance performance by reducing the time taken to access data from disk, making it well-suited for processing large datasets in IoT applications. Spark integrates with a wide variety of data sources and frameworks, including Hadoop, and supports multiple programming languages such as Python, Scala, Java, and R.
+
+\subsection*{Apache Hadoop}
+\label{sec:apache-hadoop}
+Apache Hadoop\cite{site:hadoop} is an open-source framework that allows for the distributed storage and processing of large datasets across clusters of computers. It uses the Hadoop Distributed File System (HDFS) for storage and MapReduce, a programming model for processing large data sets in parallel. Hadoop is designed to scale from single servers to thousands of machines, each offering local computation and storage. It is widely used for processing and analyzing big data and is highly resilient, ensuring data availability even in the event of hardware failures. Hadoop is ideal for applications requiring batch processing of massive datasets, making it suitable for IoT environments where large volumes of data are continuously generated and need to be processed efficiently.
+
+\subsection*{Container Services}
+\label{sec:container-kubernetes}
+Container services provide a lightweight, portable, and consistent runtime environment for applications by packaging code and dependencies into isolated units called containers. These containers can run across different computing environments without modification. Kubernetes\cite{site:kubernetes} is an open-source platform designed to automate the deployment, scaling, and management of containerized applications. It orchestrates containers across a cluster of machines, ensuring that the right resources are allocated, workloads are distributed efficiently, and applications remain available even in the event of hardware failures.
+
+In the context of IoT and cloud-agnostic architectures, Kubernetes ensures that services can scale horizontally to meet the growing demands of IoT data processing. By using Kubernetes, developers can deploy microservices-based applications across multiple cloud providers or on-premise infrastructure, facilitating portability and scalability. It also supports auto-scaling, fault tolerance, and continuous deployment, making it an ideal solution for managing complex and distributed IoT workloads.
+
+\subsection*{Virtualization}
+\label{sec:virtualization}
+Virtualization allows for the creation of multiple virtual instances on a single physical machine, each operating as an independent computing environment. This technology is foundational to modern cloud computing, enabling efficient use of hardware resources and allowing organizations to scale their infrastructure dynamically.
+
+Two prominent virtualization solutions are \textbf{OpenStack}\cite{site:openstack} and \textbf{VMware}\cite{site:vmware}.
+
+\begin{itemize}
+    \item \textbf{OpenStack} is an open-source cloud computing platform that controls large pools of compute, storage, and networking resources in a data center. It provides an Infrastructure as a Service (IaaS) model that supports the creation and management of virtual machines, enabling cloud providers and enterprises to build and manage private and public clouds.
+    \item \textbf{VMware} is a widely used commercial solution for virtualization, offering a suite of products that provide robust virtual infrastructure management. VMware’s vSphere platform allows for the efficient deployment and management of virtual machines, supporting both on-premise and cloud environments.
+\end{itemize}
+
+Both OpenStack and VMware are crucial in cloud-agnostic architectures as they allow for the creation of virtualized environments across multiple platforms, reducing dependency on specific hardware and enabling seamless integration with container services like Kubernetes. This flexibility is essential for IoT ecosystems where workloads need to be distributed across different infrastructures while maintaining high availability and scalability.
+
+
+\subsection*{ETL (Extract, Transform, Load)}
+\label{sec:etl}
+ETL is a process used in data integration and transformation workflows, particularly in environments where large volumes of data need to be processed and analyzed. It consists of three steps:
+\begin{itemize}
+    \item \textbf{Extract:} Data is collected or extracted from various sources, such as databases, IoT devices, or third-party services. This step involves connecting to data sources and gathering the relevant information needed for analysis or storage.
+    \item \textbf{Transform:} The extracted data is transformed into a suitable format or structure. This may involve cleaning the data, filtering out irrelevant information, standardizing formats, aggregating values, or applying business rules to ensure consistency across different data sources.
+    \item \textbf{Load:} The transformed data is loaded into a target system, such as a database or a data warehouse, where it can be stored for further analysis or machine learning processes.
+\end{itemize}
+ETL is commonly used in data warehousing and analytics applications, making it crucial in IoT architectures where raw data from multiple sensors needs to be cleaned and processed before being stored or analyzed. 
+
+\subsection*{API (Application Programming Interface)}
+\label{sec:api}
+
+An Application Programming Interface (API) is a set of rules and protocols that allows different software applications to communicate with each other. It defines the methods and data formats that developers can use when interacting with a system, enabling software components to exchange information, regardless of their underlying architecture. APIs provide a standardized interface for accessing functionality and data in a controlled and structured manner.
+
+APIs typically operate over the internet using web technologies such as HTTP and are often used to connect client applications (like web browsers or mobile apps) with backend services. APIs can be categorized into different types, such as:
+
+\begin{itemize}
+    \item \textbf{Web APIs:} These are APIs exposed over the internet via web protocols such as HTTP/HTTPS. REST (Representational State Transfer) is one of the most common architectural styles for building web APIs. REST APIs follow standard methods like GET, POST, PUT, DELETE, allowing developers to perform operations like reading, creating, updating, or deleting resources.
+    
+    \item \textbf{Library APIs:} These are APIs provided by libraries or frameworks, allowing developers to interact with certain functions or features within a programming language or framework. For example, an API in a data analysis library like Pandas in Python allows users to manipulate data structures easily.
+
+    \item \textbf{Operating System APIs:} These are APIs that allow software applications to interact with the operating system, such as file management, memory allocation, or process control. Examples include POSIX APIs for Unix-like systems or WinAPI for Windows operating systems.
+\end{itemize}
+
+APIs facilitate interoperability between different systems and enable modularity by abstracting complex operations into simpler calls that are easy to integrate into other software. In cloud-based and IoT architectures, APIs are critical in ensuring that different components (such as data collection, storage, and analysis systems) can communicate seamlessly, enabling scalable and flexible solutions.
+
+\section{The solution}
+\label{sec:the-solution}
+To address the challenges of creating a cloud-agnostic, scalable architecture for IoT data analysis and machine learning, a methodical approach was employed. The solution involved several critical steps, each contributing to the development and validation of the proposed architecture. 
+
+\subsection{Objectives and requirements}
+\label{sec:objectives-and-requirements}
+The primary objective of this project is to create a cloud-agnostic architecture for a network of IoT devices that can efficiently ingest, store, and analyze data from multiple sensors. The architecture must be capable of scaling both horizontally (by adding more machines) and vertically (by increasing resources of existing machines) to accommodate the growing data demands.
+
+\subsubsection{Cloud infrastructure}
+\label{sec:cloud-infrastructure}
+The architecture is designed to leverage the power of cloud services to ingest, store, and process large amounts of IoT data. The final product should be deployable on any cloud provider with minimal modification, offering customers the flexibility to choose the best provider for their needs. The cloud providers considered for this project include Aruba Cloud\cite{site:aruba-cloud}, AWS\cite{site:aws}, and Microsoft Azure\cite{site:azure}. Testing the architecture on at least two of these providers will help verify its cloud-agnostic nature.
+
+\subsubsection{Data collection}
+\label{sec:data-collection}
+The system must be able to ingest data from both online devices and archive data sources. Online devices will use the MQTT protocol to send data to the cloud as soon as data is collected, where it is ingested and processed. The architecture must also support uploading files from on-premise storage, such as a Network Access Storage (NAS) or a device that collects data offline.
+
+\subsubsection{Data processing}
+\label{sec:data-processing}
+The system must be capable of preprocessing data before storage, including validation, cleaning, and transformation, either in the cloud or on-premise. Additionally, the system must support post-storage processing, such as data analysis and machine learning, to extract valuable insights from the data.
+
+\subsubsection{Security}
+\label{sec:security}
+Security is a critical concern for the architecture, particularly when dealing with sensitive data. The system must ensure the security of data both in transit and at rest. Data in transit must be encrypted, and the MQTT protocol should be secured using TLS/SSL encryption and certificate-based authentication. Data at rest in the cloud must also be encrypted, with secure management of encryption keys provided by the cloud service.
+
+\subsubsection{Scalability}
+The system must be able to scale horizontally by adding more instances of the same service and vertically by increasing the resources of the service. Automated scaling based on system load should be implemented to ensure the architecture can handle varying workloads efficiently. Stress tests will be conducted to verify the system's scalability under different conditions.
+
+
+
+
+\subsection{Analysis of existing Solutions}
+\label{sec:analysis-of-existing-solutions}
+The first phase involved a comprehensive analysis of the existing technologies available for managing and processing IoT data. This included evaluating protocols for data transmission, storage solutions, and processing frameworks that could support a cloud-agnostic, scalable architecture. The focus was on identifying robust and flexible technologies capable of handling large volumes of IoT data while maintaining performance and reliability.
+
+\subsection{Analysis of different cloud providers}
+\label{sec:analysis-of-different-cloud-providers}
+Given the importance of cloud-agnosticism, the next step was to analyze the capabilities of different cloud service providers, including Amazon Web Services (AWS)\cite{site:aws}, Microsoft Azure\cite{site:azure}, and Aruba Cloud\cite{site:aruba-cloud}. Each provider offers distinct features and services, and the analysis focused on understanding how these could be leveraged to build a cloud-agnostic architecture. The selection criteria included compatibility with IoT data handling requirements, scalability options, and existing company expertise.
+
+\subsection{Definition of a base architecture}
+\label{sec:definition-of-a-base-architecture}
+Based on the technology and cloud provider analyses, a base architecture was defined. This architecture was designed to be cloud-agnostic and scalable, capable of efficiently managing large volumes of IoT data. The architecture comprised components for data ingestion, storage, preprocessing, and post-processing, with an emphasis on enabling effective data analysis and machine learning operations.
+
+\subsection{Testing on a real-world use case}
+\label{sec:testing-on-a-real-world-use-case}
+To validate the proposed architecture, it was tested against a real-world use case involving a network of heterogeneous IoT devices. These tests were designed to evaluate the architecture's performance, scalability, and cloud-agnostic capabilities. The results provided valuable feedback, confirming the architecture's effectiveness and informing further refinements.

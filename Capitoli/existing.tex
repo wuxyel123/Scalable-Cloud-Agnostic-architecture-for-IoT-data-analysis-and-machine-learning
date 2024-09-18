@@ -1,0 +1,194 @@
+\chapter{Existing solutions}
+\label{cap:existing}
+In this chapter, the solutions currently available on the market that could be integrated into the architecture engineering process are presented.
+
+\section{Alleantia IoT Edge Hub}
+\label{alleantia}
+IoT Edge Hub is Alleantia's\cite{site:alleantia} plug-and-play solution for industrial IoT. It allows for quick integration with IoT systems but has limitations in terms of platform support.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Plug and play
+    \item Device management: enables remote management and updates of devices
+    \item Alarms and events handling
+    \item Log management
+    \item Report generation
+    \item Integration with Microsoft Azure
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Platform dependent
+    \item Does not support Amazon Web Services (AWS)
+\end{itemize}
+
+\section{Eclipse Kura}
+\label{kura}
+Eclipse Kura\cite{site:kura} is an open-source IoT Edge Framework for building IoT gateways. It is based on Java and the OSGi framework, which enhances Java’s modular programming capabilities. It provides API access to hardware interfaces of IoT gateways (physical devices that enable sensors to communicate with the internet).
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Open source: allows for customization
+    \item Platform agnostic
+    \item Enables flexible and modular development
+    \item Provides API access to hardware interfaces
+    \item Introduces AI capabilities at the edge
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item High computational complexity for less powerful devices
+    \item Lacks comprehensive documentation, making it difficult to learn
+\end{itemize}
+
+\section{Eurotech Everyware Cloud}
+\label{everyware-cloud}
+Eurotech\cite{site:eurotech} Everyware Cloud is an IoT integration platform that uses a microservices architecture to connect, configure, and manage IoT gateways and devices. It supports various communication protocols and cloud platforms like AWS and Azure.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Cloud-based
+    \item Allows for connection, configuration, and management of IoT gateways and devices
+    \item Supports multiple protocols
+    \item Supports multiple cloud providers (AWS and Azure)
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Last updated in 2019, which could mean it is outdated compared to newer cloud services
+\end{itemize}
+
+\section{STMicroelectronics X-Cube Cloud}
+\label{stm}
+STMicroelectronics\cite{site:st-micro} X-Cube Cloud is a software package for connecting STM32 microcontrollers to the cloud. STM32 microcontrollers are widely used in the IoT space.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Supports multiple cloud providers
+    \item Provides secure cloud connections
+    \item Supports various communication protocols
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Specific to STM32 microcontrollers
+    \item A dedicated software version is needed for each cloud provider to use all features
+    \item A generic version with limited features is available but only supports a subset of microcontrollers
+\end{itemize}
+
+\section{MQTTX}
+\label{mqttx}
+MQTTX\cite{site:mqttx} is a cross-platform MQTT 5.0 client tool that facilitates publishing and subscribing to MQTT messages, testing connections, and simulating IoT devices.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Connection management
+    \item Logging capabilities
+    \item Data pipelines
+    \item Device simulation capabilities: can create virtual devices to test the connection
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item The data pipeline feature is poorly documented, and the process for creating pipelines is unclear, with limited debugging support
+\end{itemize}
+
+\section{EMQX}
+\label{emqx}
+EMQX\cite{site:emqx} is an open-source MQTT broker that is designed to be highly scalable. It supports various messaging protocols and cloud services, making it a robust option for IoT systems requiring high scalability.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Supports MQTT 5.0
+    \item Compatible with WebSockets
+    \item Supports multiple cloud services, including AWS and Azure
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Though open source, access to all features requires purchasing the enterprise version
+\end{itemize}
+
+\section{Machine learning at edge} 
+This section describes the technologies that can be used to build and deploy machine learning models at the edge and the Federated Learning approach. Even if they have not yet been implemented in the solution proposed in chapter \ref{cap:method}, they could still be considered for future development.
+
+\subsection*{Tensorflow Lite}
+\label{tensorflow-lite}
+Tensorflow Lite\cite{site:tflite} is the mobile and edge version of Tensorflow\cite{site:tensorflow} that allows to run machine learning models on edge devices.\\
+\textbf{Pros:}
+\begin{itemize}
+    \item Lightweight
+    \item Supports multiple operating systems both mobile and edge
+    \item Easy to use
+    \item Well documented
+\end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item On-device training is limited to Unix-based systems, only inference is supported on edge devices
+\end{itemize}
+
+\subsection*{Tiny Engine}
+\label{tiny-engine}
+Tiny Engine\cite{site:tinyengine}\cite{lin2022ondevice} is a specialized machine learning framework designed to build, train, and deploy models on edge devices. Tiny Engine can utilize pre-trained models, making it a versatile tool for various edge computing applications. The framework is lightweight, ensuring minimal resource consumption and fast inference times, which are critical for real-time, on-device machine learning tasks. Tiny Engine is particularly suited for applications in areas such as IoT, where low power consumption and quick response times are essential.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Supports multiple platforms
+    \item Allows to convert TensorFlow Lite models to C++
+    \item Easy deployment of pre-trained models
+\end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item Need to pre-train the model before deploying it
+    \item MCUnet\cite{lin2020mcunet} (An algorithm for deep learning on microcontrollers) is the only well-documented model
+    \item Custom models are hard to deploy and there is a lack of documentation
+\end{itemize}
+
+
+
+\subsection*{Federated Learning and Transfer Learning}
+Federated Learning is a machine learning approach that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach is advantageous because it allows for privacy preservation and data security, minimizing the risk of sensitive information being exposed. Federated Learning also makes it feasible to train models on devices with low computational power, which is particularly useful in edge computing environments where computational resources are limited. As described in \enquote{EdgeFed: Optimized Federated Learning Based on Edge Computing}\cite{9260194}, this method enables the development of sophisticated machine learning models by utilizing the collective power of multiple devices, enhancing both the efficiency and effectiveness of the training process.
+\\
+Another important approach is Transfer Learning, a technique that transfers the knowledge from a model trained on a specific task to a new, related task. This approach significantly improves the performance of the model on the new task and reduces the time and resources needed for training. Transfer Learning is especially valuable when there is limited data available for the new task, as it leverages the pre-existing knowledge embedded in the model. As detailed in \enquote{Federated learning for IoT devices: Enhancing TinyML with on-board training}\cite{FICCO2024102189}, this method can enhance the capabilities of IoT devices by enabling them to perform complex tasks with improved accuracy and efficiency, without the need for extensive retraining.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Privacy preservation
+    \item Data security
+    \item No need for data centralization
+    \item Low computational power needed
+    \item Predictions made on the edge reduce latency
+\end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item Complicated to implement
+    \item Limited capabilities compared to centralized training
+\end{itemize}
+
+
+\section{Comparison of existing technologies}
+After analyzing various solutions available on the market, it is clear that each technology has its own strengths and weaknesses, depending on the use case. Below is a comparison of these technologies in terms of their scalability, platform dependency, cloud integration capabilities, and potential use for machine learning at the edge.
+
+\begin{itemize}
+    \item \textbf{Alleantia IoT Edge Hub} is a powerful industrial IoT solution but lacks cloud-agnostic capabilities, as it only supports Microsoft Azure. This makes it unsuitable for a multi-cloud environment and limits its flexibility in cloud integration.
+
+    \item \textbf{Eclipse Kura} is open-source and platform-agnostic, providing flexibility and modularity. However, it suffers from high computational requirements and poor documentation, leading to a steep learning curve, which could be a barrier to effective implementation, especially when considering advanced features like machine learning at the edge.
+
+    \item \textbf{Eurotech Everyware Cloud} offers robust cloud integration but has not been updated since 2019. This raises concerns about long-term support and compatibility with newer cloud and edge technologies, including the growing demand for edge-based machine learning solutions.
+
+    \item \textbf{STMicroelectronics X-Cube Cloud} is a specialized solution tailored to STM32 microcontrollers, but its platform-specific nature limits its general applicability in broader cloud-agnostic architectures. Although powerful for edge computing, it does not offer the flexibility needed for cross-platform machine learning deployment, making it less suitable for scaling machine learning models across different devices and environments.
+
+    \item \textbf{MQTTX} is useful for testing MQTT connections and simulating IoT devices, but it lacks the robust features required for production environments and large-scale cloud integration, limiting its utility in complex IoT ecosystems that include edge-based machine learning deployments.
+
+    \item \textbf{EMQX} stands out as a highly scalable, cloud-agnostic MQTT broker that supports multiple cloud platforms, making it an excellent choice for a scalable IoT architecture. Its support for MQTT 5.0 and ability to integrate seamlessly with cloud services make it ideal for handling large IoT data streams. Additionally, it is well-suited for real-time data processing at the edge, which can facilitate machine learning deployments on edge devices. While the enterprise version is paid, the open-source version offers sufficient features for scalable IoT and potential machine learning integration.
+
+    \item \textbf{Machine Learning at the Edge Technologies} such as \textbf{Tensorflow Lite} and \textbf{Tiny Engine} provide the ability to run machine learning models directly on edge devices. Tensorflow Lite is lightweight, well-documented, and supports multiple operating systems, making it suitable for a range of IoT applications. Tiny Engine, while offering specialized support for edge devices, has limited support for custom models and requires pre-trained models for deployment. Both frameworks could significantly enhance IoT solutions by enabling low-latency, on-device inference, which is crucial for real-time applications. However, implementing these technologies would require robust device management and efficient data handling to ensure scalability across the architecture.
+\end{itemize}
+
+\section{Chosen solution}
+\label{sec:chosen-solution}
+After evaluating all available options, \textbf{EMQX} was chosen as the messaging protocol broker for the architecture due to its strong cloud-agnostic features, scalability, and support for multiple cloud services. While Eclipse Kura was considered for its flexibility and open-source nature, its high computational requirements and poor documentation posed significant challenges, especially for rapid deployment. Other options like Alleantia and STMicroelectronics X-Cube Cloud were excluded because they were platform-dependent or limited to specific hardware, which goes against the core requirement for a cloud-agnostic and scalable architecture.
+
+\textbf{EMQX} provides native support for MQTT 5.0, scalability across various cloud providers, and strong open-source community support, making it ideal for implementing a scalable IoT architecture. This architecture can ingest and analyze data from IoT devices while remaining cloud-agnostic, ensuring flexibility and ease of future expansion.
+
+In terms of \textbf{machine learning at the edge}, technologies such as Tensorflow Lite and Tiny Engine were not immediately implemented in the current solution but could be integrated into future iterations. Once the architecture has been fully developed and tested for scalability and efficiency, adding machine learning at the edge would provide additional benefits such as real-time data processing, reduced latency, and enhanced analytics capabilities. Federated Learning and Transfer Learning approaches would also enable more advanced model training directly on edge devices, ensuring privacy and reducing the need for centralized data processing. This would be particularly valuable in IoT environments where devices have limited computational power but require sophisticated analytics for real-time decision-making.

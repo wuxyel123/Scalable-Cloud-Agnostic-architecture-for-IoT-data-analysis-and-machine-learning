@@ -1,0 +1,73 @@
+\chapter{Testing}
+\label{cap:testing}
+
+After implementing the system, a series of tests were conducted to ensure it met the client’s requirements and performed as expected. The testing phase included various types of tests such as unit, integration, and performance testing to validate the system’s functionality, reliability, and scalability under real-world conditions.
+
+The tests were conducted on a machine with limited resources, without enabling scaling, to evaluate the system’s performance in a worst-case scenario. This approach allowed for the identification of potential bottlenecks and performance issues under constrained environments, providing valuable insights into the system's baseline performance and areas for optimization.
+
+\section{Unit testing}
+Unit tests were conducted to verify the functionality of individual components like upload scripts, data ingestion, and data processing functions. Although manual unit tests were performed in this phase, they helped isolate each component to ensure it functioned as expected and produced the correct output. A more comprehensive automated unit testing framework will be implemented in future phases to ensure continuous validation.
+
+\section{Integration testing}
+Integration tests were conducted to validate the interactions between various components, including the data ingestion, storage, and processing pipelines. These tests ensured that the components worked seamlessly together, processing and storing data accurately. The integration tests were carried out in an environment replicating the production setup, ensuring that the system would behave correctly in a real-world scenario. While these tests were conducted manually, an automated integration testing framework will be implemented in future iterations to streamline the testing process.
+
+\section{Performance testing}
+Performance tests were conducted to evaluate the system’s scalability, reliability, and responsiveness under varying load conditions. These tests aimed to measure throughput, latency, and resource utilization to identify potential bottlenecks. 
+
+For these tests, the system was run on a machine with limited resources, and scaling was not enabled to assess how the system would perform under constrained conditions. This approach was selected to test the system in a worst-case scenario, allowing us to observe its performance under maximum stress and ensure that it could handle significant workloads even without the benefits of resource scaling.
+
+The following tests were performed on a single server with a subset of users. Further testing in a distributed environment, with multiple servers, will be conducted in the next phase to evaluate system performance in a more complex setup.
+
+\section{Stress test results}
+The results of the stress tests are summarized in Table \ref{table:performance_metrics}. These tests focused on two key operations: calculating analytics and retrieving analytics.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Number of Users} & \textbf{Calculate Analytics} & \textbf{Retrieve Analytics} \\
+\hline
+1   & 30 sec              & 221 ms          \\
+\hline
+10  & 85 sec (1 min 25 sec)& 252 ms          \\
+\hline
+50  & 467 sec (7 min 47 sec)& 327 ms          \\
+\hline
+250 & 2284 sec (38 min 4 sec)& 268 ms          \\
+\hline
+\end{tabular}
+\caption{Performance Metrics for Calculating and Retrieving Analytics}
+\label{table:performance_metrics}
+\end{table}
+
+\subsection{Analysis of results}
+The performance metrics in Table \ref{table:performance_metrics} indicate how the system handled different numbers of concurrent users for the two operations:
+
+\begin{itemize}
+    \item \textbf{Calculate Analytics}:
+        \begin{itemize}
+            \item With 1 user, the operation took 30 seconds.
+            \item As the number of users increased to 10, the time rose to 85 seconds.
+            \item With 50 users, the time increased drastically to 467 seconds.
+            \item At 250 users, the operation took 2284 seconds (38 minutes and 4 seconds).
+            \item This significant increase in time suggests a bottleneck, primarily due to the large volume of data being transferred from object storage to the analytics pipeline on the server. The performance bottleneck is more pronounced due to the limited resources available, simulating a worst-case scenario.
+        \end{itemize}
+
+    \item \textbf{Retrieve Analytics}:
+        \begin{itemize}
+            \item The response time remained relatively stable, ranging from 221 ms to 327 ms as the number of users increased from 1 to 250.
+            \item The minor variations in response time indicate that the system efficiently handled retrieval operations, even with high concurrent loads, despite the machine's limited resources.
+        \end{itemize}
+\end{itemize}
+
+\section{Conclusions}
+The performance tests highlight that while the system handles retrieval efficiently under increasing loads, calculating analytics experiences significant performance degradation as the number of concurrent users rises. The bottleneck is mainly due to the high volume of data transferred from object storage to the analytics pipeline, exacerbated by the resource limitations of the test environment.
+
+\textbf{Next steps for optimization}:
+\begin{itemize}
+    \item \textbf{Horizontal Scaling}: The system could be scaled horizontally by distributing the workload across more servers. This would reduce the load on individual servers and improve processing times.
+    \item \textbf{Optimizing Data Transfer}: Saving raw data directly on the server could improve performance, but it would require more storage and may not be scalable. Another solution is to optimize the data transfer process between object storage and the server.
+    \item \textbf{Containerization}: Deploying the application in a containerized environment, such as Kubernetes, could help distribute the load more efficiently across multiple servers. This approach would enable the system to scale horizontally as needed and improve performance under heavy loads.
+\end{itemize}
+
+By testing under constrained resources and without scaling, we could identify the system’s worst-case performance, providing valuable insights into potential bottlenecks. This testing approach has demonstrated that, while the system is capable of handling up to 250 concurrent users, optimizations and scaling mechanisms will be necessary to support larger user bases and more demanding real-world conditions.

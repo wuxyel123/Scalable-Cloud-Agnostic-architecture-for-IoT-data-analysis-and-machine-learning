@@ -1,0 +1,497 @@
+\chapter{Cloud}
+\label{cap:cloud}
+This chapter describes the services offered by Aruba Cloud, Amazon Web Services (AWS), and Microsoft Azure, exploring their features, pros, and cons. Detailed service features can be found in the official documentation for Aruba Cloud\cite{site:aruba-docs}, AWS\cite{site:aws-docs}, and Azure\cite{site:azure-docs}. The analysis of pros and cons is based on user reviews from platforms like TrustRadius\cite{site:trust-radius} and my personal experience.
+
+These three cloud platforms are among the most widely used globally, providing a broad range of features suitable for developing the project. It is important to clarify that when discussing cloud services, the term \textit{Service} encompasses various categories, including IaaS (Infrastructure as a Service), PaaS (Platform as a Service), and SaaS (Software as a Service). More generally, it refers to any service accessible via the internet and hosted on the cloud provider's infrastructure under a paid subscription model.
+
+Another important concept to highlight is the term \textit{Fully Managed}. This refers to services where the cloud provider manages the infrastructure, maintenance, updates, and security. Such services allow users to concentrate on application development without needing to manage the underlying infrastructure.
+
+Service Level Agreements (SLAs) are crucial in defining the expected level of service provided by the cloud vendor, including specifics about uptime and data availability. An SLA of up to 99.5\% uptime, for example, means that the service may be unavailable for up to 0.5\% of the total time across a year. This translates to about 43.8 hours of potential downtime per year, or approximately 3.65 hours per month, which might be critical for services requiring high availability such as financial services or healthcare systems. Understanding these metrics helps customers choose providers that best meet their operational needs based on guaranteed uptime.
+
+At the end of this section, a comparison of the various providers is provided, focusing not only on their features and user feedback but also on how their SLAs compare in terms of providing reliability and performance assurances.
+
+
+
+\section{Aruba Cloud}
+\label{aruba-cloud}
+
+Aruba Cloud offers a comprehensive suite of services, including virtual servers, object storage, and managed Kubernetes\cite{site:kubernetes}. These services are designed to cater to both small-scale and enterprise-level needs, providing flexibility, performance, and scalability.
+
+\subsection*{Bare Metal}
+Aruba Cloud's Bare Metal service offers dedicated servers for users who require full control and high performance.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Provides high performance and reliability for demanding workloads.
+    \item Cost-effective with pricing starting as low as €13.50/month.
+    \item Supports multiple operating systems for flexibility.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Requires full management of the infrastructure, which can be time-consuming.
+    \item Lacks scalability and upgrade options, limiting long-term flexibility.
+\end{itemize}
+
+\subsection*{Virtual Private Server (VPS)}
+The VPS offers a virtual server solution utilizing virtualization technologies like OpenStacks and VMware.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item High performance with an SLA of up to 99.95\% uptime per year.
+    \item Scalable and cost-effective, starting at €1.99/month.
+    \item Supports a wide range of operating systems.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item In lower-tier plans, resources are shared, which can affect performance. Guaranteed resources are only available in professional plans.
+\end{itemize}
+
+\subsection*{Virtual Private Cloud (VPC)}
+Aruba’s VPC offers a private, isolated network with the ability to configure multiple subnets and security groups.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Provides a secure, isolated network environment.
+    \item Highly scalable with an SLA of 99.98\% uptime per year, ensuring high availability.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Setup complexity requires advanced knowledge of networking and security configurations.
+    \item Higher costs compared to public cloud solutions, with pricing starting at €215,2/month.
+\end{itemize}
+
+\subsection*{Object Storage}
+Aruba’s Object Storage is a solution for storing large volumes of unstructured data securely.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable, secure, and highly available, with pricing as low as €0.005/GB per month.
+    \item Offers flexible pricing models (reservable plans or pay-per-use).
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Limited traffic to the public network (charges apply after exceeding certain thresholds), which could be restrictive in high-traffic scenarios.
+\end{itemize}
+
+\subsection*{Managed Kubernetes}
+Aruba's Managed Kubernetes service enables easy deployment, scaling, and management of containerized applications using Kubernetes clusters.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Fully managed with autoscaling capabilities, providing a cost-effective solution for deploying containerized applications.
+    \item Ensures low latency, high redundancy, and rapid deployment.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Requires knowledge of Kubernetes for optimal use, which can be complex for users unfamiliar with the platform.
+\end{itemize}
+
+
+\section{Amazon Web Services (AWS)}
+\label{aws}
+
+\subsection*{Batch}
+\label{aws:batch}
+AWS Batch is a service that enables developers to efficiently run thousands of batch and machine learning computing jobs on AWS.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Fully managed
+    \item Scalable compared to on-premises solutions
+    \item Cost-effective: Users pay only for the AWS resources (e.g., EC2 instances, EBS volumes) used to run batch jobs (Starting from €0.0384 per hour)
+    \item Versatile: supports batch jobs (data analytics) and complex machine learning tasks
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Limited documentation
+\end{itemize}
+
+\subsection*{Bedrock}
+\label{aws:bedrock}
+AWS Bedrock simplifies the deployment and management of machine learning models, providing access to various pre-trained models that can be deployed on IoT devices.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Fully managed
+    \item Flexible
+    \item Native support for Retrieval Augmented Generation (RAG) models\cite{site:rag}
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costs rise exponentially with big data processing: Pricing depends on the machine learning model and usage, where users pay for compute instances, model training, and inference costs.
+    \item Difficult to future-proof against evolving requirements
+\end{itemize}
+
+\subsection*{DynamoDB}
+\label{aws:dynamodb}
+AWS DynamoDB is a fully managed NoSQL database service that offers fast, predictable performance and automatic scaling. It handles large volumes of data and traffic with ease.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Fast read and write operations
+    \item Predictable performance
+    \item Scalable
+    \item Highly available thanks to automatic scaling and data replication
+    \item Cost-effective: On-demand pricing starts at \$1.25 per million write requests and \$0.25 per million read requests.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Difficult to apply bulk changes to records
+    \item Requires pre-defined query patterns
+\end{itemize}
+
+\subsection*{Elastic MapReduce (EMR)}
+\label{aws:emr}
+AWS EMR is a Fully managed platform for deploying and managing big data frameworks like Apache Hadoop and Apache Spark, enabling scalable data processing.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable
+    \item Supports petabyte-scale data processing
+    \item Easy resource provisioning
+    \item Reconfigurable
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Complex for users unfamiliar with big data frameworks
+    \item Costly for large-scale processing tasks: For example, an \texttt{m5.xlarge} instance (4 vCPUs, 16 GB memory) costs \$0.096 per hour.
+\end{itemize}
+
+\subsection*{Glue}
+\label{aws:glue}
+AWS Glue is a fully managed ETL (Extract, Transform, Load) service designed for large-scale data integration. It supports multiple data sources and formats.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable
+    \item Centralized metadata repository\cite{site:aws-glue-catalog} for automated data discovery and cataloguing
+    \item Supports scheduling of ETL jobs
+    \item Data encryption
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Expensive for high workloads: Performance issues may arise with large datasets, and costs can escalate quickly with higher data volumes.
+    \item Complex for users unfamiliar with ETL processes
+\end{itemize}
+
+\subsection*{Greengrass}
+\label{aws:greengrass}
+AWS Greengrass provides both edge runtime software and a cloud service for managing and deploying devices. It supports AWS Lambda for extending functionality and offers encryption for data at rest and in transit.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Supports edge computing
+    \item Encryption at rest and in transit
+    \item Extends device functionality with AWS Lambda functions
+    \item Supports machine learning at the edge
+    \end{itemize}
+\textbf{Cons:}
+\begin{itemize}
+    \item Resource intensive: IoT devices have limited computing capabilities
+    \item Requires an internet connection for the initial setup
+
+\end{itemize}
+
+\subsection*{IoT Core}
+\label{aws:iot-core}
+AWS IoT Core is a fully managed cloud service that allows secure interaction between connected devices and cloud applications. Unlike Greengrass, IoT Core doesn’t require a runtime on the device.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Composed of modular services like Device Management, Device Defender, and IoT Analytics
+    \item Supports encryption at rest and in transit
+    \item Supports MQTT, HTTP, and WebSockets for communication
+    \item Enables device management and machine learning at the edge
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Architecture is not platform agnostic if installed on devices
+    \item Cannot be installed on all device types
+\end{itemize}
+
+\subsection*{SageMaker}
+\label{aws:sage-maker}
+AWS SageMaker provides a fully managed platform for building, training, and deploying machine learning models, supporting multiple frameworks and programming languages.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable
+    \item Supports various machine learning frameworks and languages
+    \item Simplifies model deployment
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costly for large-scale machine learning tasks: For example, an \texttt{ml.m5.large} instance costs \$0.10 per hour, and additional charges apply for training and hosting based on usage.
+    \item Cannot schedule training jobs
+\end{itemize}
+
+\subsection*{Simple Storage Service (S3)}
+\label{aws:s3}
+AWS S3 is a fully managed object storage service, suitable for storing any amount of data from anywhere on the web.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable and highly available
+    \item Secure and durable (with redundancy built in)
+    \item Cost-effective: Standard storage pricing starts at \$0.023 per GB for the first 50 TB per month, with additional costs for data transfer.
+    \item No size limits for buckets
+    \item Multiple storage classes to suit different access needs
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Not optimized for storing small files
+    \item 5TB limit per object
+    \item Maximum 100 buckets per account
+    \item Limited to 5GB per file upload
+\end{itemize}
+
+
+\section{Microsoft Azure}
+\label{azure}
+
+\subsection*{Blob Storage}
+\label{azure:blob-storage}
+Azure Blob Storage is a fully managed, scalable object storage service designed for storing large amounts of unstructured data. It supports various storage tiers, offering flexibility for different workloads like frequent access, infrequent access, and long-term archival.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Highly available and secure
+    \item Cost-effective: Pricing starts at \$0.0184 per GB for hot storage, \$0.01 per GB for cool storage, and \$0.00099 per GB for archive storage
+    \item No limit on the number of objects stored in a container
+    \item Multiple storage options for different access patterns
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Not suitable for small files
+    \item Object size limit of 4TB
+    \item Maximum 2PB per account in the US and Europe regions; 500TB per account in other regions
+\end{itemize}
+
+\subsection*{Cosmos DB}
+\label{azure:cosmos-db}
+Azure Cosmos DB is a fully managed NoSQL database service that supports multiple data models (key-value, document, column-family, graph) and is designed for global distribution and horizontal scaling. It offers flexible consistency levels to optimize performance and data synchronization across regions.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable with global data availability
+    \item Multiple consistency levels for performance and data synchronization
+    \item Easy to set up and supports multiple NoSQL databases like PostgreSQL, MongoDB, and Cassandra
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Expensive: Pricing starts at \$0.008 per RUs/second for provisioned throughput, plus \$0.25 per GB of storage
+    \item Queries can be slow if not optimized with proper indexing
+\end{itemize}
+
+\subsection*{DataBricks}
+\label{azure:databricks}
+Azure Databricks is a fully managed, Apache Spark-based analytics platform. It offers an open data lakehouse platform, merging the capabilities of data lakes and data warehouses.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable with support for multiple programming languages and machine learning libraries
+    \item Open data lakehouse platform for unifying data storage and processing
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costs can rise significantly with big-data processing: Pricing starts at \$0.07 per DBU (Databricks Unit)\footnote{An Azure Databricks Unit (DBU) is a unit of processing capability per hour, used in Azure Databricks to measure and bill for the compute resources consumed. It represents the processing power required by the platform to run workloads such as data processing, analytics, and machine learning.}
+    \item Complex to set up for users unfamiliar with Apache Spark
+\end{itemize}
+
+\subsection*{Data Explorer}
+\label{azure:data-explorer}
+Azure Data Explorer is an analytics service designed for fast data ingestion and querying of large datasets. It supports multiple data sources and can handle structured, semi-structured, and unstructured data with low-latency processing.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Real-time, scalable data processing with low latency
+    \item Fast data ingestion with support for multiple data sources and formats
+    \item Capable of batch processing
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costly: Pricing starts at \$0.00036 per GB ingested and \$0.0023 per GB queried
+    \item Limited data transformation capabilities
+    \item Complex to configure, requiring knowledge of the data structure beforehand
+\end{itemize}
+
+\subsection*{Data Factory}
+\label{azure:data-factory}
+Azure Data Factory is a fully managed data integration service that enables the orchestration and automation of data workflows. It can be used for data analytics, especially when combined with Azure Synapse for big data processing and data warehousing.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable
+    \item Integrates with Azure Synapse for advanced data analytics
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Complex to configure for large-scale operations
+\end{itemize}
+
+\subsection*{Data Lake Storage}
+\label{azure:data-lake-storage}
+Azure Data Lake Storage is a platform for storing both structured and unstructured data, making it ideal for big data analytics. It integrates well with Apache Hadoop and supports popular programming languages like Python for data analysis.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable, secure, and cost-effective: Pricing starts at \$0.0184 per GB for hot storage, \$0.01 per GB for cool storage, and \$0.00099 per GB for archive storage
+    \item Supports integration with Apache Hadoop for big data processing
+    \item Fully compatible with Python for analytics
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Challenges in managing data governance, particularly when setting up user permissions
+\end{itemize}
+
+\subsection*{Event Grid}
+\label{azure:event-grid}
+Azure Event Grid is a fully managed event routing service that facilitates the development of event-driven applications. It supports a wide range of event sources and destinations, including Azure services and custom sources.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable and supports multiple event types and sources, including custom event sources
+    \item Fully managed with support for MQTT5 and various programming languages
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Complexity in configuration
+    \item Limitations in event storage and retention (7 days)
+    \item Not cost-effective for basic event routing: Pricing starts at \$0.60 per million operations
+\end{itemize}
+
+\subsection*{Event Hubs}
+\label{azure:event-hubs}
+Azure Event Hubs is a fully managed event ingestion service designed to handle millions of events per second with low latency. It integrates with Apache Kafka and includes a schema registry for centralized schema management.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable, secure, and low latency for real-time data processing
+    \item Supports Apache Kafka and offers a schema registry for centralized schema management
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costly: Pricing starts at \$0.028 per throughput unit and \$0.0005 per message
+    \item Complex to manage event storage and consumers' state of processing
+\end{itemize}
+
+\subsection*{Functions}
+\label{azure:functions}
+Azure Functions is a fully managed, serverless compute service that allows developers to run code in response to events without provisioning infrastructure. It supports multiple programming languages and custom libraries.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Pay-per-use: \$0.20 per million executions and \$0.000016 per GB-s of memory usage
+    \item Scalable, easy to deploy, and supports multiple programming languages
+    \item Fast deployment with low time to market
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Limited execution time (10 minutes)
+    \item Cold start issues: The first function call takes longer
+    \item Not cost-effective for high workloads: Costs rise with increased CPU and memory requirements
+\end{itemize}
+
+\subsection*{IoT Hub}
+\label{azure:iot-hub}
+Azure IoT Hub is a fully managed cloud service that connects IoT devices to the cloud, providing secure, bidirectional communication between IoT devices and cloud services.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Secure communication with support for MQTT and HTTP protocols
+    \item Offers device management and supports machine learning at the edge
+    \item Can extend functionality with Azure Functions and trigger events via custom rules
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Client runtime is not platform agnostic and only works with Azure services
+    \item Limited support for MQTT5 (only a subset of features is available)
+    \item Costly: Pricing starts at \$0.0028 per message, scaling based on the number of devices and messages
+\end{itemize}
+
+\subsection*{Machine Learning}
+\label{azure:machine-learning}
+Azure Machine Learning is a fully managed service that simplifies building, training, and deploying machine learning models. It supports multiple frameworks and languages, and offers pay-as-you-go pricing.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Scalable and cost-effective with MLOps capabilities for automated deployment: Pay-as-you-go model starts at \$0.05 per training hour on basic compute instances
+    \item Supports multiple machine learning frameworks and languages
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Costs rise significantly when training large models or using high-performance compute instances
+\end{itemize}
+
+\section{Comparison of cloud providers}
+\label{sec:comparison-cloud-providers}
+
+When building a scalable cloud architecture for IoT applications, it is essential to consider the key services provided by cloud platforms, such as Infrastructure as a Service (IaaS) and object storage, which are critical for handling the dynamic workload and massive amounts of data generated by IoT devices.
+
+The three cloud providers considered in this thesis—Amazon Web Services (AWS), Microsoft Azure, and Aruba Cloud—all offer robust IaaS and object storage services, but they differ in terms of scalability, global reach, and specialized features. Below is a comparative analysis of these providers, focusing on their strengths and suitability for designing a cloud-agnostic architecture.
+
+\subsection*{Amazon Web Services (AWS)}
+AWS is one of the most mature and widely used cloud platforms. Its extensive range of services, global infrastructure, and innovative solutions make it highly scalable. AWS's S3 (Simple Storage Service) is a robust and cost-effective object storage solution that can handle large volumes of unstructured data with high durability and availability. AWS also offers Elastic Compute Cloud (EC2), an IaaS service providing scalable virtual machines, allowing horizontal and vertical scaling based on demand. 
+
+\textbf{Advantages of AWS:}
+\begin{itemize}
+    \item Global reach with multiple data centers and regions worldwide, ensuring low latency and high availability.
+    \item S3 provides high scalability, durability (99.999999999\%), and cost-efficient storage tiers (Standard, Infrequent Access, and Glacier) suitable for different IoT workloads.
+    \item EC2 instances offer flexible pricing models (on-demand, reserved, and spot instances) to optimize costs as the architecture scales.
+\end{itemize}
+
+\subsection*{Microsoft Azure}
+Microsoft Azure is known for its seamless integration with enterprise applications and services, making it a strong choice for enterprises with existing Microsoft environments. Azure Blob Storage is a highly scalable object storage service, and its IaaS offerings, such as Azure Virtual Machines, provide similar flexibility to AWS EC2 in terms of scalability and pricing options. Azure's global infrastructure, though slightly smaller than AWS, still offers excellent availability and performance.
+
+\textbf{Advantages of Microsoft Azure:}
+\begin{itemize}
+    \item Strong integration with Microsoft’s ecosystem (Active Directory, Office 365, etc.), making it a good choice for enterprise environments.
+    \item Azure Blob Storage offers various storage tiers for handling both frequently accessed data and long-term archival, optimizing costs.
+    \item Azure Virtual Machines support automated scaling and offer multiple pricing tiers, including spot instances for cost savings.
+\end{itemize}
+
+\subsection*{Aruba Cloud}
+Aruba Cloud is a European cloud service provider that offers reliable and cost-effective solutions, particularly for businesses operating within Europe. While its global reach is more limited compared to AWS and Azure, it still provides the necessary services for building a scalable architecture. Aruba Cloud offers object storage services similar to AWS S3 and Azure Blob Storage, along with IaaS through its virtual servers and dedicated infrastructure.
+
+\textbf{Advantages of Aruba Cloud:}
+\begin{itemize}
+    \item More affordable pricing compared to AWS and Azure, making it an attractive option for small to medium-sized businesses with budget constraints.
+    \item Object storage services offer scalability and durability, suitable for IoT data storage.
+    \item Virtual servers provide a flexible IaaS solution that supports horizontal and vertical scaling.
+\end{itemize}
+
+\subsection*{Why Leverage Object Storage and IaaS}
+Object storage and IaaS services are common to all three providers and form the backbone of a scalable architecture for handling IoT data. Here’s why these services are crucial:
+
+\begin{itemize}
+    \item \textbf{Object Storage:} IoT devices generate massive amounts of unstructured data (e.g., sensor readings, logs, images), which require scalable storage solutions. Object storage services like AWS S3, Azure Blob Storage, and Aruba Cloud Object Storage are designed to scale seamlessly with increasing data, offering features like high availability, durability, and varying storage tiers to optimize costs based on data access patterns. These services also integrate easily with cloud-based analytics and machine learning tools, making them ideal for IoT use cases.
+    
+    \item \textbf{IaaS:} Infrastructure as a Service (IaaS) allows for scalable compute resources that can adapt to varying workloads. In IoT environments, the data processing demands can fluctuate depending on the number of devices connected and the amount of data being processed. By leveraging IaaS, the architecture can dynamically scale resources up or down, ensuring optimal performance and cost-efficiency. Services like AWS EC2, Azure Virtual Machines, and Aruba Cloud Virtual Servers offer the flexibility to choose different instance types (e.g., CPU-optimized, memory-optimized) depending on the application needs, while also supporting auto-scaling and load balancing to handle traffic spikes.
+\end{itemize}
+
+\textbf{Conclusion:} While AWS and Microsoft Azure offer greater global reach and a wider variety of services, Aruba Cloud provides a more cost-effective solution for smaller-scale deployments. Regardless of the provider, using object storage and IaaS ensures that the architecture remains scalable, flexible, and able to accommodate future growth, making them the core components of the proposed cloud-agnostic architecture. By leveraging these services, the architecture can efficiently handle the dynamic nature of IoT data, enabling real-time processing, secure storage, and scalable infrastructure without the need to use services specific of one provider.
+

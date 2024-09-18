@@ -1,0 +1,232 @@
+\appendix
+\chapter{Code listings}
+\label{appendix:code}
+
+This appendix contains the key code components used in the Proof of Concept (PoC) implementation. Each section corresponds to a specific layer or component of the architecture described in Chapter \ref{cap:real_implementation}. The code is divided into sections based on the data pipeline: from ingestion to storage and data analysis.
+
+\section{Preprocessing pipeline}
+\label{sec:prprocessing_impl}
+
+The following script subscribes to the MQTT broker and processes incoming messages from the IoT devices. The script converts JSON data into CSV format for easier storage and further processing.
+
+\textbf{Explanation:}  
+- The script connects to the MQTT broker and listens for messages from IoT devices.  
+- Upon receiving a message, the script extracts sensor data from the JSON payload and writes it into a CSV file.  
+- The file is saved locally before being uploaded to cloud storage.
+
+\begin{verbatim}
+#!/root/y/bin/python3
+import paho.mqtt.client as mqtt
+import datetime
+import os
+import json
+import csv
+import sys
+sys.stdout = open('logs.txt', 'w')
+sys.stderr = sys.stdout
+
+def json_to_csv(value):
+    """
+    Converts a JSON object to a CSV string.
+    
+    Args:
+        value (dict): The JSON object to be converted.
+    
+    Returns:
+        str: The CSV string representation of the JSON object.
+    """
+    csv_data = []
+    
+    # Extracting headers from the first object in the JSON
+    headers = list(value.keys())
+    
+    # Adding headers to the CSV
+    csv_data.append(headers)
+    
+    # Adding values to the CSV
+    csv_data.append([value[header] for header in headers])
+
+    return csv_data
+
+# Message receiving callback
+def on_message(client, userdata, msg):
+    _id = msg.topic.split('/')[-1]
+    filename = _id + '_' + str(datetime.datetime.now().strftime('%Y-%m-%dH%H')) + '.csv'
+    filepath= "/root/CloudUtils/ToUpload"
+    data = json.loads(msg.payload.decode())
+    properties = data['SystemProperties']
+    data = data['Body']
+    csv_data = json_to_csv(data)
+    if not os.path.exists(filepath):
+        os.makedirs(filepath)
+    filepath = os.path.join(filepath, filename)
+    if os.path.exists(filepath):
+        csv_data = csv_data[1:]
+    else:
+        csv_data.insert(0, ['SystemProperties: ' + str(properties)])
+    try:
+        with open(filepath, 'a') as file:
+            writer = csv.writer(file, delimiter='\t')
+            writer.writerows(csv_data)
+    except FileNotFoundError:
+       pass
+
+#Connection callbacks
+def on_connect(client, userdata, flags, rc):
+    print('Connected with result code '+str(rc))
+    client.subscribe('221e/#')
+
+def on_disconnect(client, userdata, rc):
+    print('Disconnected with result code '+str(rc))
+    client.reconnect()
+
+# Load application properties
+with open('/root/CloudUtils/application_properties.json') as file:
+    properties = json.load(file)
+    username = properties['mqttx-username']
+    password = properties['mqttx-password']
+    ip = properties['mqttx-host']
+    port = properties['mqttx-port']
+
+client = mqtt.Client()
+client.username_pw_set(username, password)
+client.tls_set(ca_certs='/Certs/ca-root-cert.crt', certfile='/Certs/server.crt', keyfile='/Certs/server.key')
+client.connect(ip, port, 0)
+
+client.on_connect = on_connect
+client.on_message = on_message
+client.on_disconnect = on_disconnect
+
+client.loop_forever()
+\end{verbatim}
+
+\section{Upload data to object storage}
+\label{sec:upload_cloudcloud_impl}
+
+This script uploads the locally saved CSV files from the preprocessing step to the cloud storage (S3-compatible services like Azure Blob Storage or Aruba Cloud).
+
+\textbf{Explanation:}  
+- The script iterates through the files in a specified directory and uploads them to the cloud storage bucket.  
+- After successful uploads, the files are removed from the local system to optimize storage.
+
+\begin{verbatim}
+#!/root/y/bin/python3
+import boto3
+import os
+import json
+from datetime import datetime
+
+# Configuration
+endpoint_url = ''
+access_key = ''  # Username equivalent
+secret_key = ''  # Password equivalent
+bucket_name = 'raw'
+walk_dir = ''
+
+with open('/root/CloudUtils/application_properties.json') as file:
+    properties = json.load(file)
+    endpoint_url = properties['s3_host']
+    access_key = properties['s3_user']
+    secret_key = properties['s3_pwd']
+    walk_dir = properties['WalkDir']
+
+# Create a session and client
+session = boto3.session.Session()
+s3 = session.client(
+    's3',
+    endpoint_url=endpoint_url,
+    aws_access_key_id=access_key,
+    aws_secret_access_key=secret_key
+)
+
+for subdir, dirs, files in os.walk(walk_dir):
+    for file in files:
+        path= subdir + '/' + file
+        if file.startswith('.'):
+            continue
+        if os.stat(path).st_size == 0:
+            continue
+
+        # Extract device ID and timestamp
+        _id = file.split('_')[0]
+        timestamp = datetime.strptime(file.split('_')[1].split('.')[0], '%Y-%m-%dH%H')
+        timestamp = datetime.timestamp(timestamp)
+        timestamp = str(timestamp).split('.')[0]
+
+        datet_time=file.split('_')[1].split('.')[0]
+        date=datet_time.split('H')[0].split('-')
+        time=datet_time.split('H')[1]
+        key= _id+"/"+date[0]+"/"+ date[1] +"/"+ date[2]+"/"+time+"/"+file
+
+        # Upload file to the cloud
+        s3.upload_file(path, bucket_name, key)
+        try:
+            s3.head_object(Bucket=bucket_name, Key=key)
+            os.remove(path)
+        except:
+            continue
+\end{verbatim}
+
+\section{Data analysis function}
+\label{sec:analysis_fun}
+
+This Java function reads the preprocessed CSV files and calculates performance metrics such as average speed, left/right turns, and acceleration/deceleration values.
+
+\textbf{Explanation:}  
+- The function processes each CSV file, iterating through the records to compute statistics like the highest acceleration and deceleration, average speed, and detecting left or right turns.  
+- The calculated metrics are stored in a map for further analysis or storage.
+
+\begin{verbatim}
+/*
+ * Process CSV
+ * @param String filePath: file path
+ * @return Map<String, Object>: map of metrics
+ * */
+private Map<String, Object> processCSV(String filePath) throws IOException {
+    Map<String, Object> metrics = new HashMap<>();
+    try (Reader reader = new FileReader(filePath);
+         CSVParser csvParser = new CSVParser(reader,
+            CSVFormat.DEFAULT.withDelimiter('\t').withFirstRecordAsHeader())) {
+
+        double highestAcceleration = Double.MIN_VALUE;
+        double highestDeceleration = Double.MAX_VALUE;
+        double totalSpeed = 0;
+        int speedCount = 0;
+        int leftTurns = 0;
+        int rightTurns = 0;
+
+        for (CSVRecord record : csvParser) {
+            double accelChestX = Double.parseDouble(record.get("Accel_CHEST.X"));
+            double accelChestY = Double.parseDouble(record.get("Accel_CHEST.Y"));
+            double accelChestZ = Double.parseDouble(record.get("Accel_CHEST.Z"));
+            double gpsSpeed = Double.parseDouble(record.get("GPS_Speed."));
+
+            highestAcceleration = Math.max(highestAcceleration, 
+                Math.max(accelChestX, Math.max(accelChestY, accelChestZ)));
+            highestDeceleration = Math.min(highestDeceleration,
+                Math.min(accelChestX, Math.min(accelChestY, accelChestZ)));
+
+            totalSpeed += gpsSpeed;
+            speedCount++;
+
+            double orientChestX = Double.parseDouble(record.get("Orient_CHEST.X"));
+            double orientChestY = Double.parseDouble(record.get("Orient_CHEST.Y"));
+            double orientationAngle = Math.atan2(orientChestY, orientChestX) * (180 / Math.PI);
+
+            if (orientationAngle > 25) leftTurns++;
+            if (orientationAngle < -25) rightTurns++;
+        }
+
+        double averageSpeed = totalSpeed / speedCount;
+
+        metrics.put("Left_Turns", leftTurns);
+        metrics.put("Right_Turns", rightTurns);
+        metrics.put("Average_Speed", averageSpeed);
+        metrics.put("Highest_Acceleration", highestAcceleration);
+        metrics.put("Average_Braking_Power", highestDeceleration);
+        metrics.put("Highest_Deceleration", highestDeceleration);
+    }
+
+    return metrics;
+}
+\end{verbatim}
