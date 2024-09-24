@@ -1,10 +1,11 @@
-\chapter{Existing solutions}
+\chapter{Analysis of existing solutions}
 \label{cap:existing}
-In this chapter, the solutions currently available on the market that could be integrated into the architecture engineering process are presented.
+In this chapter, is provided an overview of the solutions currently available on the market that could be integrated into this project. These solutions include various softwares and tools that could be leveraged for building a scalable, cloud-agnostic architecture for IoT data analysis and machine learning applications. The chapter focuses on evaluating these technologies in terms of their compatibility, scalability, and potential for integration with various cloud providers.
+
 
 \section{Alleantia IoT Edge Hub}
 \label{alleantia}
-IoT Edge Hub is Alleantia's\cite{site:alleantia} plug-and-play solution for industrial IoT. It allows for quick integration with IoT systems but has limitations in terms of platform support.
+IoT Edge Hub is Alleantia's\cite{site:alleantia} plug-and-play solution for IoT. It allows for quick integration with IoT systems but has limitations in terms of platform support.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -18,13 +19,13 @@ IoT Edge Hub is Alleantia's\cite{site:alleantia} plug-and-play solution for indu
 
 \textbf{Cons:}
 \begin{itemize}
-    \item Platform dependent
+    \item Platform dependent (Microsoft Azure)
     \item Does not support Amazon Web Services (AWS)
 \end{itemize}
 
 \section{Eclipse Kura}
 \label{kura}
-Eclipse Kura\cite{site:kura} is an open-source IoT Edge Framework for building IoT gateways. It is based on Java and the OSGi framework, which enhances Java’s modular programming capabilities. It provides API access to hardware interfaces of IoT gateways (physical devices that enable sensors to communicate with the internet).
+Eclipse Kura\cite{site:kura} is an open-source IoT Edge Framework for building IoT gateways. It is based on Java and the OSGi\cite{site:osgi} framework, which enhances Java’s modular programming capabilities. It provides API access to hardware interfaces of IoT gateways (physical devices that enable sensors to communicate with the internet).
 
 \textbf{Pros:}
 \begin{itemize}
@@ -32,18 +33,18 @@ Eclipse Kura\cite{site:kura} is an open-source IoT Edge Framework for building I
     \item Platform agnostic
     \item Enables flexible and modular development
     \item Provides API access to hardware interfaces
-    \item Introduces AI capabilities at the edge
+    \item Supports AI capabilities at the edge
 \end{itemize}
 
 \textbf{Cons:}
 \begin{itemize}
     \item High computational complexity for less powerful devices
-    \item Lacks comprehensive documentation, making it difficult to learn
+    \item Lacks of documentation, making it difficult to learn
 \end{itemize}
 
 \section{Eurotech Everyware Cloud}
 \label{everyware-cloud}
-Eurotech\cite{site:eurotech} Everyware Cloud is an IoT integration platform that uses a microservices architecture to connect, configure, and manage IoT gateways and devices. It supports various communication protocols and cloud platforms like AWS and Azure.
+Eurotech\cite{site:eurotech} Everywhere Cloud is a cloud-based platform offered by Eurotech, a global company specializing in IoT solutions. The Everywhere Cloud is designed to provide end-to-end IoT services, enabling seamless integration and management of connected devices, data processing, and application deployment. It serves as a comprehensive platform that simplifies IoT deployments by offering device connectivity, data collection, storage, and real-time analytics.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -60,38 +61,65 @@ Eurotech\cite{site:eurotech} Everyware Cloud is an IoT integration platform that
 
 \section{STMicroelectronics X-Cube Cloud}
 \label{stm}
-STMicroelectronics\cite{site:st-micro} X-Cube Cloud is a software package for connecting STM32 microcontrollers to the cloud. STM32 microcontrollers are widely used in the IoT space.
+STMicroelectronics\cite{site:st-micro} X-Cube Cloud is a software package designed to connect STM32 microcontrollers to the cloud. STM32 microcontrollers are widely used in IoT applications, and this software package helps in securely linking them to various cloud providers.
+
+The X-Cube Cloud package is available in two main versions: a generic version and dedicated versions tailored to individual cloud providers. Each of these versions offers different levels of functionality and compatibility.
+
+\subsection*{Generic Version}
+The \textbf{generic version} of X-Cube Cloud provides a cloud-agnostic solution, enabling basic cloud connectivity across multiple platforms. However, it is limited in its features and supports only a subset of STM32 microcontrollers.
 
 \textbf{Pros:}
 \begin{itemize}
     \item Supports multiple cloud providers
-    \item Provides secure cloud connections
-    \item Supports various communication protocols
+    \item Provides essential cloud connectivity and communication protocols like MQTT and HTTP
+    \item Works with a range of cloud platforms without requiring specific versions
 \end{itemize}
 
 \textbf{Cons:}
 \begin{itemize}
-    \item Specific to STM32 microcontrollers
-    \item A dedicated software version is needed for each cloud provider to use all features
-    \item A generic version with limited features is available but only supports a subset of microcontrollers
+    \item Limited feature set, offering only basic cloud functionalities
+    \item Supports only a subset of STM32 microcontrollers
+    \item Lacks advanced cloud-specific optimizations, such as OTA updates or cloud-native device management
 \end{itemize}
 
-\section{MQTTX}
-\label{mqttx}
-MQTTX\cite{site:mqttx} is a cross-platform MQTT 5.0 client tool that facilitates publishing and subscribing to MQTT messages, testing connections, and simulating IoT devices.
+\subsection*{Dedicated Versions}
+The \textbf{dedicated versions} of X-Cube Cloud are specifically developed for particular cloud providers, such as AWS or Microsoft Azure. These versions are optimized to provide full integration with the respective cloud services, offering a richer feature set and broader microcontroller compatibility.
 
 \textbf{Pros:}
 \begin{itemize}
-    \item Connection management
-    \item Logging capabilities
-    \item Data pipelines
-    \item Device simulation capabilities: can create virtual devices to test the connection
+    \item Full integration with specific cloud platforms, providing advanced cloud features
+    \item Optimized for better performance, security, and scalability on each cloud provider
+    \item Supports a wider range of STM32 microcontrollers
 \end{itemize}
 
 \textbf{Cons:}
 \begin{itemize}
-    \item The data pipeline feature is poorly documented, and the process for creating pipelines is unclear, with limited debugging support
+    \item A separate version is required for each cloud provider to access full functionalities
+    \item Not as flexible as the generic version for switching between multiple cloud providers
 \end{itemize}
+
+\subsection*{Comparison of Versions}
+In summary, the \textbf{generic version} provides flexibility in working with multiple cloud providers but comes with limitations in features and device support. On the other hand, the \textbf{dedicated versions} offer full-featured cloud integration and broader compatibility but require a separate software version for each cloud provider to unlock all features.
+
+
+\section{MQTTX}
+\label{mqttx}
+MQTTX\cite{site:mqttx} is a cross-platform MQTT 5.0 client that facilitates publishing and subscribing to MQTT messages, testing connections, and simulating IoT devices. It provides a user-friendly interface for managing multiple connections to MQTT brokers, making it an essential tool for testing and developing MQTT-based IoT applications.
+MQTTX also allows users to create virtual devices that can simulate real-world IoT devices. These virtual devices can publish and subscribe to MQTT topics, simulating the behavior of actual IoT hardware. Data pipelines is another useful feature in MQTTX. It refers to the ability to process and route incoming or outgoing MQTT messages through a defined workflow. This allows users to simulate complex data flows by linking multiple topics and processing the data as it moves through different stages, such as filtering, transforming, or rerouting the data.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Connection management: Easily manage multiple connections to different MQTT brokers simultaneously.
+    \item Logging capabilities: Provides detailed logs of MQTT transactions for better analysis and debugging.
+    \item Data pipelines: Supports message processing and routing through custom workflows, allowing for complex testing scenarios.
+    \item Device simulation capabilities: Can create virtual devices to publish and subscribe to topics, simulating real-world IoT devices for comprehensive testing.
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item \Poorly documented data pipelines: The feature is not well-explained, making it difficult for users to create and debug pipelines effectively, especially in complex scenarios.
+\end{itemize}
+
 
 \section{EMQX}
 \label{emqx}
@@ -147,7 +175,7 @@ Tiny Engine\cite{site:tinyengine}\cite{lin2022ondevice} is a specialized machine
 
 
 \subsection*{Federated Learning and Transfer Learning}
-Federated Learning is a machine learning approach that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach is advantageous because it allows for privacy preservation and data security, minimizing the risk of sensitive information being exposed. Federated Learning also makes it feasible to train models on devices with low computational power, which is particularly useful in edge computing environments where computational resources are limited. As described in \enquote{EdgeFed: Optimized Federated Learning Based on Edge Computing}\cite{9260194}, this method enables the development of sophisticated machine learning models by utilizing the collective power of multiple devices, enhancing both the efficiency and effectiveness of the training process.
+Federated Learning is a machine learning approach that trains an algorithm across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This approach is advantageous because it allows for privacy preservation and data security, minimizing the risk of sensitive information being exposed. Federated Learning also makes it feasible to train models on devices with low computational power, which is particularly useful in edge computing environments where computational resources are limited. As described in \cite{9260194}, this method enables the development of sophisticated machine learning models by utilizing the collective power of multiple devices, enhancing both the efficiency and effectiveness of the training process.
 \\
 Another important approach is Transfer Learning, a technique that transfers the knowledge from a model trained on a specific task to a new, related task. This approach significantly improves the performance of the model on the new task and reduces the time and resources needed for training. Transfer Learning is especially valuable when there is limited data available for the new task, as it leverages the pre-existing knowledge embedded in the model. As detailed in \enquote{Federated learning for IoT devices: Enhancing TinyML with on-board training}\cite{FICCO2024102189}, this method can enhance the capabilities of IoT devices by enabling them to perform complex tasks with improved accuracy and efficiency, without the need for extensive retraining.
 

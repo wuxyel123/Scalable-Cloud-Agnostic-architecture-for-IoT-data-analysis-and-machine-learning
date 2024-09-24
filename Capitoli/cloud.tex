@@ -1,15 +1,18 @@
-\chapter{Cloud}
+\chapter{Analysys of cloud providers}
 \label{cap:cloud}
 This chapter describes the services offered by Aruba Cloud, Amazon Web Services (AWS), and Microsoft Azure, exploring their features, pros, and cons. Detailed service features can be found in the official documentation for Aruba Cloud\cite{site:aruba-docs}, AWS\cite{site:aws-docs}, and Azure\cite{site:azure-docs}. The analysis of pros and cons is based on user reviews from platforms like TrustRadius\cite{site:trust-radius} and my personal experience.
 
-These three cloud platforms are among the most widely used globally, providing a broad range of features suitable for developing the project. It is important to clarify that when discussing cloud services, the term \textit{Service} encompasses various categories, including IaaS (Infrastructure as a Service), PaaS (Platform as a Service), and SaaS (Software as a Service). More generally, it refers to any service accessible via the internet and hosted on the cloud provider's infrastructure under a paid subscription model.
+These three cloud platforms are among the most widely used globally, providing a broad range of features suitable for developing the project. It is important to clarify that when discussing cloud services, the term \textit{Service} encompasses various categories, including IaaS (Infrastructure as a Service), PaaS (Platform as a Service), and SaaS (Software as a Service). More generally, it refers to any service accessible via the internet and hosted on the cloud provider's infrastructure under a paid subscription model. While many cloud providers offer temporary free-tier plans or trial periods, access to the full range of features or long-term usage requires a paid subscription.
 
 Another important concept to highlight is the term \textit{Fully Managed}. This refers to services where the cloud provider manages the infrastructure, maintenance, updates, and security. Such services allow users to concentrate on application development without needing to manage the underlying infrastructure.
 
 Service Level Agreements (SLAs) are crucial in defining the expected level of service provided by the cloud vendor, including specifics about uptime and data availability. An SLA of up to 99.5\% uptime, for example, means that the service may be unavailable for up to 0.5\% of the total time across a year. This translates to about 43.8 hours of potential downtime per year, or approximately 3.65 hours per month, which might be critical for services requiring high availability such as financial services or healthcare systems. Understanding these metrics helps customers choose providers that best meet their operational needs based on guaranteed uptime.
 
-At the end of this section, a comparison of the various providers is provided, focusing not only on their features and user feedback but also on how their SLAs compare in terms of providing reliability and performance assurances.
+\textit{Durability} is another critical aspect of cloud services, particularly in the context of data storage. Durability refers to the likelihood that data stored in the cloud will remain intact and accessible over time without being lost or corrupted. Cloud providers often advertise durability in terms of percentages, such as 99.999999999\% (often referred to as "11 nines" durability), which means that the chance of losing data is extremely low. This is achieved through replication, backup, and redundancy across multiple geographic regions and storage systems. For applications that rely on long-term data retention, such as archival storage or critical backups, high durability is essential for ensuring that the data remains accessible and secure.
 
+It is also worth noting that, while cloud providers may offer temporary free-tier plans or free trial periods, these are typically limited in terms of resources or time. Users looking for long-term, fully-featured access to services will need to transition to paid subscription models once the free period ends.
+
+At the end of this section, a comparison of the various providers is provided, focusing not only on their features and user feedback but also on how their SLAs compare in terms of providing reliability and performance assurances.
 
 
 \section{Aruba Cloud}
@@ -69,13 +72,17 @@ Aruba’s Object Storage is a solution for storing large volumes of unstructured
 \textbf{Pros:}
 \begin{itemize}
     \item Scalable, secure, and highly available, with pricing as low as €0.005/GB per month.
-    \item Offers flexible pricing models (reservable plans or pay-per-use).
+    \item Offers flexible pricing models (reserved plans or pay-per-use).
 \end{itemize}
 
 \textbf{Cons:}
 \begin{itemize}
     \item Limited traffic to the public network (charges apply after exceeding certain thresholds), which could be restrictive in high-traffic scenarios.
 \end{itemize}
+
+\textbf{Explanation of Pricing Models:}
+Aruba offers two main pricing models for Object Storage: \textbf{Reserved Plans} and \textbf{Pay-Per-Use}. Reserved plans allow users to pre-commit to a fixed amount of storage at a discounted rate, ideal for those with predictable storage needs. Pay-per-use is more flexible, charging only for the storage actually used each month, but typically at a higher rate.
+
 
 \subsection*{Managed Kubernetes}
 Aruba's Managed Kubernetes service enables easy deployment, scaling, and management of containerized applications using Kubernetes clusters.
@@ -98,6 +105,8 @@ Aruba's Managed Kubernetes service enables easy deployment, scaling, and managem
 \subsection*{Batch}
 \label{aws:batch}
 AWS Batch is a service that enables developers to efficiently run thousands of batch and machine learning computing jobs on AWS.
+\textbf{Batch jobs} typically refer to the execution of non-interactive, scheduled jobs, often involving large volumes of data processing, such as data transformations or analysis. These jobs can be scheduled to run during specific periods, optimizing resource use. On the other hand, \textbf{machine learning tasks} involve training models on large datasets, which require significant computational resources and often run for long periods. AWS Batch supports both types of workloads, enabling users to run data analytics and machine learning tasks efficiently.
+
 
 \textbf{Pros:}
 \begin{itemize}
@@ -109,7 +118,7 @@ AWS Batch is a service that enables developers to efficiently run thousands of b
 
 \textbf{Cons:}
 \begin{itemize}
-    \item Limited documentation
+    \item Poor documentation: for AWS Batch, documentation is limited in terms of best practices, advanced configurations, and troubleshooting. While the service itself is powerful and versatile, developers may find the official documentation lacking in examples or detailed guides for more complex use cases, which can make advanced tasks harder to implement without external support or experimentation.
 \end{itemize}
 
 \subsection*{Bedrock}
@@ -150,7 +159,7 @@ AWS DynamoDB is a fully managed NoSQL database service that offers fast, predict
 
 \subsection*{Elastic MapReduce (EMR)}
 \label{aws:emr}
-AWS EMR is a Fully managed platform for deploying and managing big data frameworks like Apache Hadoop and Apache Spark, enabling scalable data processing.
+AWS EMR is a fully managed platform for deploying and managing big data frameworks like Apache Hadoop and Apache Spark, enabling scalable data processing.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -180,8 +189,27 @@ AWS Glue is a fully managed ETL (Extract, Transform, Load) service designed for 
 
 \textbf{Cons:}
 \begin{itemize}
-    \item Expensive for high workloads: Performance issues may arise with large datasets, and costs can escalate quickly with higher data volumes.
-    \item Complex for users unfamiliar with ETL processes
+    \item Expensive for high workloads: costs can escalate quickly with higher data volumes.
+\end{itemize}
+
+\subsection*{AWS Lambda}
+\label{aws:lambda}
+AWS Lambda is a serverless compute service that allows developers to run code without provisioning or managing servers. Lambda automatically scales applications by running code in response to events, such as HTTP requests or changes in data, and charges only for the compute time used.
+
+\textbf{Pros:}
+\begin{itemize}
+    \item Fully managed, serverless compute service: no need to manage servers
+    \item Scales automatically with workload
+    \item Cost-effective: pay only for the compute time used (starting from €0.00001667 per GB-s)
+    \item Supports various programming languages, including Python, Node.js, and Java
+    \item Integrates seamlessly with other AWS services (e.g., S3, DynamoDB, API Gateway)
+\end{itemize}
+
+\textbf{Cons:}
+\begin{itemize}
+    \item Execution time limit: Lambda functions can only run for a maximum of 15 minutes per execution
+    \item Cold start latency: Functions may experience slight delays during the first invocation, especially with larger functions
+    \item Limited control over the underlying infrastructure
 \end{itemize}
 
 \subsection*{Greengrass}
@@ -233,7 +261,7 @@ AWS SageMaker provides a fully managed platform for building, training, and depl
 
 \textbf{Cons:}
 \begin{itemize}
-    \item Costly for large-scale machine learning tasks: For example, an \texttt{ml.m5.large} instance costs \$0.10 per hour, and additional charges apply for training and hosting based on usage.
+    \item Expensive for large-scale machine learning tasks: For example, an \texttt{ml.m5.large} instance costs \$0.10 per hour, and additional charges apply for training and hosting based on usage.
     \item Cannot schedule training jobs
 \end{itemize}
 
@@ -277,8 +305,6 @@ Azure Blob Storage is a fully managed, scalable object storage service designed 
 \textbf{Cons:}
 \begin{itemize}
     \item Not suitable for small files
-    \item Object size limit of 4TB
-    \item Maximum 2PB per account in the US and Europe regions; 500TB per account in other regions
 \end{itemize}
 
 \subsection*{Cosmos DB}
@@ -305,7 +331,7 @@ Azure Databricks is a fully managed, Apache Spark-based analytics platform. It o
 \textbf{Pros:}
 \begin{itemize}
     \item Scalable with support for multiple programming languages and machine learning libraries
-    \item Open data lakehouse platform for unifying data storage and processing
+    \item Open data lakehouse platform for unifying data storage and processing: Combines the flexibility and scalability of a data lake (storing vast amounts of raw, unstructured data) with the structure and query optimization of a data warehouse. This enables faster and more efficient analytics on large datasets.
 \end{itemize}
 
 \textbf{Cons:}
@@ -316,7 +342,7 @@ Azure Databricks is a fully managed, Apache Spark-based analytics platform. It o
 
 \subsection*{Data Explorer}
 \label{azure:data-explorer}
-Azure Data Explorer is an analytics service designed for fast data ingestion and querying of large datasets. It supports multiple data sources and can handle structured, semi-structured, and unstructured data with low-latency processing.
+Azure Data Explorer is an analytics service designed for fast data ingestion and querying of large datasets. It supports multiple data sources and can handle structured, semi-structured, and unstructured data.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -334,7 +360,7 @@ Azure Data Explorer is an analytics service designed for fast data ingestion and
 
 \subsection*{Data Factory}
 \label{azure:data-factory}
-Azure Data Factory is a fully managed data integration service that enables the orchestration and automation of data workflows. It can be used for data analytics, especially when combined with Azure Synapse for big data processing and data warehousing.
+Azure Data Factory is a fully managed data integration service that enables the orchestration and automation of data workflows. It can be used for data analytics, especially when combined with Azure Synapse, which is an analytics service that combines big data and data warehousing capabilities, allowing for large-scale data processing, querying, and machine learning.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -346,6 +372,7 @@ Azure Data Factory is a fully managed data integration service that enables the 
 \begin{itemize}
     \item Complex to configure for large-scale operations
 \end{itemize}
+
 
 \subsection*{Data Lake Storage}
 \label{azure:data-lake-storage}
@@ -365,11 +392,12 @@ Azure Data Lake Storage is a platform for storing both structured and unstructur
 
 \subsection*{Event Grid}
 \label{azure:event-grid}
-Azure Event Grid is a fully managed event routing service that facilitates the development of event-driven applications. It supports a wide range of event sources and destinations, including Azure services and custom sources.
+Azure Event Grid is a fully managed event routing service that facilitates the development of event-driven applications.
 
 \textbf{Pros:}
 \begin{itemize}
-    \item Scalable and supports multiple event types and sources, including custom event sources
+    \item Scalable
+    \item Supports a wide range of event sources and destinations, including Azure services and custom sources
     \item Fully managed with support for MQTT5 and various programming languages
 \end{itemize}
 
@@ -377,12 +405,12 @@ Azure Event Grid is a fully managed event routing service that facilitates the d
 \begin{itemize}
     \item Complexity in configuration
     \item Limitations in event storage and retention (7 days)
-    \item Not cost-effective for basic event routing: Pricing starts at \$0.60 per million operations
+    \item Not cost-effective for basic event routing: Pricing starts at \$0.60 per million operations, meaning that while it's economical at scale, smaller or infrequent workloads might incur unnecessary costs when compared to simpler or less expensive event routing services.
 \end{itemize}
 
 \subsection*{Event Hubs}
 \label{azure:event-hubs}
-Azure Event Hubs is a fully managed event ingestion service designed to handle millions of events per second with low latency. It integrates with Apache Kafka and includes a schema registry for centralized schema management.
+Azure Event Hubs is a fully managed event ingestion service designed to handle millions of events per second with low latency. It integrates with Apache Kafka and includes a schema registry for centralized schema management. A schema defines the structure or format of data, including the data types of fields and their relationships. In event-driven architectures, schemas are essential to ensure that data being ingested, processed, and consumed is consistent and interpretable by all parts of the system. Azure Event Hubs’ schema registry enables centralized management of these schemas, ensuring that producers and consumers of data agree on the structure, making it easier to validate and process data correctly across various systems.
 
 \textbf{Pros:}
 \begin{itemize}
@@ -411,7 +439,7 @@ Azure Functions is a fully managed, serverless compute service that allows devel
 \begin{itemize}
     \item Limited execution time (10 minutes)
     \item Cold start issues: The first function call takes longer
-    \item Not cost-effective for high workloads: Costs rise with increased CPU and memory requirements
+    \item Not cost-effective for high workloads: While Azure Functions uses a pay-per-use model, costs can increase significantly for applications that require a large number of executions or high resource consumption (e.g., intensive CPU or memory tasks). As the number of executions or the memory usage rises, the cumulative cost can surpass that of dedicated infrastructure, especially for long-running or resource-heavy operations.
 \end{itemize}
 
 \subsection*{IoT Hub}
@@ -438,7 +466,7 @@ Azure Machine Learning is a fully managed service that simplifies building, trai
 
 \textbf{Pros:}
 \begin{itemize}
-    \item Scalable and cost-effective with MLOps capabilities for automated deployment: Pay-as-you-go model starts at \$0.05 per training hour on basic compute instances
+    \item Scalable and cost-effective with capabilities of automated deployment: Pay-as-you-go model starts at \$0.05 per training hour on basic compute instances
     \item Supports multiple machine learning frameworks and languages
 \end{itemize}
 
@@ -475,7 +503,7 @@ Microsoft Azure is known for its seamless integration with enterprise applicatio
 \end{itemize}
 
 \subsection*{Aruba Cloud}
-Aruba Cloud is a European cloud service provider that offers reliable and cost-effective solutions, particularly for businesses operating within Europe. While its global reach is more limited compared to AWS and Azure, it still provides the necessary services for building a scalable architecture. Aruba Cloud offers object storage services similar to AWS S3 and Azure Blob Storage, along with IaaS through its virtual servers and dedicated infrastructure.
+Aruba Cloud is a European cloud service provider that offers reliable and cost-effective solutions, particularly for businesses operating within Europe since all of its datacenters are located there. While its global reach is more limited compared to AWS and Azure, it still provides the necessary services for building a scalable architecture. Aruba Cloud offers object storage services similar to AWS S3 and Azure Blob Storage, along with IaaS through its virtual servers and dedicated infrastructure.
 
 \textbf{Advantages of Aruba Cloud:}
 \begin{itemize}

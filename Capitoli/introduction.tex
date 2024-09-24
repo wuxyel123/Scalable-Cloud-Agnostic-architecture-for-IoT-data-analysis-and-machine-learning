@@ -3,7 +3,13 @@
 
 \section{The problem}
 \label{sec:the-problem}
-The proliferation of the Internet of Things (IoT) has revolutionized how we interact with technology, creating a network of interconnected devices that generate and exchange vast amounts of data. However, this advancement also brings significant challenges, particularly in managing, storing, and analyzing the enormous volumes of data produced by these devices. The problem, solved in collaboration with 221e is developing a scalable, cloud-agnostic architecture that can efficiently handle IoT data for analysis and machine learning applications.
+The rapid expansion of the Internet of Things (IoT) has transformed the way we interact with technology. IoT connects a diverse range of devices—from household appliances to industrial machinery—creating a network that continuously generates, exchanges, and analyzes vast amounts of data. This interconnected ecosystem allows for smarter, more efficient systems, automating tasks and offering insights through real-time data collection and analysis. However, while this technological advancement opens up new possibilities, it also introduces significant challenges, particularly in the management, storage, and analysis of the large volumes of data these devices produce.
+
+This thesis addresses these challenges by developing a scalable, cloud-agnostic architecture capable of efficiently managing IoT data, facilitating analysis and machine learning applications. The problem, undertaken in collaboration with \textbf{221e}, forms the core focus of this work.
+
+\textbf{221e} is an Italian startup, established in 2012, which specializes in leveraging advancements in IT, microelectronics, sensors, and control algorithms to develop miniaturized wireless embedded systems. 221e operates across two key areas: providing \textbf{OEM (Original Equipment Manufacturer) services} to clients seeking technological partnerships for product development and offering \textbf{finished products} in the form of multi-sensor hardware platforms to direct customers or distributors. The company primarily targets the wearable devices market and industries related to IoT, where applications are vast and continuously evolving.
+Through collaboration with 221e, this thesis explores solutions to the complexities of IoT data management and analysis, developing an architecture that not only meets these demands but is also adaptable across various cloud platforms.
+
 
 \section{Background}
 \label{sec:background}
@@ -25,23 +31,34 @@ A cloud-agnostic architecture is designed to operate seamlessly across multiple 
 
 \subsection*{MQTT Protocol}
 \label{sec:mqtt-protocol}
-MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed for devices with limited bandwidth and high latency, making it ideal for IoT applications. MQTT operates on a publish-subscribe model, where devices (publishers) send messages to an MQTT broker, which then forwards these messages to subscribers. This protocol is popular in IoT because it is simple, reliable, and supports various Quality of Service (QoS) levels to ensure message delivery.
+MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol designed for devices with limited bandwidth, making it ideal for IoT applications. MQTT operates on a publish-subscribe model, where devices (publishers) send messages to an MQTT broker, which then forwards these messages to subscribers. 
+
+The core concept of MQTT revolves around \textit{topics}, which act as channels or paths through which messages are transmitted. A topic is a hierarchical string that devices use to publish or subscribe to specific types of data. For example, a topic like \texttt{sensor/temperature/livingroom} could be used to send temperature readings from a sensor located in a living room. Publishers send messages to topics, and subscribers receive messages from the topics they are subscribed to, ensuring efficient data routing. Topics can be structured in multiple levels to organize data streams efficiently.
+
+This protocol is popular in IoT because it is simple, reliable, and supports various Quality of Service (QoS) levels to ensure message delivery, even in unreliable network conditions. A more comprehensive description of MQTT can be found in \cite{site:mqtt}.
+
 
 \subsection*{TLS/SSL Encryption}
 \label{sec:tls-ssl-encryption}
 Transport Layer Security (TLS) and its predecessor, Secure Sockets Layer (SSL), are cryptographic protocols that provide secure communication over a computer network. TLS/SSL encryption ensures that data transmitted between devices is protected from eavesdropping and tampering. In the context of IoT, securing data in transit is essential to protect sensitive information from unauthorized access.
+A more comprehensive description of TLS/SSL can be found in \cite{site:tls} and \cite{site:ssl}.
 
 \subsection*{HTTP (Hypertext Transfer Protocol)}
 \label{sec:http}
-HTTP is an application-layer protocol used for transmitting data over the web. It is the foundation of data communication on the internet, commonly used for exchanging hypertext documents between clients (such as browsers) and servers. HTTP operates in a request-response model, where the client sends a request, and the server returns a response. While HTTP is well-suited for many web-based services, its stateless nature, where each request is treated independently, makes it less ideal for real-time data transmission in IoT applications. Despite this, HTTP is widely used for transferring IoT data due to its simplicity and compatibility with RESTful APIs.
+HTTP is an application-layer protocol used for transmitting data over the web. It is the foundation of data communication on the internet, commonly used for exchanging hypertext documents between clients (such as browsers) and servers. HTTP operates in a request-response model, where the client sends a request, and the server returns a response. While HTTP is well-suited for many web-based services, its stateless nature, where each request is treated independently, makes it less ideal for real-time data transmission in IoT applications. Despite this, HTTP is widely used for transferring IoT data due to its simplicity and compatibility with RESTful APIs. A more comprehensive description of HTTP can be found in \cite{site:http}.
 
 \subsection*{WebSocket}
 \label{sec:websocket}
-WebSocket is a communication protocol that provides full-duplex communication channels over a single, persistent connection between a client and a server. Unlike HTTP, which follows a request-response model, WebSocket allows continuous, bidirectional communication. This makes WebSocket particularly useful for applications that require real-time data exchange, such as live monitoring or control of IoT devices. Once the connection is established, the server and client can exchange data freely without the need to re-establish the connection for each transmission, making it efficient for continuous data streams.
+WebSocket is a communication protocol that provides full-duplex communication channels over a single, persistent connection between a client and a server. Unlike HTTP, which follows a request-response model, WebSocket allows continuous, bidirectional communication. This makes WebSocket particularly useful for applications that require real-time data exchange, such as live monitoring or control of IoT devices. Once the connection is established, the server and client can exchange data freely without the need to re-establish the connection for each transmission, making it efficient for continuous data streams. A more comprehensive description of HTTP can be found in \cite{site:websocket}.
 
 \subsection*{Object Storage}
 \label{sec:object-storage}
-Object storage services provide a scalable solution for storing and managing vast amounts of unstructured data, such as files, images, and videos, which are commonly generated by IoT devices. In this model, data is stored as objects within "buckets," which are containers that hold the data and associated metadata. Object storage is highly durable, easy to scale, and accessible from anywhere, making it a crucial component of cloud-based IoT architectures.
+Object storage services offer a scalable and flexible solution for storing and managing vast amounts of unstructured data, such as files, images, videos, and any type of binary or text-based data. Unlike traditional file storage, where data is organized into a hierarchical directory structure, object storage saves data as discrete units called "objects." Each object contains not only the data itself but also metadata and a unique identifier, allowing for efficient retrieval, organization, and management.
+
+In object storage, these objects are stored within "buckets," which serve as data containers. A bucket can hold any number of objects and is designed to scale seamlessly as data grows. This model is highly suitable for IoT environments, where devices continuously generate large quantities of diverse data types. The inclusion of metadata with each object provides context, enabling more advanced data handling and processing.
+
+Object storage is highly durable, thanks to its use of replication across multiple physical locations or nodes, ensuring that data is protected against hardware failures. It also offers high availability and accessibility, allowing data to be retrieved from anywhere via standard protocols like HTTP. This combination of scalability, durability, and ease of access makes object storage a critical component of modern cloud-based IoT architectures, where large, diverse datasets must be stored and managed efficiently.
+
 
 \subsection*{Infrastructure as a Service (IaaS)}
 \label{sec:iaas}
@@ -49,7 +66,22 @@ Infrastructure as a Service (IaaS) refers to cloud services that provide virtual
 
 \subsection*{Platform as a Service (PaaS)}
 \label{sec:paas}
-Platform as a Service (PaaS) is a cloud computing model that provides a platform for developing, running, and managing applications without the complexity of building and maintaining the underlying infrastructure. PaaS services offer a complete environment for application development, including tools, libraries, and frameworks, allowing developers to focus on creating software rather than managing hardware. PaaS is well-suited for IoT applications, as it streamlines the development process and enables rapid deployment of IoT solutions.
+Platform as a Service (PaaS) is a cloud computing model that provides developers with a comprehensive environment to build, run, and manage applications without needing to handle the complexities of the underlying infrastructure. In a PaaS environment, cloud providers deliver not just the hardware and network infrastructure but also a complete suite of development tools, runtime environments, databases, and middleware that are essential for software development.
+
+This model allows developers to focus on writing and deploying code while the cloud provider takes care of the underlying servers, storage, networking, and security. The environment includes everything from operating systems, programming languages, frameworks, and libraries to integrated development environments (IDEs), CI/CD pipelines, and deployment tools.
+
+PaaS is particularly beneficial for IoT applications because it simplifies the development and deployment process for complex, data-driven systems. With PaaS, developers can rapidly prototype and deploy IoT solutions, scaling them effortlessly as the number of connected devices increases. Moreover, PaaS services typically integrate with other cloud services such as databases, analytics, and machine learning, making it easier to process, store, and analyze IoT data in real-time. This model accelerates time-to-market for IoT applications by removing the need for teams to manage infrastructure and focus solely on building innovative solutions.
+
+\subsection*{Frameworks}
+\label{sec:frameworks}
+A framework is a foundational structure or platform that provides predefined tools, libraries, and best practices for developing software applications. It serves as a blueprint for building applications by offering a reusable set of components, patterns, and guidelines that streamline the development process. Frameworks simplify the development of complex applications by offering built-in functionalities like database access, user authentication, and input handling, allowing developers to focus on the specific logic of their application.
+
+\subsection*{Serverless Computing}
+\label{sec:serverless}
+Serverless computing is a cloud computing execution model where the cloud provider dynamically manages the infrastructure and allocates resources as needed to run applications. In this model, developers focus solely on writing code, while the cloud provider handles server provisioning, scaling, and maintenance. Serverless platforms automatically scale to meet demand and charge based only on the actual compute resources consumed, rather than a fixed amount of infrastructure.
+
+Serverless simplifies the development of applications by removing the need to manage the underlying hardware or infrastructure, allowing developers to concentrate on their code and business logic. Popular examples of serverless services include AWS Lambda and Azure Functions which allow developers to run code in response to specific events or triggers without worrying about the underlying infrastructure.
+
 
 \subsection*{Shared responsibility model}
 \label{sec:shared-responsibility-model}
@@ -94,6 +126,8 @@ ETL is a process used in data integration and transformation workflows, particul
 \end{itemize}
 ETL is commonly used in data warehousing and analytics applications, making it crucial in IoT architectures where raw data from multiple sensors needs to be cleaned and processed before being stored or analyzed. 
 
+
+
 \subsection*{API (Application Programming Interface)}
 \label{sec:api}
 
@@ -111,13 +145,48 @@ APIs typically operate over the internet using web technologies such as HTTP and
 
 APIs facilitate interoperability between different systems and enable modularity by abstracting complex operations into simpler calls that are easy to integrate into other software. In cloud-based and IoT architectures, APIs are critical in ensuring that different components (such as data collection, storage, and analysis systems) can communicate seamlessly, enabling scalable and flexible solutions.
 
+\subsection*{JSON (JavaScript Object Notation)}
+\label{sec:json-format}
+JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and simple for machines to parse and generate. JSON is widely used in web applications and IoT environments for data exchange because it is language-independent, meaning it can be used with any programming language.
+
+In JSON, data is organized in key-value pairs, where keys are strings and values can be strings, numbers, arrays, or other nested JSON objects. This makes JSON ideal for transmitting structured data such as sensor readings or device states. For example, a JSON object might look like this:
+
+\begin{verbatim}
+{
+    "sensor": "temperature",
+    "value": 22.5,
+    "unit": "Celsius",
+    "timestamp": "2024-09-12T10:30:00Z"
+}
+\end{verbatim}
+
+This structure makes it easy to represent complex data in a concise, readable format. In IoT applications, JSON is often used to send and receive data between devices and cloud-based platforms, enabling efficient communication. More details about JSON can be found in \cite{site:json-docs}.
+
+\subsection*{CSV (Comma-Separated Values)}
+\label{sec:csv-format}
+CSV (Comma-Separated Values) is a simple file format used to store tabular data, such as spreadsheets or databases, in plain text. Each line in a CSV file corresponds to a row in a table, and the values in each row are separated by commas (or other delimiters such as tabs or semicolons). CSV is commonly used for data exchange between different applications because it is easy to generate and parse.
+
+CSV is ideal for representing structured data, such as IoT sensor readings or logs, that need to be processed in a sequential manner. For example, a CSV file might look like this:
+
+\begin{verbatim}
+sensor,value,unit,timestamp
+temperature,22.5,Celsius,2024-09-12T10:30:00Z
+humidity,60,Percent,2024-09-12T10:30:00Z
+\end{verbatim}
+
+Each column in the CSV corresponds to a specific attribute, and each row represents an entry of data. CSV is particularly useful in IoT applications for batch processing and storage of large datasets. However, unlike JSON, CSV does not support complex data structures, making it less suitable for hierarchical or nested data. More details about CSV can be found in \cite{site:csv-docs}.
+
+
 \section{The solution}
 \label{sec:the-solution}
-To address the challenges of creating a cloud-agnostic, scalable architecture for IoT data analysis and machine learning, a methodical approach was employed. The solution involved several critical steps, each contributing to the development and validation of the proposed architecture. 
+A systematic approach was employed to address the challenges of creating a cloud-agnostic, scalable architecture for IoT data analysis
+and machine learning. The solution involved several
+critical steps, each contributing to developing and validating the proposed architecture.
+
 
 \subsection{Objectives and requirements}
 \label{sec:objectives-and-requirements}
-The primary objective of this project is to create a cloud-agnostic architecture for a network of IoT devices that can efficiently ingest, store, and analyze data from multiple sensors. The architecture must be capable of scaling both horizontally (by adding more machines) and vertically (by increasing resources of existing machines) to accommodate the growing data demands.
+The primary objective of this project is to create a cloud-agnostic architecture for a network of IoT devices that can efficiently ingest, store, and analyze data from multiple sensors. The architecture must be capable of scaling both horizontally (by adding more machines) and vertically (by increasing the resources of existing machines) to accommodate the growing data demands.
 
 \subsubsection{Cloud infrastructure}
 \label{sec:cloud-infrastructure}
@@ -147,7 +216,8 @@ The first phase involved a comprehensive analysis of the existing technologies a
 
 \subsection{Analysis of different cloud providers}
 \label{sec:analysis-of-different-cloud-providers}
-Given the importance of cloud-agnosticism, the next step was to analyze the capabilities of different cloud service providers, including Amazon Web Services (AWS)\cite{site:aws}, Microsoft Azure\cite{site:azure}, and Aruba Cloud\cite{site:aruba-cloud}. Each provider offers distinct features and services, and the analysis focused on understanding how these could be leveraged to build a cloud-agnostic architecture. The selection criteria included compatibility with IoT data handling requirements, scalability options, and existing company expertise.
+Given the importance of cloud-agnosticism, the next step was to analyze the capabilities of different cloud service providers, including Amazon Web Services (AWS)\cite{site:aws}, Microsoft Azure\cite{site:azure}, and Aruba Cloud\cite{site:aruba-cloud}. Each provider offers distinct features and services, and the analysis focused on understanding how these could be leveraged to build a cloud-agnostic architecture. The selection criteria not only included compatibility with IoT data handling requirements and scalability options but also took into account the expertise within the company and my familiarity with these platforms.
+
 
 \subsection{Definition of a base architecture}
 \label{sec:definition-of-a-base-architecture}
